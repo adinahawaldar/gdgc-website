@@ -24,8 +24,6 @@ To contribute:
 2. Create a new branch
 3. Submit a pull request with your changes
 
----
-
 ## 📢 Stay Connected
 
 Follow our activities and upcoming events:
