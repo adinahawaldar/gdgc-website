@@ -4,8 +4,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+// Animation Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const scaleOnHover = {
+  rest: { scale: 1, transition: { duration: 0.2 } },
+  hover: { scale: 1.05, transition: { duration: 0.3 } },
+};
 
 const Contact = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const contactInfo = [
     {
       icon: Mail,
@@ -73,11 +97,22 @@ const Contact = () => {
     }
   ];
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 4000);
+  };
+
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center mb-16 animate-fade-in">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+        >
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Get in <span className="text-gradient">Touch</span>
           </h1>
@@ -85,194 +120,190 @@ const Contact = () => {
             Have questions about our events, want to collaborate, or interested in joining GDGC AIKTC? 
             We'd love to hear from you!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Form */}
-          <div className="animate-slide-up">
-            <Card className="shadow-card border-0">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Card className="shadow-card border-0 overflow-hidden">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold text-foreground mb-6">Send us a Message</h2>
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        placeholder="Enter your first name"
-                        className="mt-1"
-                      />
+                {!formSubmitted ? (
+                  <form className="space-y-6" onSubmit={handleFormSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <motion.div whileHover={{ scale: 1.02 }}>
+                        <Label htmlFor="firstName">First Name</Label>
+                        <Input id="firstName" placeholder="Enter your first name" className="mt-1" />
+                      </motion.div>
+                      <motion.div whileHover={{ scale: 1.02 }}>
+                        <Label htmlFor="lastName">Last Name</Label>
+                        <Input id="lastName" placeholder="Enter your last name" className="mt-1" />
+                      </motion.div>
                     </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        placeholder="Enter your last name"
-                        className="mt-1"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email address"
-                      className="mt-1"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input
-                      id="subject"
-                      placeholder="What is this about?"
-                      className="mt-1"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us more about your inquiry..."
-                      rows={5}
-                      className="mt-1"
-                    />
-                  </div>
-                  
-                  <Button className="w-full" size="lg">
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
+
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                      <Label htmlFor="email">Email Address</Label>
+                      <Input id="email" type="email" placeholder="Enter your email address" className="mt-1" />
+                    </motion.div>
+
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                      <Label htmlFor="subject">Subject</Label>
+                      <Input id="subject" placeholder="What is this about?" className="mt-1" />
+                    </motion.div>
+
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                      <Label htmlFor="message">Message</Label>
+                      <Textarea id="message" placeholder="Tell us more about your inquiry..." rows={5} className="mt-1" />
+                    </motion.div>
+
+                    <motion.div whileHover={{ scale: 1.05 }}>
+                      <Button className="w-full" size="lg" type="submit">
+                        <Send className="h-4 w-4 mr-2" />
+                        Send Message
+                      </Button>
+                    </motion.div>
+                  </form>
+                ) : (
+                  <motion.div
+                    className="text-center py-12"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <h3 className="text-2xl font-bold text-primary mb-4">✅ Message Sent Successfully!</h3>
+                    <p className="text-muted-foreground">We'll get back to you shortly.</p>
+                  </motion.div>
+                )}
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
 
-          {/* Contact Information */}
-          <div className="space-y-6 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            {/* Contact Cards */}
+          {/* Contact Info */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
             {contactInfo.map((info, index) => (
-              <Card 
-                key={info.title} 
-                className="shadow-card border-0 hover:shadow-hover transition-smooth"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center">
-                    <div className="p-3 rounded-lg bg-primary/10 mr-4">
-                      <info.icon className="h-6 w-6 text-primary" />
+              <motion.div key={info.title} variants={fadeUp} whileHover="hover" initial="rest" animate="rest">
+                <Card className="shadow-card border-0">
+                  <CardContent className="p-6">
+                    <div className="flex items-center">
+                      <div className="p-3 rounded-lg bg-primary/10 mr-4">
+                        <info.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground">{info.title}</h3>
+                        <p className="text-foreground font-medium">{info.details}</p>
+                        <p className="text-muted-foreground text-sm">{info.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">{info.title}</h3>
-                      <p className="text-foreground font-medium">{info.details}</p>
-                      <p className="text-muted-foreground text-sm">{info.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
 
             {/* Office Hours */}
-            <Card className="shadow-card border-0">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="p-3 rounded-lg bg-secondary/10 mr-4">
-                    <Clock className="h-6 w-6 text-secondary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground text-lg">Office Hours</h3>
-                </div>
-                <div className="space-y-2 ml-14">
-                  {officeHours.map((schedule) => (
-                    <div key={schedule.day} className="flex justify-between">
-                      <span className="text-muted-foreground">{schedule.day}</span>
-                      <span className="text-foreground font-medium">{schedule.time}</span>
+            <motion.div variants={fadeUp}>
+              <Card className="shadow-card border-0">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 rounded-lg bg-secondary/10 mr-4">
+                      <Clock className="h-6 w-6 text-secondary" />
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <h3 className="font-semibold text-foreground text-lg">Office Hours</h3>
+                  </div>
+                  <div className="space-y-2 ml-14">
+                    {officeHours.map((schedule) => (
+                      <div key={schedule.day} className="flex justify-between">
+                        <span className="text-muted-foreground">{schedule.day}</span>
+                        <span className="text-foreground font-medium">{schedule.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
             {/* Social Links */}
-            <Card className="shadow-card border-0">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground text-lg mb-4">Follow Us</h3>
-                <div className="space-y-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      className="flex items-center p-3 rounded-lg hover:bg-muted/50 transition-smooth group"
-                    >
-                      <div className="p-2 rounded-md bg-accent/10 mr-3 group-hover:bg-accent/20 transition-smooth">
-                        <social.icon className="h-5 w-5 text-accent" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-foreground">{social.name}</div>
-                        <div className="text-sm text-muted-foreground">{social.description}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            <motion.div variants={fadeUp}>
+              <Card className="shadow-card border-0">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-foreground text-lg mb-4">Follow Us</h3>
+                  <div className="space-y-3">
+                    {socialLinks.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.href}
+                        whileHover={{ scale: 1.05, x: 5 }}
+                        className="flex items-center p-3 rounded-lg hover:bg-muted/50 transition-smooth group"
+                      >
+                        <div className="p-2 rounded-md bg-accent/10 mr-3 group-hover:bg-accent/20">
+                          <social.icon className="h-5 w-5 text-accent" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-foreground">{social.name}</div>
+                          <div className="text-sm text-muted-foreground">{social.description}</div>
+                        </div>
+                      </motion.a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* FAQ Section */}
-        <div className="mb-16">
+        <motion.div className="mb-16" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <h2 className="text-3xl font-bold text-foreground text-center mb-12">
             Frequently Asked <span className="text-gradient">Questions</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq, index) => (
-              <Card 
-                key={faq.question} 
-                className="shadow-card border-0 animate-bounce-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-3">
-                    {faq.question}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {faq.answer}
-                  </p>
-                </CardContent>
-              </Card>
+              <motion.div key={faq.question} variants={fadeUp}>
+                <Card className="shadow-card border-0 overflow-hidden">
+                  <CardContent className="p-6">
+                    <details className="group">
+                      <summary className="cursor-pointer font-semibold text-foreground mb-3 flex justify-between items-center">
+                        {faq.question}
+                        <span className="transition-transform group-open:rotate-180">▼</span>
+                      </summary>
+                      <p className="text-muted-foreground text-sm mt-2">{faq.answer}</p>
+                    </details>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Location Map Placeholder */}
-        <Card className="shadow-card border-0 animate-fade-in overflow-hidden">
-          <div className="relative">
-            <div 
-              className="w-full h-64 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center"
-              style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&h=400&fit=crop')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            >
-              <div className="bg-black/60 backdrop-blur-sm rounded-lg p-8 text-center text-white">
-                <MapPin className="h-12 w-12 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold mb-2">AIKTC Campus</h3>
-                <p className="text-white/90">
-                  Al-Ameen Institute of Information Technology<br />
-                  New Panvel, Navi Mumbai, Maharashtra
-                </p>
-              </div>
-            </div>
-          </div>
-        </Card>
+        {/* Map Embed */}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <Card className="shadow-card border-0 overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.4704327031683!2d73.11515607461738!3d19.03224078216879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e8a6a2683d7d%3A0x55dd1ad1e2abbe5c!2sAIKTC!5e0!3m2!1sen!2sin!4v1695023451234!5m2!1sen!2sin"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              loading="lazy"
+              className="rounded-lg"
+            ></iframe>
+          </Card>
+        </motion.div>
 
-        {/* Community CTA */}
-        <div className="mt-20">
+        {/* CTA Section */}
+        <motion.div className="mt-20" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <Card className="shadow-card border-0 gradient-primary">
             <CardContent className="p-12 text-center">
-              <Users className="h-16 w-16 text-white mx-auto mb-6" />
+              <Users className="h-16 w-16 text-white mx-auto mb-6 animate-bounce" />
               <h2 className="text-3xl font-bold text-white mb-4">
                 Join Our Growing Community
               </h2>
@@ -281,16 +312,20 @@ const Contact = () => {
                 most active tech community at AIKTC. Your journey starts here!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
-                  Join GDGC AIKTC
-                </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  Learn More
-                </Button>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
+                    Join GDGC AIKTC
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                    Learn More
+                  </Button>
+                </motion.div>
               </div>
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -89,24 +89,24 @@ const Team = () => {
   ];
 
   const SocialLinks = ({ social, size = "sm" }: { social: any; size?: "sm" | "lg" }) => (
-    <div className={`flex space-x-2 ${size === "lg" ? "justify-center" : ""}`}>
+    <div className={`flex space-x-3 justify-center ${size === "lg" ? "mt-2" : ""}`}>
       {social.github && (
         <Button variant="ghost" size={size} asChild>
-          <a href={social.github} aria-label="GitHub">
+          <a href={social.github} aria-label="GitHub" className="hover:text-primary transition-colors">
             <Github className="h-4 w-4" />
           </a>
         </Button>
       )}
       {social.linkedin && (
         <Button variant="ghost" size={size} asChild>
-          <a href={social.linkedin} aria-label="LinkedIn">
+          <a href={social.linkedin} aria-label="LinkedIn" className="hover:text-primary transition-colors">
             <Linkedin className="h-4 w-4" />
           </a>
         </Button>
       )}
       {social.email && (
         <Button variant="ghost" size={size} asChild>
-          <a href={`mailto:${social.email}`} aria-label="Email">
+          <a href={`mailto:${social.email}`} aria-label="Email" className="hover:text-primary transition-colors">
             <Mail className="h-4 w-4" />
           </a>
         </Button>
@@ -115,12 +115,12 @@ const Team = () => {
   );
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Meet Our <span className="text-gradient">Team</span>
+            Meet Our <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Team</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             The passionate individuals driving GDGC AIKTC forward and creating an amazing community experience.
@@ -130,16 +130,16 @@ const Team = () => {
         {/* Faculty Coordinator */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">
-            Faculty <span className="text-gradient">Coordinator</span>
+            Faculty <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Coordinator</span>
           </h2>
           <div className="flex justify-center">
-            <Card className="max-w-md shadow-card border-0 animate-bounce-in">
+            <Card className="max-w-md shadow-card border-0 animate-bounce-in hover:scale-105 transition-transform duration-500">
               <CardContent className="p-8 text-center">
                 <div className="mb-6">
                   <img
                     src={organizer.image}
                     alt={organizer.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover shadow-primary"
+                    className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg border-2 border-primary transition-transform hover:scale-105"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">{organizer.name}</h3>
@@ -154,13 +154,13 @@ const Team = () => {
         {/* Core Team */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">
-            Core <span className="text-gradient">Team</span>
+            Core <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Team</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {coreTeam.map((member, index) => (
               <Card 
                 key={member.name} 
-                className="shadow-card border-0 animate-slide-up hover:shadow-hover transition-smooth"
+                className="shadow-card border-0 animate-slide-up hover:scale-105 transition-transform duration-500"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6 text-center">
@@ -168,7 +168,7 @@ const Team = () => {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-24 h-24 rounded-full mx-auto object-cover shadow-card"
+                      className="w-24 h-24 rounded-full mx-auto object-cover shadow-md transition-transform hover:scale-110"
                     />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-1">{member.name}</h3>
@@ -182,15 +182,15 @@ const Team = () => {
         </div>
 
         {/* Team Members */}
-        <div>
+        <div className="mb-20">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">
-            Our <span className="text-gradient">Members</span>
+            Our <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Members</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {members.map((member, index) => (
               <Card 
                 key={member.name} 
-                className="shadow-card border-0 animate-bounce-in hover:shadow-hover transition-smooth"
+                className="shadow-card border-0 animate-bounce-in hover:scale-105 transition-transform duration-500"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6 text-center">
@@ -198,7 +198,7 @@ const Team = () => {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-20 h-20 rounded-full mx-auto object-cover shadow-card"
+                      className="w-20 h-20 rounded-full mx-auto object-cover shadow-md transition-transform hover:scale-110"
                     />
                   </div>
                   <h3 className="text-lg font-semibold text-foreground mb-1">{member.name}</h3>
@@ -212,7 +212,7 @@ const Team = () => {
 
         {/* Join CTA */}
         <div className="mt-20 text-center">
-          <Card className="shadow-card border-0 gradient-primary">
+          <Card className="shadow-card border-0 gradient-primary animate-fade-in hover:scale-105 transition-transform duration-500">
             <CardContent className="p-12">
               <h2 className="text-3xl font-bold text-white mb-4">
                 Want to Join Our Team?
@@ -221,7 +221,7 @@ const Team = () => {
                 We're always looking for passionate students who want to contribute to the community 
                 and help organize amazing events and workshops.
               </p>
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover transition-all duration-300">
                 Apply Now
               </Button>
             </CardContent>
