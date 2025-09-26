@@ -29,7 +29,68 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden gradient-hero py-20 md:py-32">
+
+
+      <section className="relative overflow-hidden py-20 md:py-32">
+  {/* Background GIF */}
+  {/* <div className="absolute inset-0"> */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <img
+      src="bg.gif" // replace with your GIF path
+      alt="Background Animation"
+      className="w-full h-full object-cover"
+    />
+    {/* Optional overlay for better text visibility */}
+    {/* <div className="absolute inset-0 bg-black/40"></div> */}
+  </div>
+
+  {/* Content */}
+  <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center text-green-foreground">
+    <div className="animate-fade-in max-w-3xl mx-auto text-green">
+      {/* Logo or Icon */}
+      <div className="mb-8 flex justify-center">
+        <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30">
+          <span className="text-4xl font-bold">Google</span>
+        </div>
+      </div>
+
+      {/* Headline */}
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        Google Developer Student Clubs
+      </h1>
+
+      {/* Subheading */}
+      <p className="text-xl text-white/90 mb-6">
+        Anjuman-I-Islam's Kalsekar Technical Campus
+      </p>
+
+      {/* Description */}
+      <p className="text-lg text-white/80 mb-8">
+        Google Developer Student Clubs is a Google Developers program for university students to learn mobile and web development skills, design thinking skills, and leadership skills.
+      </p>
+
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
+          Become a Member
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+        <Button
+          size="lg"
+          variant="outline"
+          className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+        >
+          Join Us
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+      {/* <section className="relative overflow-hidden gradient-hero py-20 md:py-32">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-fade-in">
@@ -64,7 +125,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section className="py-20 bg-gradient-card">
