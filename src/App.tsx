@@ -6,19 +6,13 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Team from "./pages/Team";
-import Events from "./pages/Events";
-import Achievements from "./pages/Achievements";
-import Resources from "./pages/Resources";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { Suspense, lazy } from "react";
 
+// Query client instance
 const queryClient = new QueryClient();
 
-// Optional lazy loading for pages
+// Lazy load pages for better performance
 const LazyHome = lazy(() => import("./pages/Home"));
 const LazyAbout = lazy(() => import("./pages/About"));
 const LazyTeam = lazy(() => import("./pages/Team"));
@@ -26,6 +20,12 @@ const LazyEvents = lazy(() => import("./pages/Events"));
 const LazyAchievements = lazy(() => import("./pages/Achievements"));
 const LazyResources = lazy(() => import("./pages/Resources"));
 const LazyContact = lazy(() => import("./pages/Contact"));
+
+const pageVariants = {
+  initial: { opacity: 0, y: 30, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -30, scale: 0.98 },
+};
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -37,10 +37,11 @@ const AnimatedRoutes = () => {
           path="/"
           element={
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <LazyHome />
             </motion.div>
@@ -50,10 +51,10 @@ const AnimatedRoutes = () => {
           path="/about"
           element={
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 30 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, x: 40 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <LazyAbout />
             </motion.div>
@@ -63,9 +64,9 @@ const AnimatedRoutes = () => {
           path="/team"
           element={
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5 }}
             >
               <LazyTeam />
@@ -76,9 +77,9 @@ const AnimatedRoutes = () => {
           path="/events"
           element={
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
+              exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.5 }}
             >
               <LazyEvents />
@@ -89,9 +90,9 @@ const AnimatedRoutes = () => {
           path="/achievements"
           element={
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
+              exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.5 }}
             >
               <LazyAchievements />
@@ -102,9 +103,9 @@ const AnimatedRoutes = () => {
           path="/resources"
           element={
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
             >
               <LazyResources />
@@ -131,7 +132,7 @@ const AnimatedRoutes = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               <NotFound />
             </motion.div>
@@ -144,23 +145,27 @@ const AnimatedRoutes = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      {/* Global Notifications */}
-      <Toaster position="top-right" reverseOrder={false} />
-      <Sonner position="bottom-center" richColors />
+    <TooltipProvider delayDuration={200}>
+      {/* Notifications */}
+      <Toaster position="top-right" />
+      <Sonner position="bottom-center" richColors expand />
 
       <BrowserRouter>
-        <div className="flex min-h-screen flex-col bg-gray-50">
+        <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
           <Header />
 
+          {/* Main Content */}
           <Suspense
             fallback={
               <div className="flex justify-center items-center min-h-[70vh]">
-                <p className="text-gray-500 text-lg animate-pulse">Loading page...</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg animate-pulse">
+                  Loading page...
+                </p>
               </div>
             }
           >
-            <main className="flex-1">
+            <main className="flex-1 px-3 sm:px-6 md:px-8">
+              {/* Page transitions */}
               <AnimatedRoutes />
             </main>
           </Suspense>
