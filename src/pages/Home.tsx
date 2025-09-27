@@ -56,7 +56,7 @@ const Home = () => {
 
       {/* Headline */}
       <h1 className="text-4xl md:text-5xl font-bold mb-4">
-        Google Developer Student Clubs
+        Google Developer Groups on Campus
       </h1>
 
       {/* Subheading */}
@@ -66,7 +66,7 @@ const Home = () => {
 
       {/* Description */}
       <p className="text-lg text-white/80 mb-8">
-        Google Developer Student Clubs is a Google Developers program for university students to learn mobile and web development skills, design thinking skills, and leadership skills.
+        Google Developer Groups  is a Google Developers program for university students to learn mobile and web development skills, design thinking skills, and leadership skills.
       </p>
 
       {/* Buttons */}
