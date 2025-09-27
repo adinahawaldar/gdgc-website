@@ -1,118 +1,163 @@
 import { ArrowRight, Code, Users, Calendar, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 
 const Home = () => {
   const features = [
     {
       icon: Code,
       title: "Learn & Build",
-      description: "Master Google technologies through hands-on workshops and real-world projects."
+      description: "Master Google technologies through hands-on workshops and projects"
     },
     {
       icon: Users,
       title: "Community",
-      description: "Connect with like-minded developers, collaborate, and grow together."
+      description: "Connect with like-minded developers and tech enthusiasts"
     },
     {
       icon: Calendar,
       title: "Events",
-      description: "Attend workshops, hackathons, and tech talks hosted by industry experts."
+      description: "Regular workshops, hackathons, and tech talks with industry experts"
     },
     {
       icon: Trophy,
       title: "Achievements",
-      description: "Showcase your skills by participating in competitions and earning recognitions."
+      description: "Participate in competitions and showcase your projects"
     }
   ];
 
-  // Floating shapes rotation
-  const [offset, setOffset] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => setOffset(prev => (prev + 0.5) % 360), 16);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden gradient-hero py-20 md:py-32">
-        {/* Floating animated shapes */}
-        <div 
-          className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-purple-500/20 animate-spin-slow" 
-          style={{ transform: `rotate(${offset}deg)` }}
-        />
-        <div 
-          className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-yellow-400/20 animate-spin-slow-reverse" 
-          style={{ transform: `rotate(${offset}deg)` }}
-        />
-        <div className="absolute inset-0 bg-black/10"></div>
 
+
+      <section className="relative overflow-hidden py-20 md:py-32">
+  {/* Background GIF */}
+  {/* <div className="absolute inset-0"> */}
+  <div className="absolute inset-0 flex justify-center items-center">
+    <img
+      src="bg.gif" // replace with your GIF path
+      alt="Background Animation"
+      className="w-full h-full object-cover"
+    />
+    {/* Optional overlay for better text visibility */}
+    {/* <div className="absolute inset-0 bg-black/40"></div> */}
+  </div>
+
+  {/* Content */}
+  <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center text-green-foreground">
+    <div className="animate-fade-in max-w-3xl mx-auto text-green">
+      {/* Logo or Icon */}
+      <div className="mb-8 flex justify-center">
+        <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30">
+          <span className="text-4xl font-bold">Google</span>
+        </div>
+      </div>
+
+      {/* Headline */}
+      <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        Google Developer Student Clubs
+      </h1>
+
+      {/* Subheading */}
+      <p className="text-xl text-white/90 mb-6">
+        Anjuman-I-Islam's Kalsekar Technical Campus
+      </p>
+
+      {/* Description */}
+      <p className="text-lg text-white/80 mb-8">
+        Google Developer Student Clubs is a Google Developers program for university students to learn mobile and web development skills, design thinking skills, and leadership skills.
+      </p>
+
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
+          Become a Member
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+        <Button
+          size="lg"
+          variant="outline"
+          className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+        >
+          Join Us
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+      {/* <section className="relative overflow-hidden gradient-hero py-20 md:py-32">
+        <div className="absolute inset-0 bg-black/10"></div>
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in-down">
-            {/* Logo Circle */}
+          <div className="animate-fade-in">
             <div className="mb-8 flex justify-center">
-              <div className="h-28 w-28 md:h-32 md:w-32 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border-2 border-white/30 transform hover:scale-110 transition-transform duration-500">
-                <span className="text-5xl md:text-6xl font-bold text-white">G</span>
+              <div className="h-24 w-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30">
+                <span className="text-4xl font-bold text-white">G</span>
               </div>
             </div>
-
-            {/* Hero Headline */}
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in-up">
-              Empowering Students with <br />
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Empowering Students with
+              <br />
               <span className="bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
                 Google Technologies
               </span>
             </h1>
-
-            {/* Hero Subtext */}
-            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto animate-fade-in-up delay-100">
-              Join GDGC AIKTC and become part of a vibrant community of developers, innovators, and tech enthusiasts.
-              Learn, collaborate, and build amazing projects using the latest Google technologies.
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Join GDGC AIKTC and become part of a vibrant community of developers, 
+              innovators, and tech enthusiasts building the future with Google technologies.
             </p>
-
-            {/* Hero Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
-              <Button className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-indigo-500 hover:to-purple-500 shadow-xl transform hover:scale-105 transition-all flex items-center justify-center" size="lg">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
                 Join Our Community
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transform hover:scale-105 transition-all" size="lg">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+              >
                 Explore Events
               </Button>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
-      <section className="py-24 bg-gradient-card relative overflow-hidden">
+      <section className="py-20 bg-gradient-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in-up">
-              Why Join <span className="text-gradient bg-clip-text text-transparent from-purple-500 to-indigo-500">GDGC AIKTC</span>?
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Why Join <span className="text-gradient">GDGC AIKTC</span>?
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up delay-100">
-              Discover opportunities to learn, grow, and innovate with cutting-edge Google technologies.
-              Connect with mentors, participate in events, and level up your skills.
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Discover opportunities to learn, grow, and innovate with cutting-edge Google technologies
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <Card key={feature.title} 
-                className="border-0 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 animate-slide-up bg-gradient-card"
-                style={{ animationDelay: `${index * 0.15}s` }}
+              <Card 
+                key={feature.title} 
+                className="border-0 shadow-card hover:shadow-hover transition-smooth animate-slide-up bg-gradient-card"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6 text-center">
                   <div className="mb-4 flex justify-center">
-                    <div className="p-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center transform hover:scale-110 transition-all">
-                      <feature.icon className="h-8 w-8 text-white" />
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <feature.icon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground text-sm">{feature.description}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {feature.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -121,20 +166,16 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 gradient-primary relative overflow-hidden">
-        {/* Floating shapes */}
-        <div className="absolute -top-28 -left-28 w-56 h-56 rounded-full bg-purple-500/20 animate-spin-slow" />
-        <div className="absolute -bottom-28 -right-28 w-72 h-72 rounded-full bg-yellow-400/20 animate-spin-slow-reverse" />
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <div className="max-w-3xl mx-auto animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-bounce">
+      <section className="py-20 gradient-primary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Ready to Start Your Journey?
             </h2>
-            <p className="text-lg md:text-xl text-white/90 mb-10">
-              Join hundreds of students already learning and building amazing projects with Google technologies.
+            <p className="text-xl text-white/90 mb-8">
+              Join hundreds of students already learning and building amazing projects with Google technologies
             </p>
-            <Button className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-xl transform hover:scale-105 transition-all flex items-center justify-center" size="lg">
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-hover">
               Get Started Today
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
