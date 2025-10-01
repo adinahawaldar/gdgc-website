@@ -13,7 +13,6 @@ This repo contains resources, project code, and collaborative efforts aligned wi
 * 🗓️ Event-related materials
 * 👥 Collaboration tools for GDG community members
 
----
 
 ## 🤝 Contribution
 
