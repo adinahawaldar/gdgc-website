@@ -14,14 +14,66 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 14px 60px;
+  background: linear-gradient(90deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 2px solid transparent;
+  backdrop-filter: blur(10px);
   animation: slideDown 0.6s ease;
+  transition: all 0.4s ease-in-out;
 }
+
+/* On hover — gives a glowing and gradient border effect */
+header:hover {
+  border-bottom: 2px solid #007bff;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Animate the slide down when page loads */
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Example for nav links inside header */
+header nav a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 18px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  left: 0;
+  bottom: -4px;
+  transition: width 0.3s ease;
+}
+
+header nav a:hover {
+  color: #007bff;
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
 
 /* Logo Section */
 .logo {
