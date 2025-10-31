@@ -87,25 +87,6 @@ window.addEventListener('scroll', function() {
 // NAVBAR SCROLL EFFECT END
 
 // BUTTON CLICK HANDLERS START
-document.addEventListener('DOMContentLoaded', function() {
-    // Join Community button
-    const joinButtons = document.querySelectorAll('.btn-primary, .join-btn');
-    joinButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Add your join community logic here
-            alert('Join Community functionality - Connect this to your registration form');
-        });
-    });
-
-    // Explore Events button
-    const exploreButton = document.querySelector('.btn-secondary');
-    if (exploreButton) {
-        exploreButton.addEventListener('click', function() {
-            // Add your explore events logic here
-            alert('Explore Events functionality - Navigate to events section');
-        });
-    }
-});
 // BUTTON CLICK HANDLERS END
 // Intersection Observer for animations
     const observerOptions = {

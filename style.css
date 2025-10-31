@@ -47,7 +47,7 @@ header {
 }
 
 /* Example for nav links inside header */
-header nav a {
+/* header nav a {
   color: #333;
   text-decoration: none;
   font-weight: 600;
@@ -73,7 +73,7 @@ header nav a:hover {
 
 header nav a:hover::after {
   width: 100%;
-}
+} */
 
 
 /* Logo Section */
@@ -87,10 +87,24 @@ header nav a:hover::after {
 }
 
 .logo img {
-  height: 35px;
-  width: 35px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  /* animation: spin 6s linear infinite; */
+  transition: transform 0.5s ease;
+  /* Smooth transform */
+  cursor: pointer;
+}
+
+/* Image hover - only image scales */
+.logo img:hover {
+  transform: scale(1.2);
+  animation: googleColors 2s infinite;
+}
+
+.logo span {
+  transition: transform 0.5s ease;
+  /* Smooth transform */
+  cursor: pointer;
 }
 
 .logo span:first-child {
@@ -103,18 +117,25 @@ header nav a:hover::after {
   /* Green */
 }
 
-.logo :hover {
+/* Text hover - only text scales */
+.logo span:hover {
+  transform: scale(1.2);
   animation: googleColors 2s infinite;
-  cursor: pointer
 }
 
+
+
 /* Navbar */
+/* Enhanced Navigation with Button Styles */
+/* Navigation Links - Default State */
+/* Navigation Links */
 nav ul {
   list-style: none;
   display: flex;
-  gap: 28px;
+  gap: 20px;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 nav ul li a {
@@ -122,20 +143,161 @@ nav ul li a {
   font-size: 16px;
   font-weight: 500;
   position: relative;
-  color: #000;
-  /* Default black */
-  transition: color 0.4s ease;
+  color: #5f6368;
+  transition: all 0.3s ease;
+  padding: 10px 24px;
+  border-radius: 24px;
+  display: inline-block;
+  width: 0%;
+  /* Initial width */
+  transition: all 0.3s ease;
+  /* Smooth transition */
 }
 
-/* Hover animation with Google colors */
+/* Default link hover - Light background */
 nav ul li a:hover {
-  color: #4285F4;
-  ;
-}
-
-nav ul li a:hover::after {
+  background: red;
+  color: white;
   width: 100%;
 }
+
+/* Primary Button Style (Home) - Default inactive state */
+nav ul li a. {
+  background: #e0e0e0;
+  /* Gray when inactive */
+  color: #5f6368;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Home Button (1st child) - Blue */
+nav ul li:nth-child(1) a:hover {
+  background: red;
+  /* Google Red */
+  color: white;
+  width: 100%;
+}
+
+nav ul li:nth-child(1) a.active {
+  color: red;
+  font-weight: 600;
+}
+
+
+/* About (2nd child) - Red */
+nav ul li:nth-child(2) a:hover {
+  background: blue;
+  /* Google Red */
+  color: white;
+  width: 100%;
+}
+
+nav ul li:nth-child(2) a.active {
+  color: blue;
+  font-weight: 600;
+}
+
+/* Teams (3rd child) - Green */
+nav ul li:nth-child(3) a:hover {
+  background: #34A853;
+  /* Google Green */
+  color: white;
+  width: 100%;
+}
+
+nav ul li:nth-child(3) a.active {
+  color: #34A853;
+  font-weight: 600;
+}
+
+/* Events (4th child) - Yellow */
+nav ul li:nth-child(4) a:hover {
+  background: #FBBC05;
+  /* Google Yellow */
+  color: #202124;
+  /* Dark text for readability */
+  width: 100%;
+}
+
+nav ul li:nth-child(4) a.active {
+  color: #ea8b00;
+  font-weight: 600;
+}
+
+/* Resources (5th child) - Blue */
+nav ul li:nth-child(5) a:hover {
+  background: red;
+  /* Google Blue */
+  color: white;
+  width: 100%;
+}
+
+nav ul li:nth-child(5) a.active {
+  color: red;
+  font-weight: 600;
+}
+
+/* Contact (6th child) - Pink */
+nav ul li:nth-child(6) a:hover {
+  background: blue;
+  /* Pink */
+  color: white;
+  width: 100%;
+}
+
+nav ul li:nth-child(6) a.active {
+  color: blue;
+  font-weight: 600;
+}
+
+/* About Section - Red text when active */
+nav ul li a[href="#about"].active {
+  color: #EA4335;
+  font-weight: 600;
+}
+
+/* Teams Section - Green text when active */
+nav ul li a[href="#teams"].active {
+  color: #34A853;
+  font-weight: 600;
+}
+
+/* Events Section - Yellow text when active */
+nav ul li a[href="#workshops"].active {
+  color: #ea8b00;
+  font-weight: 600;
+}
+
+/* Resources Section - Blue text when active */
+nav ul li a[href="#resources"].active {
+  color: #4285F4;
+  font-weight: 600;
+}
+
+/* Contact Section - Pink text when active */
+nav ul li a[href="#contact"].active {
+  color: #E91E63;
+  font-weight: 600;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  nav ul li a {
+    width: 100%;
+    text-align: center;
+  }
+
+  nav ul li a.btn-primary {
+    padding: 12px 24px;
+  }
+}
+
 
 
 @keyframes googleColors {
