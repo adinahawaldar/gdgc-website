@@ -757,3 +757,80 @@ function initializeExpandableCards() {
     document.body.style.overflow = 'auto';
   });
 }
+// Active section tracking with smooth scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('nav ul li a');
+  const sections = document.querySelectorAll('section[id]');
+
+  // Handle click events
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default first
+      
+      // Remove active class from ALL links
+      navLinks.forEach(l => l.classList.remove('active'));
+      
+      // Add active class to clicked link
+      this.classList.add('active');
+      
+      console.log('Active class added to:', this.textContent); // Debug log
+      console.log('Target href:', this.getAttribute('href')); // Debug href
+      
+      // Smooth scroll to section
+      const targetId = this.getAttribute('href');
+      
+      if (targetId === '#home' || targetId === '#') {
+        // Scroll to top for home
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else if (targetId && targetId.startsWith('#')) {
+        // Scroll to specific section
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        } else {
+          console.error('Section not found:', targetId);
+        }
+      }
+    });
+  });
+
+  // OPTIONAL: Track scroll position and update active link automatically
+  // Comment this out if you only want manual clicking to change active state
+  /*
+  window.addEventListener('scroll', function() {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      
+      if (window.pageYOffset >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href');
+      
+      if (current && href === '#' + current) {
+        link.classList.add('active');
+      } else if (!current && (href === '#home' || href === '#')) {
+        link.classList.add('active');
+      }
+    });
+  });
+  */
+
+  // Set initial active state (Home)
+  const homeLink = document.querySelector('nav ul li:nth-child(1) a');
+  if (homeLink) {
+    homeLink.classList.add('active');
+    console.log('Initial active set to Home');
+  }
+});
