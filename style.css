@@ -14,13 +14,14 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 60px;
+  padding: 5px 40px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 2px solid transparent;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   animation: slideDown 0.6s ease;
   transition: all 0.4s ease-in-out;
@@ -87,8 +88,8 @@ header nav a:hover::after {
 }
 
 .logo img {
-  height: 50px;
-  width: 50px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
   transition: transform 0.5s ease;
   /* Smooth transform */
@@ -383,15 +384,18 @@ nav ul li a[href="#contact"].active {
 /* ===== HERO SECTION ===== */
 /* Hero Section */
 .hero {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  /* Changed from center to flex-start */
   justify-content: space-between;
   gap: 60px;
   padding: 60px;
+  /* Reduced padding */
   position: relative;
   background: #e8eef5;
 }
+
 
 /* Remove the ::before pseudo-element background */
 /* .hero::before - DELETE THIS */
@@ -407,7 +411,7 @@ nav ul li a[href="#contact"].active {
 }
 
 .hero-content h2 {
-  font-size: 2.4rem;
+  font-size: 3rem;
   margin-bottom: 15px;
   color: #5f6368;
   font-weight: 500;
@@ -415,14 +419,14 @@ nav ul li a[href="#contact"].active {
 
 .hero-content h1 {
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
   color: #202124;
   line-height: 1.2;
 }
 
 .hero-content p {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: #374151;
   margin-bottom: 30px;
   line-height: 1.6;
@@ -458,7 +462,7 @@ nav ul li a[href="#contact"].active {
 
 .hero-image img {
   width: 100%;
-  max-width: 550px;
+  max-width: 1000px;
   height: auto;
   object-fit: contain;
   /* animation: float 3s ease-in-out infinite; */
@@ -601,6 +605,7 @@ nav ul li a[href="#contact"].active {
   background: linear-gradient(90deg, #1a73e8, #00c6ff, #007bff);
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: fadeInUp 1s ease 0.3s forwards, gradientShift 5s ease infinite;
 }
@@ -774,6 +779,7 @@ body {
   padding: 2px;
   background: linear-gradient(135deg, #1a73e8, #00c6ff, #007bff);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
@@ -3509,8 +3515,8 @@ body {
   z-index: 999999;
   /* Beautiful blur background instead of black */
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   justify-content: center;
   align-items: center;
   /* Add subtle animation */
