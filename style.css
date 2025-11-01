@@ -389,8 +389,7 @@ nav ul li a[href="#contact"].active {
   align-items: flex-start;
   /* Changed from center to flex-start */
   justify-content: space-between;
-  gap: 60px;
-  padding: 60px;
+  padding: 70px 60px;
   /* Reduced padding */
   position: relative;
   background: #e8eef5;
@@ -411,22 +410,23 @@ nav ul li a[href="#contact"].active {
 }
 
 .hero-content h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 15px;
   color: #5f6368;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .hero-content h1 {
   font-weight: bold;
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 20px;
   color: #202124;
   line-height: 1.2;
 }
 
 .hero-content p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #374151;
   margin-bottom: 30px;
   line-height: 1.6;
@@ -453,21 +453,124 @@ nav ul li a[href="#contact"].active {
 /* Hero Image - Right Side */
 .hero-image {
   flex: 1;
-  max-width: 600px;
+  max-width: 700px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right align;
   z-index: 0;
+  margin-top: -50px;
+  /* Moves image up */
+  margin-right: -30px;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 1000px;
+  max-width: 700px;
   height: auto;
   object-fit: contain;
   /* animation: float 3s ease-in-out infinite; */
   opacity: 0.9;
 }
+
+/* Social Media Icons */
+/* Social Media Icons */
+.social-icons-home {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+
+}
+
+.social-icon-home {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* Circular - your style */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* SVG sizing */
+.social-icon-home svg {
+  width: 32px;
+  height: 32px;
+  transition: all 0.3s ease;
+}
+
+/* Instagram - Official Colors */
+.social-icon-home.instagram {
+  background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+  color: white;
+}
+
+.social-icon-home.instagram:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(225, 48, 108, 0.4);
+  filter: brightness(1.15);
+}
+
+/* GitHub - Official Dark */
+.social-icon-home.github {
+  background: #181717;
+  color: white;
+}
+
+.social-icon-home.github:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(24, 23, 23, 0.5);
+  background: #24292e;
+}
+
+/* LinkedIn - Official Blue */
+.social-icon-home.linkedin {
+  background: #0A66C2;
+  color: white;
+}
+
+.social-icon-home.linkedin:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(10, 102, 194, 0.5);
+  background: #004182;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .social-icons-home {
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .social-icon-home {
+    width: 55px;
+    height: 55px;
+  }
+
+  .social-icon-home svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .social-icons-home {
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .social-icon-home {
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+  }
+}
+
 
 /* Floating animation */
 @keyframes float {
