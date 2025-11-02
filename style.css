@@ -10,7 +10,6 @@ body {
   /* cursor: none; */
 }
 
-
 #trail {
   position: fixed;
   top: 0;
@@ -164,7 +163,7 @@ nav ul li a {
 /* Home Button (1st child) - Red */
 nav ul li:nth-child(1) a:hover,
 nav ul li:nth-child(1) a.active {
-  background: red !important;
+  background: blue !important;
   color: white !important;
   width: 100%;
   font-weight: 600;
@@ -173,7 +172,7 @@ nav ul li:nth-child(1) a.active {
 /* About (2nd child) - Blue */
 nav ul li:nth-child(2) a:hover,
 nav ul li:nth-child(2) a.active {
-  background: blue !important;
+  background: red !important;
   color: white !important;
   width: 100%;
   font-weight: 600;
@@ -200,7 +199,7 @@ nav ul li:nth-child(4) a.active {
 /* Resources (5th child) - Red */
 nav ul li:nth-child(5) a:hover,
 nav ul li:nth-child(5) a.active {
-  background: red !important;
+  background: blue !important;
   color: white !important;
   width: 100%;
   font-weight: 600;
@@ -209,7 +208,7 @@ nav ul li:nth-child(5) a.active {
 /* Contact (6th child) - Blue */
 nav ul li:nth-child(6) a:hover,
 nav ul li:nth-child(6) a.active {
-  background: blue !important;
+  background: red !important;
   color: white !important;
   width: 100%;
   font-weight: 600;
@@ -388,7 +387,7 @@ nav ul li a[href="#contact"].active {
 }
 
 .hero-content h2 span::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 50%;
@@ -403,8 +402,6 @@ nav ul li a[href="#contact"].active {
 .hero-content h2 span:hover::after {
   width: 100%;
 }
-
-
 
 .hero-content p {
   font-size: 1.2rem;
@@ -483,17 +480,19 @@ nav ul li a[href="#contact"].active {
 
 /* Instagram - Official Colors */
 .social-icon-home.instagram {
-  background: linear-gradient(45deg,
-      #405de6,
-      #5851db,
-      #833ab4,
-      #c13584,
-      #e1306c,
-      #fd1d1d,
-      #f56040,
-      #f77737,
-      #fcaf45,
-      #ffdc80);
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d,
+    #f56040,
+    #f77737,
+    #fcaf45,
+    #ffdc80
+  );
   color: white;
 }
 
@@ -533,7 +532,6 @@ nav ul li a[href="#contact"].active {
 
 /* Floating animation */
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -650,7 +648,6 @@ nav ul li a[href="#contact"].active {
 
 /* Gradient text animation */
 @keyframes gradientShift {
-
   0%,
   100% {
     background-position: 0% 50%;
@@ -687,7 +684,6 @@ nav ul li a[href="#contact"].active {
 }
 
 @keyframes floatText {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -1057,10 +1053,12 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(from 0deg,
-      rgba(255, 255, 255, 0.1),
-      transparent,
-      rgba(255, 255, 255, 0.1));
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.1),
+    transparent,
+    rgba(255, 255, 255, 0.1)
+  );
   animation: rotate 8s linear infinite;
   z-index: 0;
 }
@@ -1366,7 +1364,6 @@ body {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0) translateX(0);
@@ -1479,7 +1476,6 @@ body {
 }
 
 @keyframes bounce {
-
   0%,
   100% {
     transform: translateY(0);
@@ -1896,7 +1892,6 @@ body {
   }
 }
 
-
 /* Responsive Design */
 /* EVENTS RESPONSIVE STYLES END */
 
@@ -1962,7 +1957,6 @@ body {
 }
 
 @keyframes titleGlow {
-
   0%,
   100% {
     text-shadow: 0 0 20px rgba(66, 133, 244, 0.3);
@@ -1974,12 +1968,14 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg,
-      #4285f4 0%,
-      #34a853 25%,
-      #fbbc05 50%,
-      #ea4335 75%,
-      #4285f4 100%);
+  background: linear-gradient(
+    135deg,
+    #4285f4 0%,
+    #34a853 25%,
+    #fbbc05 50%,
+    #ea4335 75%,
+    #4285f4 100%
+  );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1988,7 +1984,6 @@ body {
 }
 
 @keyframes gradientShift {
-
   0%,
   100% {
     background-position: 0% 50%;
@@ -2107,8 +2102,8 @@ body {
   z-index: 1;
   margin-top: 150px;
 }
-.section-members{
-  transform:translateY(-30%);
+.section-members {
+  transform: translateY(-30%);
 }
 /* Our members*/
 .section-header {
@@ -2123,7 +2118,7 @@ body {
 }
 
 .section-header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 47%;
@@ -2134,7 +2129,8 @@ body {
 }
 
 @keyframes underlineFloat {
-  0%, 100% {
+  0%,
+  100% {
     width: 100px;
   }
   50% {
@@ -2211,7 +2207,6 @@ body {
 }
 
 @keyframes imageFloat {
-
   0%,
   100% {
     transform: scale(1.05) translateY(0px) rotate(0deg);
@@ -2236,7 +2231,6 @@ body {
 }
 
 @keyframes textPulse {
-
   0%,
   100% {
     transform: scale(1);
@@ -2307,7 +2301,6 @@ body {
 }
 
 @keyframes socialBounce {
-
   0%,
   20%,
   50%,
@@ -2363,7 +2356,6 @@ body {
     transform: translateX(0);
   }
 }
-
 
 /* New Carousel Styles */
 .carousel-container {
@@ -2610,7 +2602,6 @@ body {
 }
 
 @keyframes dotGlow {
-
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4);
@@ -2656,7 +2647,6 @@ body {
 }
 
 @keyframes tabGlow {
-
   0%,
   100% {
     box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
@@ -2666,7 +2656,6 @@ body {
     box-shadow: 0 6px 25px rgba(66, 133, 244, 0.5), 0 0 20px rgba(52, 168, 83, 0.3);
   }
 }
-
 
 /* Members Grid */
 .members-grid {

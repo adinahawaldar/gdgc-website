@@ -571,7 +571,7 @@
     flex-direction: column !important;
     padding: 25px 15px 20px 15px !important;
     gap: 0px !important;
-    min-height: 0 !important;
+    min-height: 100vh !important;
     text-align: center !important;
     display: flex !important;
   }
