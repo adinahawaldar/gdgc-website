@@ -2107,26 +2107,38 @@ body {
   z-index: 1;
   margin-top: 150px;
 }
-
+.section-members{
+  transform:translateY(-30%);
+}
+/* Our members*/
 .section-header {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
   color: #e2e8f0;
   margin-bottom: 2rem;
   position: relative;
-  animation: headerFloat 4s ease-in-out infinite;
+  padding-bottom: 1rem;
+  transform: translateY(-100%);
 }
 
-@keyframes headerFloat {
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 47%;
+  transform: translateX(-40%);
+  width: 280px;
+  height: 3px;
+  background: linear-gradient(90deg, #4ade80 0%, #fbbf24 100%);
+}
 
-  0%,
-  100% {
-    transform: translateY(0px);
+@keyframes underlineFloat {
+  0%, 100% {
+    width: 100px;
   }
-
   50% {
-    transform: translateY(-10px);
+    width: 120px;
   }
 }
 
@@ -2180,13 +2192,6 @@ body {
     box-shadow: 0 20px 40px rgba(66, 133, 244, 0.2);
   }
 }
-
-/* .card-content {
-  padding: 3rem 2rem;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-} */
 
 .card-image {
   width: 20rem;
@@ -2359,87 +2364,6 @@ body {
   }
 }
 
-/* Expandable Card Styles */
-.card.expanded {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.2) !important;
-  z-index: 100;
-  max-width: 500px;
-  width: 90%;
-  animation: expandCard 0.5s ease forwards;
-}
-
-@keyframes expandCard {
-  0% {
-    transform: translate(-50%, -50%) scale(0.8) rotate(-5deg);
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-.card-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 99;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-}
-
-.card-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.card.expanded .card-content {
-  padding: 3.5rem 2.5rem;
-}
-
-.card.expanded .card-image {
-  width: 12rem;
-  height: 12rem;
-  animation: imagePulse 2s ease-in-out infinite;
-}
-
-@keyframes imagePulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  }
-
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(66, 133, 244, 0.4);
-  }
-}
-
-.card.expanded .card-name {
-  font-size: 5rem;
-  margin-top: 1rem;
-}
-
-.card.expanded .card-role {
-  font-size: 1.3rem;
-}
-
-.card.expanded .card-bio {
-  font-size: 1.1rem;
-  line-height: 1.8;
-}
 
 /* New Carousel Styles */
 .carousel-container {
@@ -2719,24 +2643,7 @@ body {
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  transform: translateY(-500%);
-}
-
-.tab-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.2), transparent);
-  transition: left 0.5s ease;
-  transform: translateY(-500%);
-}
-
-.tab-button:hover::before {
-  left: 100%;
-  transform: translateY(-500%);
+  transform: translateY(-100%);
 }
 
 .tab-button.active {
@@ -2745,7 +2652,7 @@ body {
   border-color: transparent;
   box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
   animation: tabGlow 2s ease infinite;
-  transform: translateY(-500%);
+  transform: translateY(-100%);
 }
 
 @keyframes tabGlow {
@@ -2760,23 +2667,6 @@ body {
   }
 }
 
-.tab-button:hover:not(.active) {
-  background: rgba(66, 133, 244, 0.1);
-  border-color: rgba(66, 133, 244, 0.5);
-  transform: translateY(-3px);
-  animation: tabHover 0.6s ease forwards;
-  transform: translateY(-500%);
-}
-
-@keyframes tabHover {
-  0% {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-
-  100% {
-    box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
-  }
-}
 
 /* Members Grid */
 .members-grid {
