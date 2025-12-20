@@ -50,6 +50,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 
   <!-- ✅ Structured Data for Google -->
   <script type="application/ld+json">
@@ -72,6 +73,8 @@
 
   <body>
 
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
  <!-- Animated Cursor Start  -->
       <canvas id="trail"></canvas>
     <!-- Animated Cursor End  -->
@@ -459,37 +462,115 @@
         <h2 class="events-title">Events</h2>
 
         <!-- UPCOMING EVENTS CONTAINER START -->
+
         <div class="events-category">
           <h3 class="category-title">Upcoming Events</h3>
+                
+                <div class="events-grid">
+                  <div class="events-grid">
+                    <div class="event-card">
+                      <div class="event-image">
+                        <div class="event-status upcoming pulse">Upcoming</div>
+                        <img src="Pictures\image.png" alt="Pitch Carnival" />
+                        <div class="event-badge completed">Coming soon</div>
+                      </div>
+                      <div class="event-content">
+                        <h4 class="event-title gradient-text1">Revealing Soon</h4>
+                        <p class="event-description">
+                          Something new and exciting along with new event is coming your way!
+                        </p>
+                        <div class="event-details">
+                          <div class="event-detail">
+                            <i class="icon-calendar"></i>
+                            <span>T B A</span>
+                          </div>
+                  
+                          <div class="event-detail">
+                            <i class="icon-location"></i>
+                            <span>T B A</span>
+                          </div>
+                          <div class="event-detail">
+                            <i class="icon-clock"></i>
+                            <span>T B A</span>
+                          </div>
+                          <div class="event-detail">
+                            <i class="icon-location"></i>
+                            <span>T B A</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="events-grid">
+                    <div class="event-card">
+                      <div class="event-image">
+                        <div class="event-status upcoming pulse">Upcoming</div>
+                        <img src="Pictures\image.png" alt="Pitch Carnival" />
+                        <div class="event-badge completed">Coming soon</div>
+                      </div>
+                      <div class="event-content">
+                        <h4 class="event-title gradient-text1">Revealing Soon</h4>
+                        <p class="event-description">
+                          Something new and exciting along with new event is coming your way! 
+                        </p>
+                        <div class="event-details">
+                          <div class="event-detail">
+                            <i class="icon-calendar"></i>
+                            <span>T B A</span>
+                          </div>
+                  
+                          <div class="event-detail">
+                            <i class="icon-location"></i>
+                            <span>T B A</span>
+                          </div>
+                          <div class="event-detail">
+                            <i class="icon-clock"></i>
+                            <span>T B A</span>
+                          </div>
+                          <div class="event-detail">
+                            <i class="icon-location"></i>
+                            <span>T B A</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                  
+
+
+<!--Ongoing section starts-->
+        <div class="events-category">
+          <h3 class="category-title">Ongoing Events</h3>
           <div class="events-grid">
             <div class="event-card">
               <div class="event-image">
-                <div class="event-status past">Concluded</div>
-                <img src="Pictures\GDSC-Eve.png" alt="Google Skill Badges" />
-                <div class="event-badge completed">Event Completed</div>
+                <div class="event-status past">Ongoing</div>
+                <img src="Pictures\pitch carnival.png" alt="Pitch Carnival" />
+                <div class="event-badge completed">Registration Started</div>
               </div>
               <div class="event-content">
-                <h4 class="event-title">Google Skill Badges</h4>
+                <h4 class="event-title">PITCH CARNIVAL</h4>
                 <p class="event-description">
-                  Learn various Google technologies and earn skill badges to
+                  To empower and support innovative startups created by students.adges to
                   showcase your expertise and get exciting rewards.
                 </p>
                 <div class="event-details">
                   <div class="event-detail">
                     <i class="icon-calendar"></i>
-                    <span>Wed, Oct 1, 2025 to Fri, Oct 31, 2025</span>
+                    <span>12th Jan 2026 to 24th Jan 2026</span>
                   </div>
-                  <!--div class="event-detail">
-                    <i class="icon-clock"></i>
-                    <span>2:00 PM - 5:00 PM</span>
-                  </div> -->
+                  
                   <div class="event-detail">
                     <i class="icon-location"></i>
                     <span>Online</span>
                   </div>
-                  <div class="event-detail">
-                    <i class="icon-users"></i>
-                    <span>300+ Participants</span>
+                  <div class="event-actions">
+                    <a href="https://pitchcarnival.vercel.app/"
+                      target="_blank" class="register-btn">
+                      Register Now
+                    </a>
                   </div>
                 </div>
               </div>
@@ -497,71 +578,39 @@
 
             <div class="event-card">
               <div class="event-image">
-                <div class="event-status upcoming">Upcoming</div>
+                <div class="event-status upcoming">Ongoing</div>
                 <img
-                  src="Pictures\Hack-Events.jpg"
+                  src="Pictures\techsprint.png"
                   alt="Google Cloud Platform"
                 />
-                <div class="event-badge started">Event Coming Soon</div>
+                <div class="event-badge started">Registration Started</div>
               </div>
               <div class="event-content">
-                <h4 class="event-title">Revealing Soon</h4>
+                <h4 class="event-title">TechSprint Hackathon 2025 </h4>
                 <p class="event-description">
-                  Something exciting and new Competition coming to AIKTC.
+                  An open innovation hackathon where student developers get to identify real challenges in their campuses or local
+                  communities and build practical solutions using Google technologies
                 </p>
                 <div class="event-details">
                   <div class="event-detail">
                     <i class="icon-calendar"></i>
-                    <span>TBD</span>
+                    <span>5th December, 2025 to 13th January, 2026</span>
                   </div>
-                  <div class="event-detail">
-                    <i class="icon-clock"></i>
-                    <span>TBD</span>
-                  </div>
+          
                   <div class="event-detail">
                     <i class="icon-location"></i>
-                    <span>TBD</span>
+                    <span>Online</span>
                   </div>
-                  <div class="event-detail">
-                    <i class="icon-users"></i>
-                    <span>TBD</span>
+                  <div class="event-actions">
+                    <a href=" https://vision.hack2skill.com/event/gdgoc-25-techsprint?utm_source=hack2skill&utm_medium=homepage&sectionid=693191442daaad068d5701b7" target="_blank" class="register-btn">
+                      Register Now
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="event-card">
-              <div class="event-image">
-                <div class="event-status upcoming">Upcoming</div>
-                <img src="Pictures\ML-Events.jpg"" alt="Machine Learning" />
-                <div class="event-badge started">Event Coming Soon</div>
-              </div>
-              <div class="event-content">
-                <h4 class="event-title">Machine Learning Workshop</h4>
-                <p class="event-description">
-                  Introduction to machine learning concepts and practical
-                  implementation.
-                </p>
-                <div class="event-details">
-                  <div class="event-detail">
-                    <i class="icon-calendar"></i>
-                    <span>TBD</span>
-                  </div>
-                  <div class="event-detail">
-                    <i class="icon-clock"></i>
-                    <span>TBD</span>
-                  </div>
-                  <div class="event-detail">
-                    <i class="icon-location"></i>
-                    <span>TBD</span>
-                  </div>
-                  <div class="event-detail">
-                    <i class="icon-users"></i>
-                    <span>TBD</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+        
           </div>
         </div>
         <!-- UPCOMING EVENTS CONTAINER END -->
@@ -573,31 +622,62 @@
             <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Completed</div>
-                <img src="Pictures\Solution cha.jpg" alt="React Development" />
+                <img src="Pictures\GDSC-Eve.png" alt="React Development" />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
-                <h4 class="event-title">Solution Challenge</h4>
+                <h4 class="event-title">Google Study Jam </h4>
                 <p class="event-description">
-                  A challenge to solve a real-world problem using Google Tech.
+                 Learn Various Google Technologies and earn Badges to
+                  showcase your expertise and get exciting rewards.
                 </p>
                 <div class="event-details">
                   <div class="event-detail">
                     <i class="icon-calendar"></i>
-                    <span>Sat, March 4th, 2025</span>
-                  </div>
-                  <div class="event-detail">
-                    <i class="icon-clock"></i>
-                    <span>9:00 pm</span>
+                    <span>Tue, December 16th, 2025</span>
                   </div>
                   <div class="event-detail">
                     <i class="icon-location"></i>
                     <span>Online</span>
                   </div>
+                  <div class="event-actions">
+                    <a href="  https://gdgc-aiktc-genai.vercel.app/"
+                      target="_blank" class="register-btn">
+                      LeaderBoard
+                    </a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+<div class="event-card">
+              <div class="event-image">
+                <div class="event-status past">Completed</div>
+                <img src="Pictures\gemini workshop.jpeg" alt="React Development" />
+                <div class="event-badge completed">Event Completed</div>
+              </div>
+              <div class="event-content">
+                <h4 class="event-title">Gemini Workshop</h4>
+                <p class="event-description">
+                  Empower Your Hackathon Projects With Google Gemini
+                </p>
+                <div class="event-details">
                   <div class="event-detail">
+                    <i class="icon-calendar"></i>
+                    <span>Tue, December 16th, 2025</span>
+                  </div>
+                  <div class="event-detail">
+                    <i class="icon-clock"></i>
+                    <span>4:00 pm to 6:00 pm</span>
+                  </div>
+                  <div class="event-detail">
+                    <i class="icon-location"></i>
+                    <span>Online</span>
+                  </div>
+                  <!-- <div class="event-detail">
                     <i class="icon-users"></i>
                     <span>50 attendees/span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -606,34 +686,30 @@
               <div class="event-image">
                 <div class="event-status past">Completed</div>
                 <img
-                  src="Pictures\Hack2-PEvents.jpeg"
+                  src="Pictures\firebase workshop.jpeg"
                   alt="Firebase Workshop"
                 />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
-                <h4 class="event-title">Hack2Skill Hackathon</h4>
+                <h4 class="event-title">Firebase Workshop</h4>
                 <p class="event-description">
-                  About Google Hackathon Event and on how to use google
-                  technology.
+                  Understanding backend services, authentication, databases, and hosting — essential skills for projects and hackathons.
                 </p>
                 <div class="event-details">
                   <div class="event-detail">
                     <i class="icon-calendar"></i>
-                    <span>Sun, Jan 28, 2025</span>
+                    <span>Wed, December 17th, 2025</span>
                   </div>
                   <div class="event-detail">
                     <i class="icon-clock"></i>
-                    <span>7:00pm</span>
+                    <span>4:00 pm to 6:00 pm</span>
                   </div>
                   <div class="event-detail">
                     <i class="icon-location"></i>
                     <span>Online</span>
                   </div>
-                  <div class="event-detail">
-                    <i class="icon-users"></i>
-                    <span>30 attendees</span>
-                  </div>
+                
                 </div>
               </div>
             </div>
@@ -641,31 +717,28 @@
             <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Completed</div>
-                <img src="Pictures\3-pastEvents.jpg" alt="UI/UX Design" />
+                <img src="Pictures\github workshop.jpeg" alt="UI/UX Design" />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
-                <h4 class="event-title">Web Development Workshop</h4>
+                <h4 class="event-title">Github Workshop</h4>
                 <p class="event-description">
-                  A workshop on web development using HTML, CSS, and JavaScript.
+                  Learn how to use GitHub effectively for projects, hackathons, and teamwork.
                 </p>
                 <div class="event-details">
                   <div class="event-detail">
                     <i class="icon-calendar"></i>
-                    <span>26th Dec, 2024</span>
+                    <span>Thurs, December 18th, 2025</span>
                   </div>
                   <div class="event-detail">
                     <i class="icon-clock"></i>
-                    <span>7:00 PM</span>
+                    <span>4:00 PM to 6:00 PM</span>
                   </div>
                   <div class="event-detail">
                     <i class="icon-location"></i>
                     <span>Google Meet </span>
                   </div>
-                  <div class="event-detail">
-                    <i class="icon-users"></i>
-                    <span>50 attendees</span>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -946,7 +1019,7 @@
 <!-- Footer ended -->
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
