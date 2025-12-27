@@ -1,4 +1,567 @@
+// Modernized, mobile-first interactions
+// Uses guarded initializers so missing DOM nodes do not break the page
 
+(() => {
+  const qs = (sel, ctx = document) => ctx.querySelector(sel);
+  const qsa = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+  const on = (el, evt, cb, opts) => el && el.addEventListener(evt, cb, opts);
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const throttle = (fn, wait = 150) => {
+    let pending = false;
+    let lastArgs;
+    return (...args) => {
+      lastArgs = args;
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        pending = false;
+        fn(...lastArgs);
+      });
+    };
+  };
+
+  const easeOutExpo = t => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+  const scrollToY = top => {
+    const behavior = prefersReduced.matches ? 'auto' : 'smooth';
+    window.scrollTo({ top, behavior });
+  };
+
+  const initCounters = () => {
+    const counters = qsa('.counter');
+    if (!counters.length) return;
+
+    const animate = entry => {
+      const el = entry.target;
+      const target = Number(el.dataset.target || 0);
+      const duration = prefersReduced.matches ? 400 : 1200;
+      const start = performance.now();
+
+      const step = now => {
+        const p = Math.min(1, (now - start) / duration);
+        const value = Math.round(target * easeOutExpo(p));
+        el.textContent = value.toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+      };
+
+      step(start);
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animate(entry);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counters.forEach(el => {
+      el.textContent = '0';
+      observer.observe(el);
+    });
+  };
+
+  const initNav = () => {
+    const hamburger = qs('#hamburger');
+    const nav = qs('#nav');
+    if (!hamburger || !nav) return;
+
+    const toggle = () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('open');
+      document.body.classList.toggle('no-scroll', nav.classList.contains('open'));
+    };
+
+    on(hamburger, 'click', e => {
+      e.preventDefault();
+      toggle();
+    });
+
+    qsa('a', nav).forEach(link => {
+      on(link, 'click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+  };
+
+  const initSmoothScroll = () => {
+    const links = qsa('a[href^="#"]');
+    if (!links.length) return;
+    const nav = qs('.navbar');
+
+    links.forEach(link => {
+      on(link, 'click', e => {
+        const id = link.getAttribute('href');
+        if (!id || id === '#') return;
+        const target = qs(id);
+        if (!target) return;
+        e.preventDefault();
+        const offset = nav ? nav.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset + 1;
+        scrollToY(top);
+      });
+    });
+  };
+
+  const initNavbarTint = () => {
+    const navbar = qs('.navbar');
+    if (!navbar) return;
+    const apply = throttle(() => {
+      navbar.style.background = window.scrollY > 100 ? 'rgba(30, 60, 114, 0.98)' : 'rgba(30, 60, 114, 0.95)';
+    }, 100);
+    on(window, 'scroll', apply);
+    apply();
+  };
+
+  const initReveal = () => {
+    const targets = [...qsa('.card'), ...qsa('.timeline-item')];
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(t => observer.observe(t));
+  };
+
+  const initParallax = () => {
+    const bg = qs('.bg-animation');
+    if (!bg || prefersReduced.matches) return;
+    const update = () => {
+      const scrolled = window.pageYOffset || 0;
+      bg.style.transform = `translateY(${scrolled * 0.35}px)`;
+    };
+    on(window, 'scroll', throttle(update, 16));
+    update();
+  };
+
+  const initStagger = () => {
+    qsa('.card').forEach((el, i) => { el.style.animationDelay = `${i * 0.16}s`; });
+    qsa('.timeline-item').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; });
+  };
+
+  const initAlbum = () => {
+    const pages = qsa('.album-page');
+    const nextBtn = qs('#nextBtn');
+    const prevBtn = qs('#prevBtn');
+    if (!pages.length || !nextBtn || !prevBtn) return;
+
+    let current = 0;
+    let timer;
+
+    const show = idx => {
+      pages.forEach((p, i) => p.classList.toggle('active', i === idx));
+    };
+
+    const next = () => {
+      current = (current + 1) % pages.length;
+      show(current);
+    };
+
+    const prev = () => {
+      current = (current - 1 + pages.length) % pages.length;
+      show(current);
+    };
+
+    const start = () => { timer = setInterval(next, 3500); };
+    const reset = () => { clearInterval(timer); start(); };
+
+    on(nextBtn, 'click', () => { next(); reset(); });
+    on(prevBtn, 'click', () => { prev(); reset(); });
+    on(document, 'visibilitychange', () => { document.hidden ? clearInterval(timer) : start(); });
+    show(current);
+    start();
+  };
+
+  const initResourceModal = () => {
+    const modal = qs('#resourceModal');
+    const modalTitle = qs('#modalTitle');
+    const modalText = qs('#modalText');
+    const downloadBtn = qs('#downloadBtn');
+    const closeBtns = qsa('.modal .close');
+    const cards = qsa('.resource-card');
+    if (!modal || !cards.length) return;
+
+    const close = () => {
+      modal.classList.remove('show');
+      setTimeout(() => { modal.style.display = 'none'; }, 250);
+    };
+
+    cards.forEach(card => {
+      on(card, 'click', () => {
+        modal.style.display = 'flex';
+        modal.classList.add('show');
+        if (modalTitle) modalTitle.textContent = card.dataset.title || '';
+        if (modalText) modalText.textContent = card.dataset.text || '';
+        if (downloadBtn) downloadBtn.href = card.dataset.pdf || '#';
+      });
+    });
+
+    closeBtns.forEach(btn => on(btn, 'click', close));
+    on(window, 'click', e => { if (e.target === modal) close(); });
+    on(window, 'keydown', e => { if (e.key === 'Escape') close(); });
+  };
+
+  const initGalleryModal = () => {
+    const modal = qs('#galleryModal');
+    const modalImg = qs('#galleryModalImg');
+    const thumbs = qsa('.gallery-item img');
+    if (!modal || !modalImg || !thumbs.length) return;
+
+    const close = () => {
+      modal.classList.remove('show');
+      setTimeout(() => { modal.style.display = 'none'; }, 200);
+    };
+
+    thumbs.forEach(img => on(img, 'click', () => {
+      modal.style.display = 'flex';
+      modal.classList.add('show');
+      modalImg.src = img.src;
+      modalImg.alt = img.alt || 'Gallery image';
+    }));
+
+    on(modal, 'click', e => { if (e.target === modal) close(); });
+    on(window, 'keydown', e => { if (e.key === 'Escape') close(); });
+  };
+
+  const teamLeads = [
+    { name: 'Mr. Aman Antuley', role: 'Organizer', image: 'members/Aman.png', social: { github: 'https://github.com/amanantuley', linkedin: 'https://www.linkedin.com/in/aman-antuley-8974ab26a/' } },
+    { name: 'Mr. Mueez Hajwani', role: 'Technical Lead', image: 'members/Mueez.png', social: { github: 'https://github.com/MueezHajwani', linkedin: 'https://www.linkedin.com/in/mueez-hajwani-8a80562b6/' } },
+    { name: 'Ms. Afshaan Ansari', role: 'Media Lead', image: 'members/Afshan.png', social: { github: 'https://github.com/Afshan2004', linkedin: 'https://www.linkedin.com/in/afshan-ansari-128b522b5' } },
+    { name: 'Ms. Afreen Imam', role: 'Marketing Lead', image: 'members/Afreen.png', social: { github: 'https://github.com/afreenAI', linkedin: 'https://www.linkedin.com/in/afreen-imam-b45449289/' } },
+    { name: 'Mr. Ashish Chavhan', role: 'Documentation Lead', image: 'members/Aashish.png', social: { github: 'https://github.com/Aashish1984', linkedin: 'https://www.linkedin.com/in/aashish-chavan' } },
+    { name: 'Mr. Alamin Mondal', role: 'Design Lead', image: 'members/Alamin.png', social: { github: 'https://github.com/AlaminM01', linkedin: 'https://www.linkedin.com/in/alaminmondal1/' } },
+  ];
+
+  const teamMembersData = {
+    Technical: [
+      { name: 'Mr. Abdul Kalsekar', role: 'Technical Member', image: 'members/Abdul Rahman Kalsekar.png', social: { github: 'https://github.com/arkalsekar', linkedin: 'https://linkedin.com/in/arkalsekar' } },
+      { name: 'Mr. Huzaifa Ansari', role: 'Technical Member', image: 'members/Huzaifa.png', social: { github: 'https://github.com/HuzaifaAnsari07', linkedin: 'https://www.linkedin.com/in/ansari-huzaifa-a7a00b33a' } },
+      { name: 'Ms. Iffah Sarang', role: 'Technical Member', image: 'members/Iffah.png', social: { github: 'https://github.com/Iffah-25', linkedin: 'https://www.linkedin.com/in/iffah-sarang-183830330/' } },
+    ],
+    Marketing: [
+      { name: 'Ms. Iqra Khan', role: 'Marketing Member', image: 'members/Iqra.png', social: { github: 'https://github.com/Iqraakhan1234', linkedin: 'https://www.linkedin.com/in/iqraa-khan-27562b369' } },
+      { name: 'Mr. Owais Soudagar', role: 'Media Member', image: 'members/Owais.png', social: { github: 'https://github.com/owaissoudagar26', linkedin: 'https://www.linkedin.com/in/owais-soudagar-476965352' } },
+      { name: 'Mr. Hammad Sayed', role: 'Marketing Member', image: 'members/Hammad.png', social: { github: 'https://github.com/hammaadsayed', linkedin: 'https://www.linkedin.com/in/hammaad-sayed-722b92284/' } },
+    ],
+    Media: [
+      { name: 'Ms. Daraksha Ansari', role: 'Media Member', image: 'members/Daraksha.png', social: { github: 'https://github.com/darakhshansari7', linkedin: 'https://www.linkedin.com/in/darakhsha-ansari-1b2718292' } },
+      { name: 'Ms. Samiya Khan', role: 'Media Member', image: 'members/Samiya.png', social: { github: 'https://github.com/Samiyakhan456', linkedin: 'https://www.linkedin.com/in/saamiyaakhan' } },
+      { name: 'Mr. Zain Pawle', role: 'Media Member', image: 'members/Zain.png', social: { github: 'https://github.com/Zayn329', linkedin: 'https://www.linkedin.com/in/zain-pawle-9aaa272ab' } },
+    ],
+    Design: [
+      { name: 'Mr. Irfan Labbai', role: 'Design Member', image: 'members/Irfan.png', social: { github: 'https://github.com/LabbaiIrfan', linkedin: 'https://www.linkedin.com/in/labbai-irfan/' } },
+      { name: 'Mr. Shaikh Mohd Affan', role: 'Design Member', image: 'members/Affan.png', social: { github: 'https://github.com/affanshaikh-dev', linkedin: 'https://www.linkedin.com/in/shaikh-affan' } },
+      { name: 'Ms. Munazza Jaweed', role: 'Design Member', image: 'members/Munazza.png', social: { github: 'https://github.com/MunazzaJAG', linkedin: 'https://www.linkedin.com/in/munazza-jaweed-62a2a4368/' } },
+    ],
+    Documentation: [
+      { name: 'Ms. Sadaf Ansari', role: 'Documentation Member', image: 'members/Sadaf.jpg', social: { github: 'https://github.com/sadafansari2006-09', linkedin: 'https://www.linkedin.com/in/sadaf-ansari-30267b36a/' } },
+    ],
+  };
+
+  const buildSocial = (social = {}) => {
+    const icons = [];
+    if (social.github && social.github !== '#') {
+      icons.push(`<a href="${social.github}" class="lead-social-btn" target="_blank" aria-label="GitHub">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>`);
+    }
+    if (social.linkedin && social.linkedin !== '#') {
+      icons.push(`<a href="${social.linkedin}" class="lead-social-btn" target="_blank" aria-label="LinkedIn">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>`);
+    }
+    return icons.join('');
+  };
+
+  const initCarousel = () => {
+    const track = qs('#carouselTrack');
+    const dotsContainer = qs('#carouselDots');
+    const leftArrow = qs('.nav-arrow.left');
+    const rightArrow = qs('.nav-arrow.right');
+    const memberName = qs('#memberName');
+    const memberRole = qs('#memberRole');
+    if (!track || !dotsContainer || !memberName || !memberRole) return;
+
+    let current = 0;
+    let animating = false;
+    let timer;
+    const delay = 3200;
+
+    teamLeads.forEach((member, idx) => {
+      const card = document.createElement('div');
+      card.className = 'lead-card';
+      card.dataset.index = idx;
+      card.innerHTML = `
+        <div class="lead-card-inner">
+          <div class="lead-card-front"><img src="${member.image}" alt="${member.name}"></div>
+          <div class="lead-card-back"><div class="lead-social-links">${buildSocial(member.social)}</div></div>
+        </div>`;
+      on(card, 'click', () => { stop(); update(idx); start(); });
+      track.appendChild(card);
+    });
+
+    teamLeads.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+      dot.dataset.index = idx;
+      on(dot, 'click', () => { stop(); update(idx); start(); });
+      dotsContainer.appendChild(dot);
+    });
+
+    const update = nextIdx => {
+      if (animating) return;
+      animating = true;
+      current = (nextIdx + teamLeads.length) % teamLeads.length;
+      const cards = qsa('.lead-card');
+      const dots = qsa('.dot');
+
+      cards.forEach((card, i) => {
+        const offset = (i - current + teamLeads.length) % teamLeads.length;
+        card.classList.remove('center', 'left-1', 'left-2', 'right-1', 'right-2', 'hidden');
+        if (offset === 0) card.classList.add('center');
+        else if (offset === 1) card.classList.add('right-1');
+        else if (offset === 2) card.classList.add('right-2');
+        else if (offset === teamLeads.length - 1) card.classList.add('left-1');
+        else if (offset === teamLeads.length - 2) card.classList.add('left-2');
+        else card.classList.add('hidden');
+      });
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+      memberName.style.opacity = '0';
+      memberRole.style.opacity = '0';
+      setTimeout(() => {
+        memberName.textContent = teamLeads[current].name;
+        memberRole.textContent = teamLeads[current].role;
+        memberName.style.opacity = '1';
+        memberRole.style.opacity = '1';
+      }, 200);
+
+      setTimeout(() => { animating = false; }, 650);
+    };
+
+    const start = () => { timer = setInterval(() => update(current + 1), delay); };
+    const stop = () => { if (timer) clearInterval(timer); };
+
+    on(leftArrow, 'click', () => { stop(); update(current - 1); start(); });
+    on(rightArrow, 'click', () => { stop(); update(current + 1); start(); });
+
+    let touchStartX = 0;
+    on(track, 'touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    on(track, 'touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        stop();
+        diff > 0 ? update(current + 1) : update(current - 1);
+        start();
+      }
+    });
+
+    on(track, 'mouseenter', stop);
+    on(track, 'mouseleave', start);
+
+    on(document, 'visibilitychange', () => { document.hidden ? stop() : start(); });
+
+    update(0);
+    start();
+  };
+
+  const initTabs = () => {
+    const tabsContainer = qs('#tabsContainer');
+    if (!tabsContainer) return;
+    const tabs = ['Technical', 'Marketing', 'Media', 'Design', 'Documentation'];
+    let active = tabs[0];
+
+    tabs.forEach(tab => {
+      const btn = document.createElement('button');
+      btn.className = `tab-button ${tab === active ? 'active' : ''}`;
+      btn.textContent = tab;
+      on(btn, 'click', () => {
+        active = tab;
+        qsa('.tab-button', tabsContainer).forEach(b => b.classList.toggle('active', b.textContent === tab));
+        updateMembers();
+      });
+      tabsContainer.appendChild(btn);
+    });
+
+    const membersGrid = qs('#membersGrid');
+    const updateMembers = () => {
+      if (!membersGrid) return;
+      membersGrid.innerHTML = '';
+      (teamMembersData[active] || []).forEach((member, idx) => {
+        const card = document.createElement('div');
+        card.className = 'member-card';
+        card.style.animationDelay = `${idx * 0.08}s`;
+        card.innerHTML = `
+          <div class="member-card-inner">
+            <div class="member-card-front">
+              <img src="${member.image}" alt="${member.name}" class="card-image">
+              <h3 class="member-name">${member.name}</h3>
+              <p class="member-role">${member.role}</p>
+            </div>
+            <div class="member-card-back">
+              <div class="lead-social-links" style="gap: 1.5rem;">${buildSocial(member.social)}</div>
+            </div>
+          </div>`;
+        membersGrid.appendChild(card);
+      });
+    };
+
+    updateMembers();
+  };
+
+  const initExpandableCards = () => {
+    const overlay = qs('#cardOverlay');
+    const cards = qsa('.expandable-card');
+    if (!cards.length || !overlay) return;
+
+    const close = () => {
+      qsa('.expandable-card.expanded').forEach(c => c.classList.remove('expanded'));
+      overlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    };
+
+    cards.forEach(card => {
+      on(card, 'click', e => {
+        if (e.target.closest('.social-btn')) return;
+        const isOpen = card.classList.contains('expanded');
+        close();
+        if (!isOpen) {
+          card.classList.add('expanded');
+          overlay.classList.add('active');
+          document.body.classList.add('no-scroll');
+        }
+      });
+    });
+
+    on(overlay, 'click', close);
+  };
+
+  const initActiveNav = () => {
+    const navLinks = qsa('nav ul li a');
+    const sections = qsa('section[id]');
+    if (!navLinks.length || !sections.length) return;
+
+    const setActive = id => {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        link.classList.toggle('active', href === `#${id}` || (id === 'home' && (href === '#home' || href === '#')));
+      });
+    };
+
+    navLinks.forEach(link => {
+      on(link, 'click', e => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        e.preventDefault();
+        const target = href === '#home' ? document.body : qs(href);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActive(href.replace('#', '') || 'home');
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.45 });
+
+    sections.forEach(sec => observer.observe(sec));
+    setActive('home');
+  };
+
+  const initHeaderScroll = () => {
+    const header = qs('header');
+    if (!header) return;
+    const toggle = throttle(() => header.classList.toggle('scrolled', window.scrollY > 50), 80);
+    on(window, 'scroll', toggle);
+    toggle();
+  };
+
+  const initCursorTrail = () => {
+    const canvas = qs('#trail');
+    if (!canvas || prefersReduced.matches) return;
+    const ctx = canvas.getContext('2d');
+    const colors = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58'];
+    const dots = [];
+    let colorIndex = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    on(window, 'resize', resize);
+
+    on(window, 'mousemove', e => {
+      dots.push({ x: e.clientX, y: e.clientY, size: 8, alpha: 1, color: colors[colorIndex % colors.length] });
+      colorIndex += 1;
+    });
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        ctx.globalAlpha = d.alpha;
+        ctx.fillStyle = d.color;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+        ctx.fill();
+        d.alpha -= 0.02;
+        d.size -= 0.12;
+        if (d.alpha <= 0 || d.size <= 0) { dots.splice(i, 1); i -= 1; }
+      }
+      requestAnimationFrame(draw);
+    };
+    draw();
+  };
+
+  const initParticles = () => {
+    if (typeof particlesJS !== 'function' || prefersReduced.matches) return;
+    const container = qs('#particles-js');
+    if (!container) return;
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#1a73e8' },
+        shape: { type: 'circle' },
+        opacity: { value: 1, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 120, color: '#1a73e8', opacity: 1, width: 1 },
+        move: { enable: true, speed: 0.3, direction: 'none', out_mode: 'out' },
+      },
+      interactivity: { events: { onhover: { enable: true, mode: 'grab' }, resize: true } },
+      retina_detect: true,
+    });
+  };
+
+  const init = () => {
+    initNav();
+    initSmoothScroll();
+    initNavbarTint();
+    initCounters();
+    initReveal();
+    initParallax();
+    initStagger();
+    initAlbum();
+    initResourceModal();
+    initGalleryModal();
+    initCarousel();
+    initTabs();
+    initExpandableCards();
+    initActiveNav();
+    initHeaderScroll();
+    initCursorTrail();
+    initParticles();
+  };
+
+  on(document, 'DOMContentLoaded', init);
+})();
 // FIXED JAVASCRIPT - Change 'active' to 'open'
 
 document.addEventListener("DOMContentLoaded", function () {

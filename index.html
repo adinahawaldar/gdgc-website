@@ -91,7 +91,7 @@
         <span class="gdghead">GDGC AIKTC</span>
       </div>
 
-      <div class="hamburger" id="hamburger">
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button" tabindex="0">
         <span></span>
         <span></span>
         <span></span>
@@ -99,10 +99,10 @@
 
       <nav id="nav">
         <ul>
-          <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a></li>
+          <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#teams">Teams</a></li>
-          <li><a href="#workshops">Events</a></li>
+          <li><a href="#events">Events</a></li>
           <li><a href="#resources">Resources</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -125,7 +125,7 @@
       A Google supported community where students explore cutting edge technologies like Android, Web Development, Cloud, AI, Machine Learning, and more through hands-on workshops, hackathons, and mentorship programs. Join us to build, innovate, and grow!
     </p>
     <button
-      class="btn"
+      class="btn-primary"
       onclick="window.location.href='https://gdg.community.dev/gdg-on-campus-anjuman-i-islams-kalsekar-technical-campus-navi-mumbai-india/'"
     >
       Become Member
@@ -465,80 +465,48 @@
 
         <div class="events-category">
           <h3 class="category-title">Upcoming Events</h3>
-                
-                <div class="events-grid">
-                  <div class="events-grid">
-                    <div class="event-card">
-                      <div class="event-image">
-                        <div class="event-status upcoming pulse">Upcoming</div>
-                        <img src="Pictures\image.png" alt="Pitch Carnival" />
-                        <div class="event-badge completed">Coming soon</div>
-                      </div>
-                      <div class="event-content">
-                        <h4 class="event-title gradient-text1">Revealing Soon</h4>
-                        <p class="event-description">
-                          Something new and exciting along with new event is coming your way!
-                        </p>
-                        <div class="event-details">
-                          <div class="event-detail">
-                            <i class="icon-calendar"></i>
-                            <span>T B A</span>
-                          </div>
-                  
-                          <div class="event-detail">
-                            <i class="icon-location"></i>
-                            <span>T B A</span>
-                          </div>
-                          <div class="event-detail">
-                            <i class="icon-clock"></i>
-                            <span>T B A</span>
-                          </div>
-                          <div class="event-detail">
-                            <i class="icon-location"></i>
-                            <span>T B A</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="events-grid">
-                    <div class="event-card">
-                      <div class="event-image">
-                        <div class="event-status upcoming pulse">Upcoming</div>
-                        <img src="Pictures\image.png" alt="Pitch Carnival" />
-                        <div class="event-badge completed">Coming soon</div>
-                      </div>
-                      <div class="event-content">
-                        <h4 class="event-title gradient-text1">Revealing Soon</h4>
-                        <p class="event-description">
-                          Something new and exciting along with new event is coming your way! 
-                        </p>
-                        <div class="event-details">
-                          <div class="event-detail">
-                            <i class="icon-calendar"></i>
-                            <span>T B A</span>
-                          </div>
-                  
-                          <div class="event-detail">
-                            <i class="icon-location"></i>
-                            <span>T B A</span>
-                          </div>
-                          <div class="event-detail">
-                            <i class="icon-clock"></i>
-                            <span>T B A</span>
-                          </div>
-                          <div class="event-detail">
-                            <i class="icon-location"></i>
-                            <span>T B A</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-                  
+          <div class="events-grid">
+            <div class="event-card">
+              <div class="event-image">
+                <div class="event-status upcoming pulse">Upcoming</div>
+                <img src="Pictures/image.png" alt="Upcoming event teaser" />
+                <div class="event-badge completed">Coming soon</div>
+              </div>
+              <div class="event-content">
+                <h4 class="event-title gradient-text1">Revealing Soon</h4>
+                <p class="event-description">
+                  Something new and exciting is on the way. Stay tuned!
+                </p>
+                <div class="event-details">
+                  <div class="event-detail"><i class="icon-calendar"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-location"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-clock"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-location"></i><span>T B A</span></div>
+                </div>
+              </div>
+            </div>
 
+            <div class="event-card">
+              <div class="event-image">
+                <div class="event-status upcoming pulse">Upcoming</div>
+                <img src="Pictures/image.png" alt="Upcoming event teaser" />
+                <div class="event-badge completed">Coming soon</div>
+              </div>
+              <div class="event-content">
+                <h4 class="event-title gradient-text1">Revealing Soon</h4>
+                <p class="event-description">
+                  Something new and exciting is on the way. Stay tuned!
+                </p>
+                <div class="event-details">
+                  <div class="event-detail"><i class="icon-calendar"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-location"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-clock"></i><span>T B A</span></div>
+                  <div class="event-detail"><i class="icon-location"></i><span>T B A</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 <!--Ongoing section starts-->
         <div class="events-category">
@@ -547,7 +515,7 @@
             <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Ongoing</div>
-                <img src="Pictures\pitch carnival.png" alt="Pitch Carnival" />
+                <img src="Pictures/pitch carnival.png" alt="Pitch Carnival" />
                 <div class="event-badge completed">Registration Started</div>
               </div>
               <div class="event-content">
@@ -580,7 +548,7 @@
               <div class="event-image">
                 <div class="event-status upcoming">Ongoing</div>
                 <img
-                  src="Pictures\techsprint.png"
+                  src="Pictures/techsprint.png"
                   alt="Google Cloud Platform"
                 />
                 <div class="event-badge started">Registration Started</div>
@@ -622,7 +590,7 @@
             <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Completed</div>
-                <img src="Pictures\GDSC-Eve.png" alt="React Development" />
+                <img src="Pictures/GDSC-Eve.png" alt="React Development" />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
@@ -653,7 +621,7 @@
 <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Completed</div>
-                <img src="Pictures\gemini workshop.jpeg" alt="React Development" />
+                <img src="Pictures/gemini workshop.jpeg" alt="Gemini Workshop" />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
@@ -686,7 +654,7 @@
               <div class="event-image">
                 <div class="event-status past">Completed</div>
                 <img
-                  src="Pictures\firebase workshop.jpeg"
+                  src="Pictures/firebase workshop.jpeg"
                   alt="Firebase Workshop"
                 />
                 <div class="event-badge completed">Event Completed</div>
@@ -717,7 +685,7 @@
             <div class="event-card">
               <div class="event-image">
                 <div class="event-status past">Completed</div>
-                <img src="Pictures\github workshop.jpeg" alt="UI/UX Design" />
+                <img src="Pictures/github workshop.jpeg" alt="GitHub Workshop" />
                 <div class="event-badge completed">Event Completed</div>
               </div>
               <div class="event-content">
