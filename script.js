@@ -1588,3 +1588,15 @@ particlesJS("particles-js", {
   },
   retina_detect: true
 });
+
+
+
+// Loader Animation
+window.addEventListener("load", function () {
+    let loader = document.getElementById("loader-overlay");
+    loader.style.display = "flex";
+
+    setTimeout(() => loader.style.display = "none", 5500);
+
+});
+
