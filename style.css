@@ -3517,12 +3517,5 @@ body {
     backdrop-filter: blur(20px);
   }
 }
-/* Animated Particles Background */
-#particles-js {
-  position: fixed;
-  /* inset: 0; */
-  opacity: 1000%;
-  z-index: 0;
-  pointer-events: none;
-}
+
 

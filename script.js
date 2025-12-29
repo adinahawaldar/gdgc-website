@@ -486,24 +486,6 @@
     draw();
   };
 
-  const initParticles = () => {
-    if (typeof particlesJS !== 'function' || prefersReduced.matches) return;
-    const container = qs('#particles-js');
-    if (!container) return;
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#1a73e8' },
-        shape: { type: 'circle' },
-        opacity: { value: 1, random: true },
-        size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 120, color: '#1a73e8', opacity: 1, width: 1 },
-        move: { enable: true, speed: 0.3, direction: 'none', out_mode: 'out' },
-      },
-      interactivity: { events: { onhover: { enable: true, mode: 'grab' }, resize: true } },
-      retina_detect: true,
-    });
-  };
 
   const init = () => {
     initNav();
@@ -1506,54 +1488,6 @@ function draw() {
 }
 draw();
 
-particlesJS("particles-js", {
-  particles: {
-    number: {
-      value: 80,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    },
-    color: {
-      value: "#1a73e8"
-    },
-    shape: {
-      type: "circle"
-    },
-    opacity: {
-      value: 1,
-      random: true
-    },
-    size: {
-      value: 3,
-      random: true
-    },
-    line_linked: {
-      enable: true,
-      distance: 120,
-      color: "#1a73e8",
-      opacity: 1,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 0.2,
-      direction: "none",
-      out_mode: "out"
-    }
-  },
-  interactivity: {
-    events: {
-      onhover: {
-        enable: true,
-        mode: "grab"
-      },
-      resize: true
-    }
-  },
-  retina_detect: true
-});
 
 
 
