@@ -227,41 +227,6 @@
     on(window, 'keydown', e => { if (e.key === 'Escape') close(); });
   };
 
-  const teamLeads = [
-    { name: 'Mr. Aman Antuley', role: 'Organizer', image: 'members/Aman.png', social: { github: 'https://github.com/amanantuley', linkedin: 'https://www.linkedin.com/in/aman-antuley-8974ab26a/' } },
-    { name: 'Mr. Mueez Hajwani', role: 'Technical Lead', image: 'members/Mueez.png', social: { github: 'https://github.com/MueezHajwani', linkedin: 'https://www.linkedin.com/in/mueez-hajwani-8a80562b6/' } },
-    { name: 'Ms. Afshaan Ansari', role: 'Media Lead', image: 'members/Afshan.png', social: { github: 'https://github.com/Afshan2004', linkedin: 'https://www.linkedin.com/in/afshan-ansari-128b522b5' } },
-    { name: 'Ms. Afreen Imam', role: 'Marketing Lead', image: 'members/Afreen.png', social: { github: 'https://github.com/afreenAI', linkedin: 'https://www.linkedin.com/in/afreen-imam-b45449289/' } },
-    { name: 'Mr. Ashish Chavhan', role: 'Documentation Lead', image: 'members/Aashish.png', social: { github: 'https://github.com/Aashish1984', linkedin: 'https://www.linkedin.com/in/aashish-chavan' } },
-    { name: 'Mr. Alamin Mondal', role: 'Design Lead', image: 'members/Alamin.png', social: { github: 'https://github.com/AlaminM01', linkedin: 'https://www.linkedin.com/in/alaminmondal1/' } },
-  ];
-
-  const teamMembersData = {
-    Technical: [
-      { name: 'Mr. Abdul Kalsekar', role: 'Technical Member', image: 'members/Abdul Rahman Kalsekar.png', social: { github: 'https://github.com/arkalsekar', linkedin: 'https://linkedin.com/in/arkalsekar' } },
-      { name: 'Mr. Huzaifa Ansari', role: 'Technical Member', image: 'members/Huzaifa.png', social: { github: 'https://github.com/HuzaifaAnsari07', linkedin: 'https://www.linkedin.com/in/ansari-huzaifa-a7a00b33a' } },
-      { name: 'Ms. Iffah Sarang', role: 'Technical Member', image: 'members/Iffah.png', social: { github: 'https://github.com/Iffah-25', linkedin: 'https://www.linkedin.com/in/iffah-sarang-183830330/' } },
-    ],
-    Marketing: [
-      { name: 'Ms. Iqra Khan', role: 'Marketing Member', image: 'members/Iqra.png', social: { github: 'https://github.com/Iqraakhan1234', linkedin: 'https://www.linkedin.com/in/iqraa-khan-27562b369' } },
-      { name: 'Mr. Owais Soudagar', role: 'Media Member', image: 'members/Owais.png', social: { github: 'https://github.com/owaissoudagar26', linkedin: 'https://www.linkedin.com/in/owais-soudagar-476965352' } },
-      { name: 'Mr. Hammad Sayed', role: 'Marketing Member', image: 'members/Hammad.png', social: { github: 'https://github.com/hammaadsayed', linkedin: 'https://www.linkedin.com/in/hammaad-sayed-722b92284/' } },
-    ],
-    Media: [
-      { name: 'Ms. Daraksha Ansari', role: 'Media Member', image: 'members/Daraksha.png', social: { github: 'https://github.com/darakhshansari7', linkedin: 'https://www.linkedin.com/in/darakhsha-ansari-1b2718292' } },
-      { name: 'Ms. Samiya Khan', role: 'Media Member', image: 'members/Samiya.png', social: { github: 'https://github.com/Samiyakhan456', linkedin: 'https://www.linkedin.com/in/saamiyaakhan' } },
-      { name: 'Mr. Zain Pawle', role: 'Media Member', image: 'members/Zain.png', social: { github: 'https://github.com/Zayn329', linkedin: 'https://www.linkedin.com/in/zain-pawle-9aaa272ab' } },
-    ],
-    Design: [
-      { name: 'Mr. Irfan Labbai', role: 'Design Member', image: 'members/Irfan.png', social: { github: 'https://github.com/LabbaiIrfan', linkedin: 'https://www.linkedin.com/in/labbai-irfan/' } },
-      { name: 'Mr. Shaikh Mohd Affan', role: 'Design Member', image: 'members/Affan.png', social: { github: 'https://github.com/affanshaikh-dev', linkedin: 'https://www.linkedin.com/in/shaikh-affan' } },
-      { name: 'Ms. Munazza Jaweed', role: 'Design Member', image: 'members/Munazza.png', social: { github: 'https://github.com/MunazzaJAG', linkedin: 'https://www.linkedin.com/in/munazza-jaweed-62a2a4368/' } },
-    ],
-    Documentation: [
-      { name: 'Ms. Sadaf Ansari', role: 'Documentation Member', image: 'members/Sadaf.jpg', social: { github: 'https://github.com/sadafansari2006-09', linkedin: 'https://www.linkedin.com/in/sadaf-ansari-30267b36a/' } },
-    ],
-  };
-
   const buildSocial = (social = {}) => {
     const icons = [];
     if (social.github && social.github !== '#') {
@@ -1009,6 +974,7 @@ const carouselDots = document.getElementById("carouselDots");
 const modalClose = document.getElementById("modalClose");
 const modalCloseBtn = document.getElementById("modalCloseBtn");
 const cardOverlay = document.getElementById("cardOverlay");
+
 
 // Initialize the page
 document.addEventListener("DOMContentLoaded", function () {
