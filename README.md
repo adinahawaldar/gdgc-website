@@ -4,7 +4,6 @@
 Welcome to the official repository for our **Google Developer Group** initiatives! 🚀
 This repo contains resources, project code, and collaborative efforts aligned with GDG events, hackathons, workshops, and community-driven development.
 
----
 
 ## 📁 Contents
 
