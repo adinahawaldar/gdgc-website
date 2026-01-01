@@ -151,11 +151,11 @@
     font-size: 1rem !important;
   }
 
-.hero-image {
-  max-width: 100% !important;
-  margin: 20px auto 0 !important;
-  margin-right: 0 !important;
-}
+  .hero-image {
+    max-width: 100% !important;
+    margin: 20px auto 0 !important;
+    text-align: center !important;
+  }
 
   .hero-image img {
     max-width: 300px !important;
@@ -433,9 +433,9 @@
     display: none;
   }
 
-  /* .lead-card.left-1 {
+  .lead-card.left-1 {
     transform: translateX(-140px) scale(0.85) !important;
-  } */
+  }
 
   .lead-card.right-1 {
     transform: translateX(140px) scale(0.85) !important;
@@ -567,9 +567,9 @@
     height: 12rem !important;
   }
 
-  /* .lead-card.left-1 {
+  .lead-card.left-1 {
     transform: translateX(-110px) scale(0.8) !important;
-  } */
+  }
 
   .lead-card.right-1 {
     transform: translateX(110px) scale(0.8) !important;
@@ -626,9 +626,8 @@
 /* Prevent horizontal scroll on all devices */
 html,
 body {
-  max-width: 100%;
   overflow-x: hidden;
-  position: relative;
+  max-width: 100%;
 }
 
 /* Ensure images don't break layout */
