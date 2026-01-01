@@ -2680,7 +2680,7 @@ body {
   height: 20rem;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 3rem;
+  /* margin: 0 auto 3rem; */
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   border: 2px solid #4285f4;
   transition: all 0.3s ease;
@@ -3233,7 +3233,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding-top: 2rem;
 }
 
 .member-card-front img {

@@ -425,7 +425,8 @@
 
   .lead-card {
     width: 12rem !important;
-    height: 14rem !important;
+    height: 12rem !important;
+    margin-bottom: 50px !important;
   }
 
   .lead-card.left-2,
@@ -454,7 +455,7 @@
   }
 
   .dots {
-    margin-top: 40px;
+    margin-top: 10px;
   }
 
   .section-header {
@@ -467,7 +468,7 @@
 
   .card-image {
     width: 12rem !important;
-    height: 12rem !important;
+    height: 14rem !important;
   }
 
   .members-grid {
