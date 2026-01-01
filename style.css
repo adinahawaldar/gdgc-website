@@ -88,7 +88,7 @@ body.no-scroll {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
   /* click-through */
@@ -601,11 +601,12 @@ nav ul li a[href="#contact"].active {
   max-width: 800px;
   display: flex;
   align-items: center;
-  justify-content: right align;
+  justify-content: flex-end;
+  /* Changed from 'right align' (invalid) to flex-end */
   z-index: 0;
   margin-top: -50px;
-  /* Moves image up */
-  margin-right: -120px;
+  margin-right: 0;
+  /* REMOVE the -120px margin causing the push */
 }
 
 .hero-image img {
@@ -2590,6 +2591,9 @@ body {
   -webkit-text-fill-color: transparent;
   z-index: 0;
   text-shadow: 0 0 40px rgba(66, 133, 244, 0.1);
+  max-width: 100vw;
+    overflow: hidden;
+    text-overflow: clip;
 }
 
 .team-leads-content {
