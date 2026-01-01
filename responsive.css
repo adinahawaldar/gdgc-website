@@ -626,8 +626,9 @@
 /* Prevent horizontal scroll on all devices */
 html,
 body {
-  overflow-x: hidden;
   max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Ensure images don't break layout */
