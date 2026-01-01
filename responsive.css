@@ -325,6 +325,7 @@
 
   .hero-image img {
     max-width: 100% !important;
+    margin-top: 25px !important;
   }
 
   .hero-content {
@@ -468,7 +469,7 @@
 
   .card-image {
     width: 12rem !important;
-    height: 14rem !important;
+    height: 12rem !important;
   }
 
   .members-grid {
