@@ -34,6 +34,7 @@
    ============================================== */
 @media (max-width: 768px) {
   /* HEADER & NAVIGATION */
+  
   header {
     position: fixed !important;
     top: 0 !important;
@@ -119,7 +120,7 @@
   nav ul li a {
     width: 100%;
     text-align: center;
-    color: white;
+    
     font-size: 1.2rem;
     padding: 10px 20px;
     display: block;

@@ -567,6 +567,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
+//
+const hamburger = document.getElementById("hamburger.23");
+const nav = document.getElementById("nav");
+
+if (hamburger && nav) {
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    nav.classList.toggle("open");
+  });
+
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("active");
+      nav.classList.remove("open");
+    });
+  });
+}
+
 // SMOOTH SCROLLING START
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
