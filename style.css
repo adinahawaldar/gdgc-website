@@ -2166,20 +2166,7 @@ body {
   /* spacing between buttons */
 }
 
-.album-btn {
-  padding: 12px 35px;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  background: linear-gradient(90deg, #4285f4, #34a853);
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 1px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  transition: all 0.5s ease;
-  /* smoother */
-}
+
 
 .album-btn:hover {
   background: linear-gradient(90deg, #ea4335, #fbbc05);
