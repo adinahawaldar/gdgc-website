@@ -27,7 +27,7 @@ To contribute:
 Follow our activities and upcoming events:
 🌍 [developers.google.com/community/gdg](https://developers.google.com/community/gdg)
 
----
+
 
 ## 📜 License
 
