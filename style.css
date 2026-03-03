@@ -33,7 +33,7 @@ body {
 }
 
 body.no-scroll {
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .btn-primary {
@@ -385,33 +385,20 @@ nav ul li a[href="#contact"].active {
 .hamburger {
   display: none;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   gap: 5px;
-  border: 0;
-  background: transparent;
-  min-width: 44px;
-  min-height: 44px;
-  border-radius: 12px;
-  transition: background-color 0.25s ease;
-}
-
-.hamburger:hover {
-  background: rgba(17, 24, 39, 0.06);
 }
 
 .hamburger span {
-  width: 24px;
-  height: 2.5px;
-  background: #111827;
-  border-radius: 999px;
-  transition: transform 0.35s ease, opacity 0.25s ease;
+  width: 25px;
+  height: 3px;
+  background: black;
+  transition: 0.3s;
 }
 
 @media (max-width: 1024px) {
   header {
-    padding: 8px 16px;
+    padding: 10px 20px;
   }
 
   .hamburger {
@@ -420,64 +407,40 @@ nav ul li a[href="#contact"].active {
 
   #nav {
     position: fixed;
-    top: 0;
-    right: 0;
-    height: 100dvh;
-    width: min(84vw, 360px);
+    
     background: rgba(255, 255, 255, 0.96);
     -webkit-backdrop-filter: blur(var(--blur));
     backdrop-filter: blur(var(--blur));
-    transform: translateX(105%);
-    opacity: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    opacity: 0;
     pointer-events: none;
-    z-index: 1002;
-    gap: 24px;
-    box-shadow: -12px 0 40px rgba(17, 24, 39, 0.16);
-    border-left: 1px solid var(--border);
-    padding: 90px 20px 24px;
-    overflow-y: auto;
-    transition: transform 0.35s ease;
+    z-index: 999;
+    gap: 28px;
   }
 
   #nav.open {
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  #nav::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(17, 24, 39, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-  }
-
-  #nav.open::before {
+    transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
 
   nav ul {
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
+    gap: 12px;
   }
 
   nav ul li a {
-    width: 100%;
-    text-align: left;
-    font-size: 15px;
-    color: #111827;
-    padding: 12px 14px;
-    box-shadow: none;
-    background: rgba(17, 24, 39, 0.04);
+    width: 220px;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+    padding: 12px 18px;
+    box-shadow: var(--shadow-soft);
+    background: #a0aec0;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    text-transform: none;
-    letter-spacing: 0;
   }
 }
 
@@ -524,7 +487,7 @@ nav ul li a[href="#contact"].active {
 
 /* Hamburger animation when active */
 .hamburger.active span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -532,7 +495,7 @@ nav ul li a[href="#contact"].active {
 }
 
 .hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* Hero section */
