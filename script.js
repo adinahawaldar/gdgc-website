@@ -498,13 +498,11 @@
     initAlbum();
     initResourceModal();
     initGalleryModal();
-    initCarousel();
-    initTabs();
+    // Removed broken init calls from IIFE
     initExpandableCards();
     initActiveNav();
     initHeaderScroll();
     initCursorTrail();
-    initParticles();
   };
 
   on(document, 'DOMContentLoaded', init);
@@ -697,29 +695,34 @@ function prevPage() {
   showPage(currentPage);
 }
 
-document.getElementById("nextBtn").addEventListener("click", () => {
-  nextPage();
-  resetAutoTurn();
-});
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
-document.getElementById("prevBtn").addEventListener("click", () => {
-  prevPage();
-  resetAutoTurn();
-});
+if (nextBtn && prevBtn && pages.length > 0) {
+  nextBtn.addEventListener("click", () => {
+    nextPage();
+    resetAutoTurn();
+  });
 
-// Auto turn every 3s
-function startAutoTurn() {
-  autoTurnInterval = setInterval(nextPage, 3000);
-}
+  prevBtn.addEventListener("click", () => {
+    prevPage();
+    resetAutoTurn();
+  });
 
-function resetAutoTurn() {
-  clearInterval(autoTurnInterval);
+  // Auto turn every 3s
+  function startAutoTurn() {
+    autoTurnInterval = setInterval(nextPage, 3000);
+  }
+
+  function resetAutoTurn() {
+    clearInterval(autoTurnInterval);
+    startAutoTurn();
+  }
+
+  // Initialize first page
+  showPage(currentPage);
   startAutoTurn();
 }
-
-// Initialize first page
-showPage(currentPage);
-startAutoTurn();
 
 const modal = document.getElementById("resourceModal");
 const modalTitle = document.getElementById("modalTitle");
@@ -988,28 +991,34 @@ document.addEventListener("DOMContentLoaded", function () {
   startAutoPlay();
 
   // Event listeners for carousel
-  leftArrow.addEventListener("click", () => {
-    stopAutoPlay();
-    updateCarousel(currentIndex - 1);
-    startAutoPlay();
-  });
+  if (leftArrow) {
+    leftArrow.addEventListener("click", () => {
+      stopAutoPlay();
+      updateCarousel(currentIndex - 1);
+      startAutoPlay();
+    });
+  }
 
-  rightArrow.addEventListener("click", () => {
-    stopAutoPlay();
-    updateCarousel(currentIndex + 1);
-    startAutoPlay();
-  });
+  if (rightArrow) {
+    rightArrow.addEventListener("click", () => {
+      stopAutoPlay();
+      updateCarousel(currentIndex + 1);
+      startAutoPlay();
+    });
+  }
 
   // Modal event listeners
-  modalClose.addEventListener("click", closeMemberModal);
-  modalCloseBtn.addEventListener("click", closeMemberModal);
+  if (modalClose) modalClose.addEventListener("click", closeMemberModal);
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeMemberModal);
 
   // Close modal when clicking overlay
-  modalOverlay.addEventListener("click", function (e) {
-    if (e.target === modalOverlay) {
-      closeMemberModal();
-    }
-  });
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", function (e) {
+      if (e.target === modalOverlay) {
+        closeMemberModal();
+      }
+    });
+  }
 
   // Keyboard navigation
   document.addEventListener("keydown", e => {
@@ -1053,8 +1062,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Pause auto-play on hover
-  carouselTrack.addEventListener("mouseenter", stopAutoPlay);
-  carouselTrack.addEventListener("mouseleave", startAutoPlay);
+  if (carouselTrack) {
+    carouselTrack.addEventListener("mouseenter", stopAutoPlay);
+    carouselTrack.addEventListener("mouseleave", startAutoPlay);
+  }
 });
 
 // Carousel functions
@@ -1102,7 +1113,7 @@ function initializeCarousel() {
       updateCarousel(index);
       startAutoPlay();
     });
-    carouselTrack.appendChild(card);
+    if (carouselTrack) carouselTrack.appendChild(card);
   });
 
   // Create dots
@@ -1115,7 +1126,7 @@ function initializeCarousel() {
       updateCarousel(index);
       startAutoPlay();
     });
-    carouselDots.appendChild(dot);
+    if (carouselDots) carouselDots.appendChild(dot);
   });
 
   updateCarousel(0);
@@ -1156,15 +1167,17 @@ function updateCarousel(newIndex) {
   });
 
   // Update member info with fade animation
-  memberName.style.opacity = "0";
-  memberRole.style.opacity = "0";
+  if (memberName && memberRole) {
+    memberName.style.opacity = "0";
+    memberRole.style.opacity = "0";
 
-  setTimeout(() => {
-    memberName.textContent = teamMembers[currentIndex].name;
-    memberRole.textContent = teamMembers[currentIndex].role;
-    memberName.style.opacity = "1";
-    memberRole.style.opacity = "1";
-  }, 300);
+    setTimeout(() => {
+      memberName.textContent = teamMembers[currentIndex].name;
+      memberRole.textContent = teamMembers[currentIndex].role;
+      memberName.style.opacity = "1";
+      memberRole.style.opacity = "1";
+    }, 300);
+  }
 
   setTimeout(() => {
     isAnimating = false;
@@ -1195,7 +1208,7 @@ function initializeTabs() {
     button.className = `tab-button ${tab === activeTab ? "active" : ""}`;
     button.textContent = tab;
     button.onclick = () => setActiveTab(tab);
-    tabsContainer.appendChild(button);
+    if (tabsContainer) tabsContainer.appendChild(button);
   });
 }
 
@@ -1203,9 +1216,11 @@ function setActiveTab(tab) {
   activeTab = tab;
 
   // Update tab buttons
-  tabsContainer.querySelectorAll(".tab-button").forEach(button => {
-    button.classList.toggle("active", button.textContent === tab);
-  });
+  if (tabsContainer) {
+    tabsContainer.querySelectorAll(".tab-button").forEach(button => {
+      button.classList.toggle("active", button.textContent === tab);
+    });
+  }
 
   // Update members grid
   updateMembersGrid();
@@ -1218,12 +1233,14 @@ function initializeMembers() {
 
 function updateMembersGrid() {
   const members = teamMembersData[activeTab] || [];
-  membersGrid.innerHTML = "";
+  if (membersGrid) {
+    membersGrid.innerHTML = "";
 
-  members.forEach((member, index) => {
-    const memberCard = createMemberCard(member, index);
-    membersGrid.appendChild(memberCard);
-  });
+    members.forEach((member, index) => {
+      const memberCard = createMemberCard(member, index);
+      membersGrid.appendChild(memberCard);
+    });
+  }
 }
 
 function createMemberCard(member, index) {
@@ -1315,12 +1332,16 @@ function openMemberModal(member) {
   }
 
   // Show modal
-  modalOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
+  if (modalOverlay) {
+    modalOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeMemberModal() {
-  modalOverlay.classList.remove("active");
+  if (modalOverlay) {
+    modalOverlay.classList.remove("active");
+  }
   document.body.style.overflow = "auto";
   selectedMember = null;
 }
@@ -1341,22 +1362,24 @@ function initializeExpandableCards() {
 
       if (!wasExpanded) {
         this.classList.add("expanded");
-        cardOverlay.classList.add("active");
+        if (cardOverlay) cardOverlay.classList.add("active");
         document.body.style.overflow = "hidden";
       } else {
-        cardOverlay.classList.remove("active");
+        if (cardOverlay) cardOverlay.classList.remove("active");
         document.body.style.overflow = "auto";
       }
     });
   });
 
-  cardOverlay.addEventListener("click", function () {
-    document.querySelectorAll(".expandable-card.expanded").forEach(card => {
-      card.classList.remove("expanded");
+  if (cardOverlay) {
+    cardOverlay.addEventListener("click", function () {
+      document.querySelectorAll(".expandable-card.expanded").forEach(card => {
+        card.classList.remove("expanded");
+      });
+      cardOverlay.classList.remove("active");
+      document.body.style.overflow = "auto";
     });
-    cardOverlay.classList.remove("active");
-    document.body.style.overflow = "auto";
-  });
+  }
 }
 // Active section tracking with smooth scroll
 document.addEventListener("DOMContentLoaded", function () {
@@ -1511,12 +1534,18 @@ draw();
 
 
 // Loader Animation
-window.addEventListener("load", function () {
-    let loader = document.getElementById("loader-overlay");
-    loader.style.display = "flex";
+function hideLoader() {
+  let loader = document.getElementById("loader-overlay");
+  if (loader && loader.style.display !== "none") {
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 0.5s ease";
+      setTimeout(() => loader.style.display = "none", 500);
+  }
+}
 
-    setTimeout(() => loader.style.display = "none", 5500);
+window.addEventListener("load", hideLoader);
 
-});
+// Fallback in case 'load' event doesn't fire due to blocked resources
+setTimeout(hideLoader, 3000);
 
 // End ------------
