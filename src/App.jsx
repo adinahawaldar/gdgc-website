@@ -1,3 +1,4 @@
+import Resources from './Resources';
 import { useState } from 'react'
 import {
   Home,
@@ -60,6 +61,9 @@ export default function App() {
           })}
         </div>
       </nav>
+      {activeTab === 'resources' && (
+        <Resources />
+      )}
     </div>
   )
 }

@@ -1,0 +1,46 @@
+.resources-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.resources-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #4285F4; /* GDGC Blue */
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.resource-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+}
+
+.res-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.res-btn:hover {
+  background-color: #3367d6;
+}
