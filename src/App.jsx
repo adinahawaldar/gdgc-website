@@ -1,4 +1,4 @@
-import Resources from './Resources';
+import { Resources } from './Resources.jsx';
 import { useState } from 'react'
 import {
   Home,
