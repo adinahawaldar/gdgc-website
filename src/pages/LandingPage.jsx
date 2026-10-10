@@ -119,10 +119,10 @@ export default function LandingPage() {
       {/* Floating Bottom Navigation (Google Themed Dock) */}
       <nav
         aria-label="Bottom Navigation"
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1.5rem)]"
+        className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)]"
       >
-        <div className="relative group p-[1px] rounded-full bg-gradient-to-r from-[#4285F4]/40 via-[#EA4335]/40 via-[#FBBC05]/40 to-[#34A853]/40 shadow-[0_12px_36px_rgba(32,33,36,0.14),0_2px_8px_rgba(32,33,36,0.06)] hover:shadow-[0_14px_42px_rgba(66,133,244,0.22)] transition-all duration-300">
-          <div className="flex items-center gap-1.5 bg-white/95 text-neutral-800 p-2 rounded-full backdrop-blur-xl overflow-x-auto scrollbar-none border border-white/60">
+        <div className="relative group p-[2px] rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] shadow-[0_10px_32px_rgba(32,33,36,0.16),0_2px_10px_rgba(66,133,244,0.18)] hover:shadow-[0_16px_44px_rgba(66,133,244,0.26)] transition-all duration-300">
+          <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white text-neutral-800 p-1 sm:p-2 rounded-full backdrop-blur-xl">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = activeTab === item.id
@@ -145,20 +145,19 @@ export default function LandingPage() {
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                     }
                   }}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2.5 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                     isActive
                       ? `${item.activeBg} font-semibold shadow-xs`
                       : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'
                   }`}
                 >
                   <Icon
-                    size={17}
-                    strokeWidth={isActive ? 2.2 : 1.9}
-                    className={`transition-colors shrink-0 ${
+                    strokeWidth={isActive ? 2.3 : 1.9}
+                    className={`w-4 h-4 sm:w-[17px] sm:h-[17px] transition-colors shrink-0 ${
                       isActive ? item.activeColor : 'text-neutral-500'
                     }`}
                   />
-                  <span>{item.label}</span>
+                  <span className="leading-tight">{item.label}</span>
                 </a>
               )
             })}

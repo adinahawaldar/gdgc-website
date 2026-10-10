@@ -23,9 +23,9 @@ export default function HeroSection() {
       {/* ============================================================== */}
       {/* GOOGLE CONSTELLATION & FLOATING SPHERES (Full Hero, Both Sides) */}
       {/* ============================================================== */}
-      {/* SVG Constellation Network & Solid Colored Balls on Full Pure White Background */}
+      {/* SVG Constellation Network & Solid Colored Balls (Hidden on mobile view) */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none select-none z-0"
+        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none z-0"
         viewBox="0 0 1440 850"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

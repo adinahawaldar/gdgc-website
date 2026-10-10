@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, Sparkles, Cloud, Globe, Smartphone, Database, GitBranch, ExternalLink, Clock, ArrowRight } from 'lucide-react';
 import { resourceCategories } from './resources.js';
-import './resources.css';
+import './Resources.css';
 
 export const Resources = () => {
     const [activeCategory, setActiveCategory] = useState(resourceCategories[0]?.id || '');
