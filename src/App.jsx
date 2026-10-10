@@ -1,4 +1,5 @@
 import { Resources } from './Resources.jsx';
+import { Events } from './Events.jsx';
 import { useState } from 'react'
 import {
   Home,
@@ -63,6 +64,9 @@ export default function App() {
       </nav>
       {activeTab === 'resources' && (
         <Resources />
+      )}
+      {activeTab === 'events' && (
+        <Events />
       )}
     </div>
   )
