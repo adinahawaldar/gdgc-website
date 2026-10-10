@@ -29,6 +29,29 @@ export default function AboutVisionMission() {
     },
   ]
 
+  const pillars = [
+    {
+      title: 'Learn',
+      description: 'Hands-on learning experiences through workshops, labs, and guided technical sessions.',
+      color: 'bg-[#e8f0fe] text-[#1a73e8]',
+    },
+    {
+      title: 'Build',
+      description: 'Turn ideas into prototypes and products that solve real challenges for real communities.',
+      color: 'bg-[#e6f4ea] text-[#188038]',
+    },
+    {
+      title: 'Connect',
+      description: 'Create a strong network of developers, mentors, founders, and collaborators across campus.',
+      color: 'bg-[#fef7e0] text-[#b06000]',
+    },
+    {
+      title: 'Lead',
+      description: 'Develop future-ready leaders who can shape technology, create impact, and inspire others.',
+      color: 'bg-[#fce8e6] text-[#d93025]',
+    },
+  ]
+
   return (
     <section id="about" className="w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none">
       
@@ -102,6 +125,35 @@ export default function AboutVisionMission() {
           >
             Learn more
           </a>
+        </div>
+      </div>
+
+      <div id="teams" className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">What we do</p>
+              <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-neutral-900">
+                Building a stronger developer culture
+              </h3>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {pillars.map((pillar) => (
+              <article
+                key={pillar.title}
+                className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.08)]"
+              >
+                <div className={`inline-flex rounded-full px-3 py-1.5 text-xs font-bold ${pillar.color}`}>
+                  {pillar.title}
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
+                  {pillar.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
 

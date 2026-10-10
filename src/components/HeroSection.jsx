@@ -18,6 +18,13 @@ export default function HeroSection() {
     setTimeout(() => setCmdCopied(false), 2000)
   }
 
+  const metrics = [
+    { value: '12+', label: 'Events / Semester' },
+    { value: '350+', label: 'Active Members' },
+    { value: '4', label: 'Core Tracks' },
+    { value: '1', label: 'Community Goal' },
+  ]
+
   return (
     <section className="relative w-full min-h-[calc(100svh-4.5rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-14 select-none overflow-hidden bg-white">
       {/* ============================================================== */}
@@ -307,7 +314,7 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* SUBTITLE & CTA BUTTONS (Comfortable vertical clearance)         */}
         {/* ============================================================== */}
-        <div className="mt-5 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
+        <div className="mt-5 sm:mt-8 md:mt-10 max-w-3xl mx-auto text-center px-4">
           <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
@@ -327,6 +334,22 @@ export default function HeroSection() {
               <span>Explore Events</span>
               <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
             </a>
+          </div>
+
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            {metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="rounded-2xl border border-neutral-200 bg-white/80 px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.04)] backdrop-blur-sm"
+              >
+                <div className="text-lg sm:text-2xl font-black tracking-tight text-neutral-900">
+                  {metric.value}
+                </div>
+                <div className="mt-1 text-[10px] sm:text-xs font-medium text-neutral-600 uppercase tracking-[0.12em]">
+                  {metric.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
