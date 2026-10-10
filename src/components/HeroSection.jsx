@@ -19,7 +19,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative w-full min-h-0 sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-start sm:justify-center px-4 sm:px-6 lg:px-8 pt-2 sm:pt-14 pb-8 sm:pb-14 select-none overflow-hidden bg-white">
+    <section className="relative w-full min-h-[calc(100svh-4.5rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-14 select-none overflow-hidden bg-white">
       {/* ============================================================== */}
       {/* GOOGLE CONSTELLATION & FLOATING SPHERES (Full Hero, Both Sides) */}
       {/* ============================================================== */}
@@ -234,10 +234,10 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* BIG INTERACTIVE HEADLINE (Product Sans typography)              */}
         {/* ============================================================== */}
-        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-2 sm:space-y-4 md:space-y-5 font-google">
+        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-3 sm:space-y-4 md:space-y-5 font-google">
 
           {/* LINE 1: "Google" + [Minimal Green circle] + [Minimal Blue switch] */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
             <span className="tracking-tight hover:opacity-95 transition-opacity inline-flex select-none">
               <span className="text-[#4285f4]">G</span>
               <span className="text-[#ea4335]">o</span>
@@ -249,23 +249,23 @@ export default function HeroSection() {
 
             {/* Widget 1: Minimal Google Green Circle with Arrow */}
             <div
-              className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
+              className="inline-flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
               title="Next Step"
             >
-              <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
+              <ArrowRight className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
             </div>
 
             {/* Widget 2: Minimal Google Blue Switch */}
             <div
               onClick={() => setToggleActive(!toggleActive)}
-              className="inline-flex items-center h-8 sm:h-12 md:h-14 w-20 sm:w-28 md:w-32 rounded-full p-1 sm:p-1.5 cursor-pointer shadow-xs bg-[#e8f0fe] border border-[#d2e3fc] relative transition-all duration-300 overflow-hidden shrink-0"
+              className="inline-flex items-center h-9 sm:h-12 md:h-14 w-22 sm:w-28 md:w-32 rounded-full p-1 sm:p-1.5 cursor-pointer shadow-xs bg-[#e8f0fe] border border-[#d2e3fc] relative transition-all duration-300 overflow-hidden shrink-0"
               title="Toggle State"
             >
               <div
-                className={`w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#1a73e8] shadow-sm flex items-center justify-center text-white transition-transform duration-300 ease-out ${
+                className={`w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#1a73e8] shadow-sm flex items-center justify-center text-white transition-transform duration-300 ease-out ${
                   toggleActive
                     ? 'translate-x-0.5 sm:translate-x-1.5'
-                    : 'translate-x-9 sm:translate-x-[3.8rem] md:translate-x-[4.4rem]'
+                    : 'translate-x-10 sm:translate-x-[3.8rem] md:translate-x-[4.4rem]'
                 }`}
               >
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white/90" />
@@ -274,7 +274,7 @@ export default function HeroSection() {
           </div>
 
           {/* LINE 2: "Developer Group" with Google color shades */}
-          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-5 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-5 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
             {/* Dash on desktop */}
             <span className="hidden sm:inline text-neutral-300 mr-2">—</span>
             <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">Developer</span>{' '}
@@ -282,7 +282,7 @@ export default function HeroSection() {
           </div>
 
           {/* LINE 3: [Minimal Google Red badge] + "on Campus" with Google color shades */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-5 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-5 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
             
             {/* Widget 5: Minimal Google Red / Blue Pill */}
             <div
@@ -291,7 +291,7 @@ export default function HeroSection() {
               title="Click to copy GDGC short-key"
             >
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#ea4335]" />
-              <span className="text-[9px] sm:text-[11px] font-bold text-[#d93025] tracking-wider">
+              <span className="text-[10px] sm:text-[11px] font-bold text-[#d93025] tracking-wider">
                 {cmdCopied ? 'COPIED' : 'GDGC'}
               </span>
             </div>
@@ -307,13 +307,13 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* SUBTITLE & CTA BUTTONS (Comfortable vertical clearance)         */}
         {/* ============================================================== */}
-        <div className="mt-4 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
+        <div className="mt-5 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
           <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
 
           {/* CTA Pill Buttons */}
-          <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#about"
               className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_14px_rgba(0,0,0,0.18)] cursor-pointer"
