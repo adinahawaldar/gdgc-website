@@ -173,11 +173,12 @@ export default function LandingPage() {
                     e.preventDefault()
                     setActiveTab(item.id)
                     if (item.id === 'home' || item.id === 'about') {
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams' || item.id === 'projects' || item.id === 'achievements') {
                       setTimeout(() => {
                         const target = document.querySelector(item.href)
                         if (target) {
                           target.scrollIntoView({ behavior: 'smooth' })
+                        } else {
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
                         }
                       }, 50)
                     } else {
