@@ -7,34 +7,46 @@
       "TE": "Third year",
       "SE": "Second year"
     },
-    "chapterUrl": "https://gdg.community.dev/gdg-on-campus-anjuman-i-islam-kalsekar-technical-campus-navi-mumbai-india/",
     "page": {
       "heroTitle": [
         "Our Team for",
         "GDGC at AIKTC"
       ],
       "heroSubtitle": "Meet the organisers, leads and members of Google Developer Groups on Campus · AIKTC. Students from every branch who design, build, write and organise everything the chapter does.",
-      "banner": "Every workshop, study jam and hackathon at GDGC AIKTC is made by students. Here are the people who make it happen.",
       "spotlightBadge": "Organizers",
       "spotlightTitle": "The people who steer GDGC AIKTC",
-      "spotlightTagline": "Three organisers set the direction for the chapter and support every team.",
-      "quote": {
-        "before": "Build. Lead. Belong. Every team here turns curiosity into",
-        "word": "impact",
-        "after": "."
-      },
-      "quoteSub": "Each team has a lead, a mission and room for new members. Find the one that fits your skills, or learn new ones.",
-      "joinBadge": "Open to everyone",
-      "joinTitle": "Want to be part of the team?",
-      "joinDesc": "GDGC on Campus AIKTC is built on peer learning. Join the chapter community to hear about open roles, events and recruitment.",
-      "joinNote": "Anjuman-I-Islam Kalsekar Technical Campus Chapter Hub"
+      "spotlightTagline": "Three organisers set the direction for the chapter and support every team."
+    },
+    "chapterUrl": "https://gdg.community.dev/gdg-on-campus-anjuman-i-islam-kalsekar-technical-campus-navi-mumbai-india/",
+    "footer": {
+      "college": "Anjuman-I-Islam's Kalsekar Technical Campus",
+      "tagline": "Google Developer Groups on Campus · AIKTC",
+      "credit": "Built by the GDGC Technical Team",
+      "links": [
+        {
+          "label": "Chapter",
+          "url": "https://gdg.community.dev/gdg-on-campus-anjuman-i-islam-kalsekar-technical-campus-navi-mumbai-india/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/company/gdg-on-campus-aiktc/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/gdgc._aiktc"
+        }
+      ]
     }
   },
   "organizers": [
     {
       "name": "Aman Antuley",
       "dept": "BE · CO",
-      "photo": "/teams/aman-antuley.jpg"
+      "photo": "/teams/aman-antuley.jpg",
+      "github": "https://github.com/amanantuley",
+      "linkedin": "https://www.linkedin.com/in/aman-antuley-8974ab26a",
+      "email": "amanantuley3794@gmail.com",
+      "intro": "I am Aman Antuley, a final-year Computer Engineering student passionate about software development, emerging technologies, and open-source collaboration. As a Senior Organizer at GDGC AIKTC, I contribute to building an engaging developer community by encouraging peer learning, organizing technical activities, and creating opportunities for students to explore and grow in technology. I enjoy working on real-world projects, solving problems, and collaborating with like-minded individuals. My goal is to help students learn, innovate, and turn their ideas into impactful solutions while continuously growing as a developer and community leader."
     },
     {
       "name": "Zainulabideen Pawle",
@@ -127,7 +139,11 @@
         {
           "name": "Nuvera Mulla",
           "dept": "TE · CO",
-          "photo": "/teams/nuvera-mulla.jpg"
+          "photo": "/teams/nuvera-mulla.jpg",
+          "github": "https://github.com/nuveramulla",
+          "linkedin": "https://www.linkedin.com/in/nuvera-mulla-b11952376",
+          "email": "nuveramulla@gmail.com",
+          "intro": "Hey everyone! I’m Nuvera. I enjoy creativity and exploring new design ideas. I’m excited to be a part of the GDGC Design Team, learn new things, share ideas, and create amazing designs together! 💗"
         },
         {
           "name": "Rahin Ibrahim Khamkar",
@@ -167,7 +183,11 @@
         {
           "name": "Sayed Hammaad Imtiyaz",
           "dept": "TE · CO",
-          "photo": "/teams/sayed-hammaad-imtiyaz.jpg"
+          "photo": "/teams/sayed-hammaad-imtiyaz.jpg",
+          "github": "https://github.com/hammaadsayed",
+          "linkedin": "https://www.linkedin.com/in/sayed-hammaad-imtiyaz-722b92284",
+          "email": "sayedhammaad58@gmail.com",
+          "intro": "Hi, I’m Sayed Hammaad Imtiyaz 👋, a third-year Computer Engineering student with a strong interest in technology, cybersecurity, and digital media. 💻🔐  My technical interests include Cybersecurity, Full-Stack Web Development, Artificial Intelligence 🚀. I enjoy exploring emerging technologies, developing innovative projects, and combining technical knowledge with creative problem-solving 💡.  I was a Marketing Team Member at GDG on Campus AIKTC during 2025 - 26 and currently serve as the Media Lead for 2026 - 27 🎯. In this role, I aim to strengthen the community’s digital presence, enhance audience engagement, and showcase its events, initiatives, and achievements through creative media and strategic communication 📸✨.  I look forward to collaborating with fellow developers, contributing to meaningful initiatives, and building a community that inspires learning, innovation, and growth 🤝🌱.  Create. Connect. Inspire. Grow. 🚀"
         },
         {
           "name": "Ibrahim Mirza",
@@ -190,7 +210,11 @@
         {
           "name": "Arshiya Shaik",
           "dept": "TE · CO",
-          "photo": "/teams/arshiya-shaik.jpg"
+          "photo": "/teams/arshiya-shaik.jpg",
+          "github": "https://github.com/arshiya7777",
+          "linkedin": "https://www.linkedin.com/in/arshiya-shaik-7b4374376",
+          "email": "arshiyashaik1720@gmail.com",
+          "intro": "A creative enthusiast passionate about visual storytelling, video editing, and trend-driven content creation. I enjoy transforming ideas into engaging visuals, experimenting with creative concepts, and exploring new ways to make content stand out. Always eager to learn, collaborate, and bring fresh perspectives to every project."
         },
         {
           "name": "Shaikh Mohammed Yusuf",
@@ -222,7 +246,11 @@
         {
           "name": "Afrah Bilgi",
           "dept": "TE · CO",
-          "photo": "/teams/afrah-bilgi.jpg"
+          "photo": "/teams/afrah-bilgi.jpg",
+          "github": "https://github.com/afrahbilgi1234-wq",
+          "linkedin": "https://www.linkedin.com/in/afrah-bilgi-65a457376",
+          "email": "afrahbilgi.877@gmail.com",
+          "intro": "Assalamualaikum, I am Afrah Bilgi. I am currently pursuing Computer Engineering in my third year. I am interested in learning new things, improving my skills, and gaining more knowledge in the field of technology. I enjoy working on projects and exploring new ideas. My goal is to improve myself, gain practical experience, and build a successful career in the IT field. I believe in learning from my mistakes and becoming better every day."
         },
         {
           "name": "Zaid Khan",
@@ -272,7 +300,11 @@
         {
           "name": "Mehreen Masroor Shaikh",
           "dept": "SE · CO",
-          "photo": "/teams/mehreen-masroor-shaikh.jpg"
+          "photo": "/teams/mehreen-masroor-shaikh.jpg",
+          "github": "https://github.com/Mehreen181",
+          "linkedin": "https://www.linkedin.com/in/mehreen-shaikh-2620283a5",
+          "email": "sonushaikh50181265@gmail.com",
+          "intro": "My name is Mehreen Masroor Shaikh, and I am a second-year Computer Engineering student. I am currently a member of the GDGC Documentation Team, as well as the DLLE Club.  I look forward to working with GDGC members, contributing to the club’s activities, and becoming an active member of the community. I have a strong interest in technology and aspire to become a technical member of the club. Although I wasn’t selected for the technical team this year due to my limited technical experience, I see this as an opportunity to learn, improve my skills, and prepare myself to apply again next year."
         }
       ],
       "icon": "FileText"

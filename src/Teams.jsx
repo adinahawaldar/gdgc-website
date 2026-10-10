@@ -6,7 +6,8 @@ import {
 import useTeams from './hooks/useTeams'
 import TeamModal from './components/team/TeamModal'
 import { StateMessage, getStats } from './components/team/TeamsShell'
-import { Photo, Links, PLACEHOLDER } from './components/team/parts'
+import { Photo, Links, PLACEHOLDER, GdgLogo } from './components/team/parts'
+import FooterSection from './components/FooterSection'
 import './Teams.css'
 
 const ICONS = { Code2, Palette, Camera, Megaphone, FileText, Star, Users }
@@ -37,7 +38,7 @@ function MemberCard({ m, team, role, yearLabels, onOpen, feature = false }) {
   )
 }
 
-export const Teams = () => {
+export const Teams = ({ onNavigate }) => {
   const { data, error } = useTeams()
   const [category, setCategory] = useState('all')
   const [query, setQuery] = useState('')
@@ -74,6 +75,7 @@ export const Teams = () => {
   const orgTeam = { name: 'Organizers', color: BLUE }
 
   return (
+    <>
     <div className="teams-page">
       <div className="teams-navbar-spacer" aria-hidden="true" />
 
@@ -190,17 +192,48 @@ export const Teams = () => {
               <span className="teams-group-name">{g.name}</span>
               <span className="teams-group-sub">{g.sub}</span>
             </div>
-            <div className="teams-team-grid">
-              {g.rows.map(({ m, t, role }) => (
-                <MemberCard key={`${t.id}-${m.name}`} m={m} team={t} role={role} feature={g.key !== 'leads' && role === 'Lead'} yearLabels={meta.yearLabels} onOpen={setSel} />
-              ))}
-            </div>
+            {(() => {
+              const lead = g.key !== 'leads' ? g.rows.find((r) => r.role === 'Lead') : null
+              const card = ({ m, t, role }, feature = false) => (
+                <MemberCard key={`${t.id}-${m.name}`} m={m} team={t} role={role} feature={feature} yearLabels={meta.yearLabels} onOpen={setSel} />
+              )
+              if (!lead) return <div className="teams-members-grid">{g.rows.map((r) => card(r))}</div>
+              return (
+                <div className="teams-team-layout">
+                  <div className="teams-team-lead">{card(lead, true)}</div>
+                  <div className="teams-team-members">{g.rows.filter((r) => r !== lead).map((r) => card(r))}</div>
+                </div>
+              )
+            })()}
           </div>
         ))}
       </section>
 
+      {/* Footer */}
+      {meta.footer && (
+      <footer className="teams-footer">
+        <div className="teams-footer-inner">
+          <div className="teams-footer-brand">
+            <GdgLogo className="w-9 h-5 shrink-0" />
+            <div>
+              <div className="teams-footer-tagline">{meta.footer.tagline} · {meta.batch}</div>
+              <div className="teams-footer-college">{meta.footer.college}</div>
+            </div>
+          </div>
+          <nav className="teams-footer-links" aria-label="Chapter links">
+            {meta.footer.links.map((l) => (
+              <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>
+            ))}
+          </nav>
+          <div className="teams-footer-credit">{meta.footer.credit}</div>
+        </div>
+      </footer>
+      )}
+
       <TeamModal sel={sel} onClose={() => setSel(null)} yearLabels={meta.yearLabels} />
     </div>
+    <FooterSection onNavigate={onNavigate} />
+    </>
   )
 }
 

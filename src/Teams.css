@@ -1433,3 +1433,31 @@
 .teams-card.feature .teams-member-photo { min-height: 520px; }
 .teams-card.feature .teams-member-photo img, .teams-card.feature .teams-member-photo > div { min-height: 520px; }
 @media (max-width: 767px) { .teams-card.feature .teams-member-photo, .teams-card.feature .teams-member-photo img, .teams-card.feature .teams-member-photo > div { min-height: 420px; } }
+
+/* Slim footer */
+.teams-footer { margin-top: 56px; border-top: 1px solid var(--tm-border); background: #fff; }
+.teams-footer-inner { max-width: 1280px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; }
+.teams-footer-brand { display: flex; align-items: center; gap: 12px; }
+.teams-footer-tagline { font-size: 13px; font-weight: 700; color: var(--tm-dark); line-height: 1.3; }
+.teams-footer-college { font-size: 12px; color: var(--tm-gray-500); font-weight: 500; }
+.teams-footer-links { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.teams-footer-links a { font-size: 13px; font-weight: 600; color: var(--tm-gray-600); transition: color 0.2s; }
+.teams-footer-links a:hover { color: var(--tm-blue-dark); }
+.teams-footer-credit { font-size: 12px; color: var(--tm-gray-500); font-weight: 500; }
+@media (max-width: 640px) { .teams-footer-inner { flex-direction: column; align-items: flex-start; } }
+
+/* Team block: lead card centred in the left half, members in a 2-wide grid on the right */
+.teams-team-layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; border-bottom: 1px solid var(--tm-border); }
+.teams-team-lead { display: flex; justify-content: center; align-items: center; }
+.teams-team-members { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.teams-team-lead .teams-card.feature { width: 100%; max-width: 320px; flex-direction: column; }
+.teams-card.feature .teams-member-photo { flex: none; display: block; min-height: 0; aspect-ratio: 3 / 4; border-right: none; border-bottom: 1px solid var(--tm-border); }
+.teams-card.feature .teams-member-photo img,
+.teams-card.feature .teams-member-photo > div { min-height: 0; height: 100%; }
+.teams-card.feature .teams-card-inner { flex: none; }
+.teams-card.feature .teams-member-name { font-size: 22px; }
+.teams-card.feature .teams-member-intro { -webkit-line-clamp: 3; font-size: 13px; }
+@media (min-width: 900px) {
+  .teams-team-layout { grid-template-columns: 1fr 1fr; align-items: center; gap: 36px; }
+  .teams-team-members { gap: 18px; }
+}
