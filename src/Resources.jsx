@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
-import { BookOpen, Sparkles, Cloud, Globe, Smartphone, Database, GitBranch, ExternalLink, Clock, ArrowRight } from 'lucide-react';
-import { resourceCategories } from './resources.js';
-import './resources.css';
+import React, { useState, useMemo } from 'react';
+import { ArrowRight, ExternalLink, Search, X, Check, Award, Sparkles, Briefcase, Calendar, ShieldCheck, Cpu } from 'lucide-react';
+import { categories, careerCertificates, benefits } from './resources.js';
+import './Resources.css';
+import FooterSection from './components/FooterSection';
+
+// Global FooterSection placeholder preserved for component integrity
 
 export const Resources = () => {
-    const [activeCategory, setActiveCategory] = useState(resourceCategories[0]?.id || '');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const currentCategory = resourceCategories.find((c) => c.id === activeCategory) || resourceCategories[0];
+  // Safe fallback list
+  const certsList = Array.isArray(careerCertificates) ? careerCertificates : [];
 
-  const getCategoryIcon = (id) => {
-    switch (id) {
-      case 'ai-genai':
-        return <Sparkles className="w-4 h-4 resources-pill-icon" />;
-      case 'cloud':
-        return <Cloud className="w-4 h-4 resources-pill-icon" />;
-      case 'web-dev':
-        return <Globe className="w-4 h-4 resources-pill-icon" />;
-      case 'android':
-        return <Smartphone className="w-4 h-4 resources-pill-icon" />;
-      case 'firebase':
-        return <Database className="w-4 h-4 resources-pill-icon" />;
-      case 'git-github':
-        return <GitBranch className="w-4 h-4 resources-pill-icon" />;
-      default:
-        return <BookOpen className="w-4 h-4 resources-pill-icon" />;
-    }
-  };
+  // Filtered certificates based on active category & search query
+  const filteredCertificates = useMemo(() => {
+    return certsList.filter((cert) => {
+      const matchesCategory =
+        selectedCategory === 'all' || cert.category === selectedCategory;
+
+      const query = searchQuery.trim().toLowerCase();
+      if (!query) return matchesCategory;
+
+      const matchesSearch =
+        cert.title.toLowerCase().includes(query) ||
+        cert.description.toLowerCase().includes(query) ||
+        (cert.skills && cert.skills.some((skill) => skill.toLowerCase().includes(query))) ||
+        (cert.readyForJobs && cert.readyForJobs.some((job) => job.toLowerCase().includes(query))) ||
+        (cert.tools && cert.tools.some((t) => t.toLowerCase().includes(query)));
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [certsList, selectedCategory, searchQuery]);
 
   return (
     <div className="resources-page">
@@ -33,7 +39,7 @@ export const Resources = () => {
       <div className="resources-navbar-spacer" aria-hidden="true" />
 
       {/* ====================================================================
-          1. Hero Section (Matching Reference Top Section)
+          1. HERO SECTION (UNTOUCHED & PRESERVED)
           ==================================================================== */}
       <section className="resources-hero">
         <div className="resources-hero-grid">
@@ -93,7 +99,7 @@ export const Resources = () => {
             {/* CTA row with Blue Pill button and Triple Connected Circles */}
             <div className="resources-hero-cta-row">
               <a
-                href="#learning-tracks"
+                href="#career-certificates"
                 className="resources-pill-btn-blue"
               >
                 <span>Explore Tracks</span>
@@ -168,7 +174,7 @@ export const Resources = () => {
       </section>
 
       {/* ====================================================================
-          2. Sub-Hero Banner Bar (Green Arrow & Impact Statement)
+          2. SUB-HERO BANNER BAR (UNTOUCHED & PRESERVED)
           ==================================================================== */}
       <section className="resources-banner-bar">
         <div className="resources-banner-inner">
@@ -199,246 +205,249 @@ export const Resources = () => {
       </section>
 
       {/* ====================================================================
-          3. Curly Brackets Quote Section
+          3. REFACTORED REGION (From circled quote section down to the footer):
+             GOOGLE CAREER CERTIFICATES SECTION WITH GOOGLE WEBSITE HOVER EFFECT
           ==================================================================== */}
-      <section className="resources-quote-section">
-        <div className="resources-quote-card">
-          {/* Left: Outlined Curly Brackets with Editorial Quote */}
-          <div className="resources-quote-left">
-            {/* Left Curly Bracket SVG */}
-            <div className="resources-curly-bracket" aria-hidden="true">
-              <svg width="34" height="72" viewBox="0 0 34 72" fill="none">
-                <path
-                  d="M30 4C20 4 12 10 12 20V26C12 32 4 36 4 36C4 36 12 40 12 46V52C12 62 20 68 30 68"
-                  stroke="#FBBC05"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+      <section id="career-certificates" className="resources-certs-section">
+        {/* Section Header */}
+        <div className="resources-certs-header">
+          <div className="resources-certs-eyebrow">
+            <Sparkles className="w-4 h-4 text-[#4285F4]" />
+            <span>Grow with Google · Career & Skill Pathways</span>
+          </div>
+          <h2 className="resources-certs-title">
+            Google Career Certificates & Learning Tracks
+          </h2>
+          <p className="resources-certs-intro">
+            Get job-ready for in-demand roles with Google certificates. Learn at your own pace, gain practical skills with hands-on labs, and qualify for high-growth tech positions.
+          </p>
+        </div>
 
-            <p className="resources-quote-text">
-              Here, we don't just grow with technology—we{' '}
-              <span className="resources-quote-evolve-word">
-                <span>e</span>
-                <span>v</span>
-                <span>o</span>
-                <span>l</span>
-                <span>v</span>
-                <span>e</span>
-              </span>{' '}
-              with it.
-            </p>
-
-            {/* Right Curly Bracket SVG */}
-            <div className="resources-curly-bracket" aria-hidden="true">
-              <svg width="34" height="72" viewBox="0 0 34 72" fill="none">
-                <path
-                  d="M4 4C14 4 22 10 22 20V26C22 32 30 36 30 36C30 36 22 40 22 46V52C22 62 14 68 4 68"
-                  stroke="#FBBC05"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+        {/* Category Filter Pills & Search Input Controls */}
+        <div className="resources-controls-bar">
+          {/* Category Filter Pills */}
+          <div className="resources-cert-pills-list" role="tablist" aria-label="Resource Categories">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                role="tab"
+                aria-selected={selectedCategory === cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`resources-cert-pill ${selectedCategory === cat.id ? 'active' : ''}`}
+              >
+                <span className="resources-cert-pill-dot" />
+                <span>{cat.name}</span>
+              </button>
+            ))}
           </div>
 
-          {/* Right: Explanatory paragraph and Yellow Pill Button */}
-          <div className="resources-quote-right">
-            <p className="resources-quote-subtext">
-              Develop leadership skills, gain recognition, expand your network, and collaborate with other passionate developers through Google Cloud and Android learning tracks.
+          {/* Search Box */}
+          <div className="resources-search-wrap">
+            <Search className="resources-search-icon w-4 h-4" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search certificates, roles, skills..."
+              className="resources-search-input"
+              aria-label="Search resources and certificates"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="resources-search-clear"
+                aria-label="Clear search input"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Results Metadata */}
+        <div className="resources-results-meta">
+          <span className="resources-results-count">
+            Showing {filteredCertificates.length}{' '}
+            {filteredCertificates.length === 1 ? 'Certificate' : 'Certificates'}
+          </span>
+          {selectedCategory !== 'all' && (
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className="text-xs font-bold text-[#1A73E8] hover:underline"
+            >
+              Reset to All
+            </button>
+          )}
+        </div>
+
+        {/* Responsive Grid Layout with Google website styled cards & hover effects */}
+        {filteredCertificates.length > 0 ? (
+          <div className="resources-cert-grid">
+            {filteredCertificates.map((cert) => (
+              <article
+                key={cert.id}
+                className="resources-cert-card group"
+                style={{ '--accent-color': cert.color || '#4285F4' }}
+              >
+                {/* Top Google color indicator line on hover */}
+                <div
+                  className="resources-card-top-accent"
+                  style={{ backgroundColor: cert.color || '#4285F4' }}
+                  aria-hidden="true"
+                />
+
+                <div className="resources-cert-top">
+                  {/* Badge & Level Row */}
+                  <div className="resources-cert-badge-row">
+                    <span className="resources-cert-provider-pill">
+                      <span
+                        className="resources-cert-provider-dot"
+                        style={{ backgroundColor: cert.color || '#4285F4' }}
+                      />
+                      <span>{cert.badge || 'Google Certificate'}</span>
+                    </span>
+                    <span className="resources-cert-level-pill">
+                      {cert.level ? cert.level.split('·')[0].trim() : 'Beginner'}
+                    </span>
+                  </div>
+
+                  {/* Card Title */}
+                  <h3 className="resources-cert-title">{cert.title}</h3>
+
+                  {/* Duration strip */}
+                  <div className="resources-cert-duration">
+                    <Calendar className="w-3.5 h-3.5 text-[#5F6368]" />
+                    <span>{cert.duration}</span>
+                  </div>
+
+                  {/* Short Tagline / Description */}
+                  <p className="resources-cert-desc">{cert.description}</p>
+
+                  {/* Primary CTA Button (Blue pill button redirecting directly to official Google URLs) */}
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="resources-cert-cta-btn"
+                  >
+                    <span>{cert.ctaText || 'Get Started'}</span>
+                    <ExternalLink className="resources-cert-cta-icon" />
+                  </a>
+                </div>
+
+                {/* Divider Line */}
+                <div className="resources-cert-divider" aria-hidden="true" />
+
+                {/* Card Bottom: Skills & Ready For Jobs */}
+                <div className="resources-cert-bottom">
+                  {/* "SKILLS YOU'LL LEARN" Section with 3 clean bullet points and checkmark icons */}
+                  <div className="resources-skills-section">
+                    <div className="resources-skills-label">
+                      <Award className="w-3.5 h-3.5 text-[#1A73E8]" />
+                      <span>Skills you'll learn</span>
+                    </div>
+
+                    <ul className="resources-skills-list">
+                      {cert.skills &&
+                        cert.skills.map((skill, idx) => (
+                          <li key={idx} className="resources-skill-item">
+                            <Check className="resources-skill-check" />
+                            <span>{skill}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+
+                  {/* Jobs / Roles tag chips */}
+                  {cert.readyForJobs && cert.readyForJobs.length > 0 && (
+                    <div className="resources-jobs-section">
+                      <div className="resources-jobs-label">
+                        <Briefcase className="w-3.5 h-3.5 text-[#5F6368]" />
+                        <span>Jobs you'll be ready for</span>
+                      </div>
+                      <div className="resources-jobs-chips">
+                        {cert.readyForJobs.map((job, idx) => (
+                          <span key={idx} className="resources-job-chip">
+                            {job}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          /* Empty Search State */
+          <div className="resources-empty-state">
+            <h3 className="resources-empty-title">No certificates found</h3>
+            <p className="resources-empty-desc">
+              We couldn't find any resources matching "{searchQuery}". Try searching for another topic or clear the search filters.
             </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+              }}
+              className="resources-empty-btn"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
+
+        {/* Benefits Strip (Grow with Google Pillars) */}
+        <div className="resources-benefits-grid">
+          {benefits.map((benefit) => (
+            <div key={benefit.id} className="resources-benefit-card">
+              <div className="resources-benefit-icon-wrap">
+                {benefit.id === 'pace' ? (
+                  <Calendar className="w-5 h-5 text-[#4285F4]" />
+                ) : benefit.id === 'experts' ? (
+                  <Cpu className="w-5 h-5 text-[#34A853]" />
+                ) : (
+                  <ShieldCheck className="w-5 h-5 text-[#EA4335]" />
+                )}
+              </div>
+              <h4 className="resources-benefit-title">{benefit.title}</h4>
+              <p className="resources-benefit-desc">{benefit.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Grow with Google / Cloud Boost Footer Callout Banner */}
+        <div className="resources-grow-banner">
+          <div className="resources-grow-content">
+            <span className="resources-grow-tag">
+              <Check className="w-3.5 h-3.5" />
+              <span>Official GDGC Chapter Partnership</span>
+            </span>
+            <h3 className="resources-grow-heading">
+              Need free Google Cloud Skills Boost vouchers & credits?
+            </h3>
+            <p className="resources-grow-subtext">
+              Active GDGC AIKTC chapter members receive free Google Cloud Skills Boost campaign vouchers, access to Qwiklabs credits, and mentorship from certified Cloud Architects and alumni.
+            </p>
+          </div>
+          <div className="resources-grow-action">
             <a
               href="https://www.cloudskillsboost.google"
               target="_blank"
               rel="noopener noreferrer"
-              className="resources-btn-yellow"
+              className="resources-grow-btn"
             >
-              <span>Learn more</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Explore Cloud Boost</span>
+              <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>
       </section>
 
-      {/* ====================================================================
-          4. Category Navigation Tabs (Pills)
-          ==================================================================== */}
-      <section id="learning-tracks" className="resources-tracks-nav-wrap">
-        <div className="resources-tracks-title-row">
-          <h2 className="resources-tracks-heading">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#4285F4]" />
-            <span>Select Learning Track</span>
-          </h2>
-        </div>
-
-        <div className="resources-track-pills-list">
-          {resourceCategories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`resources-track-pill ${activeCategory === cat.id ? 'active' : ''}`}
-            >
-              {getCategoryIcon(cat.id)}
-              <span>{cat.name}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* ====================================================================
-          5. Connected Vision / Track Capsule (Matching Reference "Vision" Motif)
-          ==================================================================== */}
-      <section className="resources-vision-capsule-wrap">
-        <div className="resources-vision-capsule">
-          {/* Left Circle: Developer Brackets Symbol in Google Colors */}
-          <div className="resources-capsule-left-circle" aria-hidden="true">
-            <div className="flex items-center gap-2">
-              {/* Blue Bracket '<' */}
-              <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
-                <path d="M19 4L5 16L19 28" stroke="#4285F4" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              {/* Green Bracket '>' */}
-              <svg width="24" height="32" viewBox="0 0 24 32" fill="none">
-                <path d="M5 4L19 16L5 28" stroke="#34A853" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Center Content: Track description and goal */}
-          <div className="resources-capsule-center-content">
-            <h3 className="resources-capsule-center-title">
-              {currentCategory.name} Track
-            </h3>
-            <p className="resources-capsule-center-desc">
-              {currentCategory.description}
-            </p>
-          </div>
-
-          {/* Right Circle: Vision / Track Level */}
-          <div className="resources-capsule-right-circle">
-            <span className="resources-capsule-badge-label">Curriculum</span>
-            <span className="resources-capsule-badge-sub">Roadmap</span>
-          </div>
-        </div>
-      </section>
-
-      {/* ====================================================================
-          6. Main Curriculum Section: Numbered Steps & Codelabs Cards
-          ==================================================================== */}
-      <section className="resources-content-section">
-        <div className="resources-content-grid">
-          {/* Left Column: Numbered Step Capsule Rows (Step 1, 2, 3...) */}
-          <div className="resources-steps-column">
-            <div className="resources-section-title-row">
-              <h3 className="resources-section-heading">
-                <span>Step-by-Step Learning Path</span>
-              </h3>
-            </div>
-
-            {currentCategory.learningPath.map((step, idx) => (
-              <div key={step.step} className="resources-step-capsule">
-                {/* Numbered Circle (Red, Yellow, Green, Blue, Slate) */}
-                <div className={`resources-step-num-badge step-${(idx % 5) + 1}`}>
-                  {step.step}
-                </div>
-
-                {/* Step Body */}
-                <div className="resources-step-body">
-                  <div className="resources-step-top-line">
-                    <h4 className="resources-step-title">{step.title}</h4>
-                    <span className={`resources-level-tag ${step.level}`}>
-                      {step.level}
-                    </span>
-                  </div>
-
-                  <p className="resources-step-desc">
-                    {step.description}
-                  </p>
-
-                  <div className="resources-step-tags">
-                    {step.topics.map((topic) => (
-                      <span key={topic} className="resources-topic-pill">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* Bottom Quotation Marks Deco `””` matching reference */}
-            <div className="resources-deco-quotes" aria-hidden="true">
-              <svg width="42" height="32" viewBox="0 0 42 32" fill="none">
-                <path d="M12 6C6.5 6 3 10.5 3 16C3 22 7 26 12 26C16.5 26 20 22.5 20 18C20 12.5 16 6 12 6ZM32 6C26.5 6 23 10.5 23 16C23 22 27 26 32 26C36.5 26 40 22.5 40 18C40 12.5 36 6 32 6Z" stroke="#9CA3AF" strokeWidth="2.5" fill="none" />
-              </svg>
-              <span className="text-xs text-slate-500 font-medium italic">
-                From beginner fundamentals to shipping production apps
-              </span>
-            </div>
-          </div>
-
-          {/* Right Column: Recommended Codelabs & Labs Cards */}
-          <div className="resources-labs-column">
-            <div className="resources-section-title-row">
-              <h3 className="resources-section-heading">
-                <span>Curated Codelabs</span>
-              </h3>
-            </div>
-
-            {currentCategory.curatedLinks.map((item, idx) => (
-              <a
-                key={idx}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="resources-codelab-card"
-              >
-                <div className="resources-codelab-header">
-                  <span className="resources-codelab-type">{item.type}</span>
-                  <span className="resources-codelab-time">
-                    <Clock className="w-3.5 h-3.5 text-[#FBBC05]" />
-                    <span>{item.estimatedTime}</span>
-                  </span>
-                </div>
-
-                <h4 className="resources-codelab-title">
-                  <span>{item.title}</span>
-                  <ExternalLink className="w-4 h-4 resources-codelab-arrow" />
-                </h4>
-
-                <p className="resources-codelab-desc">
-                  {item.description}
-                </p>
-              </a>
-            ))}
-
-            {/* Google Cloud Credits Box */}
-            <div className="resources-credits-box">
-              <span className="resources-credits-badge">
-                Free Google Cloud Credits
-              </span>
-              <h4 className="resources-credits-title">
-                Google Cloud Skills Boost
-              </h4>
-              <p className="resources-credits-desc">
-                GDGC AIKTC members get access to hands-on labs, Skill Boost campaign credits, and certification prep vouchers for GCP, GenAI & Kubernetes.
-              </p>
-              <a
-                href="https://www.cloudskillsboost.google"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="resources-credits-link"
-              >
-                <span>Visit Cloud Skills Boost</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Global FooterSection preserved at the bottom */}
+      <FooterSection />
     </div>
   );
 };
+
+export default Resources;
