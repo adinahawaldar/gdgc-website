@@ -9,13 +9,16 @@ import {
 import HeroSection from '../components/HeroSection'
 import RecentEvents from '../components/RecentEvents'
 import AboutVisionMission from '../components/AboutVisionMission'
+import TeamsSection from '../components/TeamsSection'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
 import { Resources } from '../Resources.jsx'
+import { Teams } from '../Teams.jsx'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
+  const openTeams = () => { setActiveTab('teams'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
 
   const navItems = [
     {
@@ -95,7 +98,11 @@ export default function LandingPage() {
 
       {/* Main Content Area */}
       <main className="w-full flex-1 flex flex-col items-center">
-        {activeTab === 'events' ? (
+        {activeTab === 'teams' ? (
+          <div className="w-full pt-4 pb-20">
+            <Teams />
+          </div>
+        ) : activeTab === 'events' ? (
           <div className="w-full pt-4 pb-20">
             <Events />
           </div>
@@ -110,6 +117,7 @@ export default function LandingPage() {
             </div>
             <RecentEvents />
             <AboutVisionMission />
+            <TeamsSection onViewAll={openTeams} />
             <SocialFollowSection />
             <FooterSection />
           </>
@@ -134,7 +142,7 @@ export default function LandingPage() {
                   onClick={(e) => {
                     e.preventDefault()
                     setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams') {
+                    if (item.id === 'home' || item.id === 'about') {
                       setTimeout(() => {
                         const target = document.querySelector(item.href)
                         if (target) {

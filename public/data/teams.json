@@ -1,0 +1,281 @@
+{
+  "meta": {
+    "org": "GDGC at AIKTC",
+    "batch": "2026–27",
+    "yearLabels": {
+      "BE": "Final year",
+      "TE": "Third year",
+      "SE": "Second year"
+    },
+    "chapterUrl": "https://gdg.community.dev/gdg-on-campus-anjuman-i-islam-kalsekar-technical-campus-navi-mumbai-india/",
+    "page": {
+      "heroTitle": [
+        "Our Team for",
+        "GDGC at AIKTC"
+      ],
+      "heroSubtitle": "Meet the organisers, leads and members of Google Developer Groups on Campus · AIKTC. Students from every branch who design, build, write and organise everything the chapter does.",
+      "banner": "Every workshop, study jam and hackathon at GDGC AIKTC is made by students. Here are the people who make it happen.",
+      "spotlightBadge": "Organizers",
+      "spotlightTitle": "The people who steer GDGC AIKTC",
+      "spotlightTagline": "Three organisers set the direction for the chapter and support every team.",
+      "quote": {
+        "before": "Build. Lead. Belong. Every team here turns curiosity into",
+        "word": "impact",
+        "after": "."
+      },
+      "quoteSub": "Each team has a lead, a mission and room for new members. Find the one that fits your skills, or learn new ones.",
+      "joinBadge": "Open to everyone",
+      "joinTitle": "Want to be part of the team?",
+      "joinDesc": "GDGC on Campus AIKTC is built on peer learning. Join the chapter community to hear about open roles, events and recruitment.",
+      "joinNote": "Anjuman-I-Islam Kalsekar Technical Campus Chapter Hub"
+    }
+  },
+  "organizers": [
+    {
+      "name": "Aman Antuley",
+      "dept": "BE · CO",
+      "photo": "/teams/aman-antuley.jpg"
+    },
+    {
+      "name": "Zainulabideen Pawle",
+      "dept": "TE · CO1",
+      "photo": "/teams/zainulabideen-pawle.jpg",
+      "github": "https://github.com/Zayn329",
+      "linkedin": "https://www.linkedin.com/in/zainpawle",
+      "email": "zainpawle19@gmail.com",
+      "intro": "I’m Zain Pawle, a  TECO student at AIKTC and an Organizer at GDGC AIKTC. I’m passionate about AI Engineering, love building things and participating in hackathons, and enjoy connecting with people, collaborating, and turning ideas into reality."
+    },
+    {
+      "name": "Munazza Jaweed",
+      "dept": "TE · CO1",
+      "photo": "/teams/munazza-jaweed.jpg",
+      "github": "https://github.com/MunazzaJAG",
+      "linkedin": "https://www.linkedin.com/in/munazza-jaweed-62a2a4368",
+      "email": "24co14@aiktc.ac.in",
+      "intro": "Hey, I’m Munazza. I’m a Third Year computer engineering student, so yeah, I spend a decent amount of time around computers. Outside of that, I enjoy good conversations, trying new things, and having a laugh. I’d say I’m a mix of curiosity, puns, and good vibes."
+    }
+  ],
+  "teams": [
+    {
+      "id": "technical",
+      "name": "Technical",
+      "color": "#34a853",
+      "blurb": "We build, break and ship.",
+      "members": [
+        {
+          "name": "Adina Hawaldar",
+          "dept": "TE · CSE(DS)",
+          "photo": "/teams/adina-hawaldar.jpg",
+          "github": "https://github.com/adinahawaldar",
+          "linkedin": "https://www.linkedin.com/in/adina-hawaldar-17az6",
+          "email": "adinahawaldar895@gmail.com",
+          "intro": "I’m Adina, the Technical Lead at GDGC, passionate about web development, AI, cloud computing, and UI/UX. I look forward to building innovative projects, exploring new technologies, and creating a collaborative environment where everyone can learn, experiment, and grow together."
+        },
+        {
+          "name": "Jishan Momin",
+          "dept": "TE · CO",
+          "photo": "/teams/jishan-momin.jpg",
+          "github": "https://github.com/jishanmomin26",
+          "linkedin": "https://www.linkedin.com/in/jishanmomin2606",
+          "email": "jishanmomin100@gmail.com",
+          "intro": "Hi, I’m Jishan Momin 👋, a Computer Engineering student passionate about technology, development, and building things that solve real-world problems.  I’m particularly interested in Web Development, Artificial Intelligence, Machine Learning, and Cloud technologies 🚀. I enjoy turning ideas into practical projects and exploring new technologies through hands-on development.  I’ve worked on projects involving React, JavaScript, Python, FastAPI, PostgreSQL, Firebase, and Tailwind CSS, including AI-powered applications, web platforms, and NLP-based solutions. Through these projects, I’ve developed a strong interest in problem-solving, system building, and learning by experimentation.  Beyond development, I enjoy being part of technical communities and student-led initiatives 🤝. I’ve taken leadership and organizing roles in technical clubs and hackathons, where I’ve worked with teams, coordinated technical activities, and helped create opportunities for students to learn and build together.  As part of GDG on Campus, I’m excited to collaborate with fellow developers, contribute to the community, learn from others, and help create an environment where students can build, experiment, share knowledge, and grow together 🌱.  Outside technology, I enjoy volleyball, chess, and singing."
+        },
+        {
+          "name": "Saifan Khalfe",
+          "dept": "TE · ECE",
+          "photo": "/teams/saifan-khalfe.jpg",
+          "github": "https://github.com/saifan30",
+          "linkedin": "https://www.linkedin.com/in/Saifan-khalfe",
+          "email": "khalfesaifan333@gmail.com",
+          "intro": "Hi, I'm Saifan! I'm a Third-Year Electrical and Computer Engineering student passionate about bridging hardware and software solutions. As part of the GDGC team, I love exploring modern technologies, collaborating on impactful projects, and contributing to a thriving tech community on campus."
+        },
+        {
+          "name": "Mohammed Hayat Azad",
+          "dept": "SE · CO",
+          "photo": "/teams/mohammed-hayat-azad.jpg",
+          "github": "https://github.com/devhayat",
+          "linkedin": "https://www.linkedin.com/in/mohd-hayat",
+          "email": "mohammedhayatazad13@gmail.com",
+          "intro": "I’m Mohammed Hayat Azad, a Second Year Computer Engineering (SE CO) student.  I’m mainly into Full Stack Python, Web Development, and Android Development. But more than sticking to one technology, I simply love building things—exploring new tech, experimenting with ideas, and turning them into something real. 🚀  I’m really into hackathons, technical events, quizzes, and competitions. I enjoy the whole process—coming up with ideas, building, breaking things, fixing them, and learning along the way. 😂🔥  I’ve also had the opportunity to teach and mentor Diploma students during their Python internship, which helped me grow not just technically, but also as a communicator and mentor.  As a part of the Technical Team, I’m excited to contribute by bringing in new ideas, organizing workshops, coding events, quizzes, hackathons, and other technical activities that people genuinely enjoy being a part of.  Looking forward to learning, collaborating, building crazy stuff, meeting amazing people, and creating some great memories together! 🚀🤝  Let’s connect, build, break, fix, and have fun while we’re at it! 😂🔥"
+        },
+        {
+          "name": "Sadia Siddiqua Shaheen",
+          "dept": "SE · CO",
+          "photo": "/teams/sadia-siddiqua-shaheen.jpg",
+          "github": "https://github.com/sadia-s-shaheen",
+          "linkedin": "https://www.linkedin.com/in/sadia-siddiqua-shaheen-7106ba182",
+          "email": "25co68@aiktc.ac.in",
+          "intro": "Hiii, I am Sadia and I have a very bad habit of turning “wait, that's interesting” into an entire project. I like pulling things apart just to understand how they work, going down mathematical rabbit holes, building weird little things, and asking questions that lead to five more questions. I'm into AI, web, cloud, UI/UX, and pretty much anything that lets me mix logic with creativity. I also have a soft spot for making tech less intimidating for people who think they're not good enough at it yet. Basically, I want to understand how things work, make my computer do things it probably shouldn't, and leave my little corner of the world a bit more interesting than I found it."
+        }
+      ],
+      "icon": "Code2"
+    },
+    {
+      "id": "design",
+      "name": "Design",
+      "color": "#fbbc05",
+      "blurb": "Pixels, posters and polish.",
+      "members": [
+        {
+          "name": "Almira Fangari",
+          "dept": "TE · CO",
+          "photo": "/teams/almira-fangari.jpg",
+          "linkedin": "https://www.linkedin.com/in/almira-fangari-020920376",
+          "email": "24co05@aiktc.ac.in",
+          "intro": "I’m Almira Fangari. I’m a third-year Computer Engineering student. I’m interested in combining technology with creativity, especially in areas like UI/UX and visual design."
+        },
+        {
+          "name": "Nuvera Mulla",
+          "dept": "TE · CO",
+          "photo": "/teams/nuvera-mulla.jpg"
+        },
+        {
+          "name": "Rahin Ibrahim Khamkar",
+          "dept": "SE · CO",
+          "photo": "/teams/rahin-ibrahim-khamkar.jpg",
+          "github": "https://github.com/raahiin21",
+          "linkedin": "https://www.linkedin.com/in/rahinkhamkar",
+          "email": "rahinkhamkar21@gmail.com",
+          "intro": "Hey there! Rahin here, someone who enjoys exploring, building, and learning through hands-on experience. I’ve worked on many different things that have helped me develop my skills and creativity.  I like trying something new or different to keep my creativity growing and put it to good use. As a member of the **Designing Team**, I enjoy bringing ideas to life through design, collaborating with others, and learning something new with every project. ✨"
+        },
+        {
+          "name": "Afifa Naik",
+          "dept": "SE · CSE(AIML)",
+          "photo": "/teams/afifa-naik.jpg",
+          "linkedin": "https://www.linkedin.com/in/afifa-naik",
+          "email": "afifainaik@gmail.com",
+          "intro": "I’m Afifa, a Computer Science student specializing in Artificial Intelligence and Machine Learning. I enjoy exploring AI, coding, and design, and I love getting creative with the things I work on. From taking part in hackathons to being involved in college clubs and design teams, I’ve had the chance to learn new things, work with different people, and step out of my comfort zone. I’m always curious to try something new and keep improving along the way."
+        },
+        {
+          "name": "Mahek Habib Shaikh",
+          "dept": "SE · ECS",
+          "photo": "/teams/mahek-habib-shaikh.jpg",
+          "github": "https://github.com/mahekshk23",
+          "linkedin": "https://www.linkedin.com/in/mahek-shaikh-146743317",
+          "email": "mahekshk231@gmail.com",
+          "intro": "Hi, I'm Mahek, a second-year Electronics and Computer Science student at AIKTC and a member of the GDGC Design Team. I enjoy exploring creative ideas, experimenting with design, and turning simple concepts into meaningful visuals. I'm always eager to learn, grow, and bring a fresh perspective to every opportunity."
+        }
+      ],
+      "icon": "Palette"
+    },
+    {
+      "id": "media",
+      "name": "Media",
+      "color": "#ea4335",
+      "blurb": "Capturing every moment.",
+      "members": [
+        {
+          "name": "Sayed Hammaad Imtiyaz",
+          "dept": "TE · CO",
+          "photo": "/teams/sayed-hammaad-imtiyaz.jpg"
+        },
+        {
+          "name": "Ibrahim Mirza",
+          "dept": "TE · CO",
+          "photo": "/teams/ibrahim-mirza.jpg",
+          "github": "https://github.com/Akmss-15",
+          "linkedin": "https://www.linkedin.com/in/ibrahim-mirza-6670aa2a5",
+          "email": "ibrahimakmss81@gmail.com",
+          "intro": "I’m Mirza Ibrahim, a third-year Computer Engineering student. I’m interested in technology, creativity, and learning new things. I’m really excited to be a part of GDGC and the Media Team, and I’m looking forward to meeting new people, contributing to the team, and having a great experience together!"
+        },
+        {
+          "name": "Aachal Ranjit Narbage",
+          "dept": "TE · CO",
+          "photo": "/teams/aachal-ranjit-narbage.jpg",
+          "github": "https://github.com/a-narbage",
+          "linkedin": "https://www.linkedin.com/in/aachal-narbage-66506937b",
+          "email": "aachalnarbage@gmail.com",
+          "intro": "I am a third-year Computer Engineering student interested in cybersecurity, web development, and AI. I am a member of the GDGC On Campus Media Team and look forward to learning, contributing to the community, and gaining experience through technical events and activities."
+        },
+        {
+          "name": "Arshiya Shaik",
+          "dept": "TE · CO",
+          "photo": "/teams/arshiya-shaik.jpg"
+        },
+        {
+          "name": "Shaikh Mohammed Yusuf",
+          "dept": "TE · CO",
+          "photo": "/teams/shaikh-mohammed-yusuf.jpg",
+          "github": "https://github.com/skyusufrafi",
+          "linkedin": "https://www.linkedin.com/in/shaikh-mohammed-yusuf-3a54a9381",
+          "email": "Msyusuf932@gmail.com",
+          "intro": "Hi, I’m Shaikh Mohammed Yusuf, a third-year Computer Engineering student at AIKTC.  I’m a creative and enthusiastic person who enjoys working with people, exploring new ideas, and being involved in events and communities. I’ve participated in and organized various events and hackathons, which helped me develop my teamwork, communication, and coordination skills. Currently, I’m a Media Team Member at GDGC AIKTC (2026–27), and I’m excited to contribute to the community, learn from others, and create meaningful experiences together."
+        }
+      ],
+      "icon": "Camera"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "color": "#4285f4",
+      "blurb": "Getting the word out.",
+      "members": [
+        {
+          "name": "Iqraa Tarik Khan",
+          "dept": "TE · CO",
+          "photo": "/teams/iqraa-tarik-khan.jpg",
+          "github": "https://github.com/Iqraakhan1234",
+          "linkedin": "https://www.linkedin.com/in/khaniqraa",
+          "email": "iqraakhan028@gmail.com",
+          "intro": "Hi, I’m Iqraa Khan, currently pursuing a B.E. in Computer Engineering. I’m someone who enjoys both the technical and creative side of things. I’m interested in software development, AI, web technologies, and building projects, while also being really interested in marketing, content, branding, and connecting with people. I like learning by actually trying things out, whether it’s building a project, exploring a new technology, or coming up with creative ideas for promoting something. I’ve worked with technologies like Java, Python, React, JavaScript, Spring Boot, MySQL, and Git/GitHub, and I’m always looking to improve my technical skills. As the Marketing Lead at GDG on Campus, I’m excited to combine my technical knowledge with my creative side. I enjoy coming up with ideas, planning content and promotions, working with people, and making sure that the work we do reaches and connects with the right audience. For me, it’s all about learning, creating, connecting, and turning ideas into action. I’m really excited to work with everyone, contribute to the community, and make this journey a memorable one!"
+        },
+        {
+          "name": "Afrah Bilgi",
+          "dept": "TE · CO",
+          "photo": "/teams/afrah-bilgi.jpg"
+        },
+        {
+          "name": "Zaid Khan",
+          "dept": "TE · CO",
+          "photo": "/teams/zaid-khan.jpg",
+          "github": "https://github.com/mrkhan7010",
+          "linkedin": "https://www.linkedin.com/in/zaid-khan-3610602b2",
+          "email": "24co55@aiktc.ac.in",
+          "intro": "Hello, my name is Zaid Khan. I am pursuing Computer Engineering degree from AIKTC. I am interested in IT, software, and AI because I enjoy solving problems through technology. I am a quick learner, detail-oriented, and comfortable working in a team. I am looking for an opportunity to learn from professionals, build real-world skills, and contribute sincerely to the organisation. Im grateful to be a part of GDGC of my College☺️💗"
+        },
+        {
+          "name": "Salmani Umair Taslim",
+          "dept": "SE · CO",
+          "photo": "/teams/salmani-umair-taslim.jpg",
+          "github": "https://github.com/Um4ir-Code",
+          "linkedin": "https://www.linkedin.com/in/umairsalmani",
+          "email": "umairsalmani8928@gmail.com",
+          "intro": "I enjoy exploring new ideas, communicating with people, and learning through new experiences. As a member of the Marketing Team, I like finding creative ways to share ideas, connect with people, and work together as a team."
+        },
+        {
+          "name": "Khan Daniyal Aftab Ahmed",
+          "dept": "SE · BSCIT",
+          "photo": "/teams/khan-daniyal-aftab-ahmed.jpg",
+          "github": "https://github.com/lolololoolololo",
+          "linkedin": "https://www.linkedin.com/in/khan-daniyal-aftab-ahmed-8a1340326",
+          "email": "khandaniyal180706@gmail.com",
+          "intro": "Hi, I’m Khan Daniyal Aftab Ahmed, a BSc IT student with a strong interest in Data Analysis and a growing passion for Artificial Intelligence and Machine Learning. I’m currently a member of the Marketing Team at GDGC AIKTC, where I look forward to contributing actively to events, campaigns, teamwork, and different community initiatives. I believe in learning by doing, working collaboratively, and staying friendly and approachable with everyone. I see GDGC as a platform where I can learn from others, share ideas, take on new challenges, and contribute meaningfully while growing both technically and personally as part of the community."
+        }
+      ],
+      "icon": "Megaphone"
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation",
+      "color": "#34a853",
+      "blurb": "If it isn't written down, it didn't happen.",
+      "members": [
+        {
+          "name": "Sadaf Ansari",
+          "dept": "TE · CO",
+          "photo": "/teams/sadaf-ansari.jpg",
+          "github": "https://github.com/sadafansari2006-09",
+          "linkedin": "https://www.linkedin.com/in/sadafasiya-ansari-30267b36a",
+          "email": "sadafansari2006@gmail.com",
+          "intro": "I’m Sadaf Ansari, a Computer Engineering student and Documentation Lead at GDG. I’m interested in technology, software development, and learning new things. I look forward to contributing to GDG through proper documentation and teamwork."
+        },
+        {
+          "name": "Mehreen Masroor Shaikh",
+          "dept": "SE · CO",
+          "photo": "/teams/mehreen-masroor-shaikh.jpg"
+        }
+      ],
+      "icon": "FileText"
+    }
+  ]
+}
