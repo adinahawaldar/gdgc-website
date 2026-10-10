@@ -5,10 +5,12 @@ import {
   Users,
   Calendar,
   Layers,
+  Trophy,
 } from 'lucide-react'
 import HeroSection from '../components/HeroSection'
 import RecentEvents from '../components/RecentEvents'
 import AboutVisionMission from '../components/AboutVisionMission'
+import ProjectsAchievements, { AchievementsSection } from '../components/ProjectsAchievements'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
@@ -49,6 +51,22 @@ export default function LandingPage() {
       href: '#events',
       activeBg: 'bg-[#e6f4ea] text-[#188038]',
       activeColor: 'text-[#188038]',
+    },
+    {
+      id: 'projects',
+      label: 'Projects',
+      icon: Layers,
+      href: '#projects',
+      activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
+      activeColor: 'text-[#1a73e8]',
+    },
+    {
+      id: 'achievements',
+      label: 'Achievements',
+      icon: Trophy,
+      href: '#achievements',
+      activeBg: 'bg-[#fef7e0] text-[#b06000]',
+      activeColor: 'text-[#b06000]',
     },
     {
       id: 'resources',
@@ -98,6 +116,16 @@ export default function LandingPage() {
         {activeTab === 'events' ? (
           <div className="w-full pt-4 pb-20">
             <Events />
+            <ProjectsAchievements />
+            <AchievementsSection />
+          </div>
+        ) : activeTab === 'projects' ? (
+          <div className="w-full pt-4 pb-20">
+            <ProjectsAchievements />
+          </div>
+        ) : activeTab === 'achievements' ? (
+          <div className="w-full pt-4 pb-20">
+            <AchievementsSection />
           </div>
         ) : activeTab === 'resources' ? (
           <div className="w-full pt-4 pb-20">
@@ -110,6 +138,8 @@ export default function LandingPage() {
             </div>
             <RecentEvents />
             <AboutVisionMission />
+            <ProjectsAchievements />
+            <AchievementsSection />
             <SocialFollowSection />
             <FooterSection />
           </>
@@ -134,7 +164,7 @@ export default function LandingPage() {
                   onClick={(e) => {
                     e.preventDefault()
                     setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams') {
+                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams' || item.id === 'projects' || item.id === 'achievements') {
                       setTimeout(() => {
                         const target = document.querySelector(item.href)
                         if (target) {

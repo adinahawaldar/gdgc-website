@@ -267,7 +267,7 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* SUBTITLE & CTA BUTTONS (Comfortable vertical clearance)         */}
         {/* ============================================================== */}
-        <div className="mt-5 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
+        <div className="mt-5 sm:mt-8 md:mt-10 max-w-3xl mx-auto text-center px-4">
           <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
