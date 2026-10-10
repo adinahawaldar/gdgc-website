@@ -1,0 +1,170 @@
+import React, { useState } from 'react'
+import {
+  Home,
+  Info,
+  Users,
+  Calendar,
+  Layers,
+} from 'lucide-react'
+import HeroSection from '../components/HeroSection'
+import RecentEvents from '../components/RecentEvents'
+import AboutVisionMission from '../components/AboutVisionMission'
+import SocialFollowSection from '../components/SocialFollowSection'
+import FooterSection from '../components/FooterSection'
+import { Events } from '../Events.jsx'
+import { Resources } from '../Resources.jsx'
+
+export default function LandingPage() {
+  const [activeTab, setActiveTab] = useState('home')
+
+  const navItems = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: Home,
+      href: '#home',
+      activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
+      activeColor: 'text-[#1a73e8]',
+    },
+    {
+      id: 'about',
+      label: 'About',
+      icon: Info,
+      href: '#about',
+      activeBg: 'bg-[#fce8e6] text-[#d93025]',
+      activeColor: 'text-[#d93025]',
+    },
+    {
+      id: 'teams',
+      label: 'Teams',
+      icon: Users,
+      href: '#teams',
+      activeBg: 'bg-[#fef7e0] text-[#b06000]',
+      activeColor: 'text-[#b06000]',
+    },
+    {
+      id: 'events',
+      label: 'Events',
+      icon: Calendar,
+      href: '#events',
+      activeBg: 'bg-[#e6f4ea] text-[#188038]',
+      activeColor: 'text-[#188038]',
+    },
+    {
+      id: 'resources',
+      label: 'Resources',
+      icon: Layers,
+      href: '#resources',
+      activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
+      activeColor: 'text-[#1a73e8]',
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
+      {/* Top Brand Header (Logo & College Name - No Nav links) */}
+      <header className="w-full px-5 sm:px-8 lg:px-12 pt-6 pb-2 flex items-center justify-start select-none">
+        <div className="flex items-center gap-3 sm:gap-3.5">
+          {/* Google Developer Groups Angle Brackets Logo */}
+          <svg
+            className="w-10 sm:w-12 h-6 sm:h-7 shrink-0"
+            viewBox="0 0 100 50"
+            fill="none"
+          >
+            {/* Left Bracket < (Red top, Blue bottom) */}
+            <line x1="40" y1="9" x2="18" y2="25" stroke="#EA4335" strokeWidth="8.5" strokeLinecap="round" />
+            <line x1="18" y1="25" x2="40" y2="41" stroke="#4285F4" strokeWidth="8.5" strokeLinecap="round" />
+            {/* Right Bracket > (Green top, Yellow bottom) */}
+            <line x1="60" y1="9" x2="82" y2="25" stroke="#34A853" strokeWidth="8.5" strokeLinecap="round" />
+            <line x1="82" y1="25" x2="60" y2="41" stroke="#FBBC04" strokeWidth="8.5" strokeLinecap="round" />
+          </svg>
+
+          {/* Text: Google Developer Groups & On Campus • College Name */}
+          <div className="flex flex-col justify-center leading-tight">
+            <span className="text-base sm:text-lg font-semibold tracking-tight text-[#3c4043]">
+              Google Developer Groups
+            </span>
+            <span className="text-xs sm:text-[13px] font-medium text-neutral-600 tracking-tight flex items-center gap-1.5 flex-wrap">
+              <span className="text-[#1a73e8] font-semibold">On Campus</span>
+              <span className="text-neutral-400">•</span>
+              <span>Anjuman-I-Islam's Kalsekar Technical Campus</span>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="w-full flex-1 flex flex-col items-center">
+        {activeTab === 'events' ? (
+          <div className="w-full pt-4 pb-20">
+            <Events />
+          </div>
+        ) : activeTab === 'resources' ? (
+          <div className="w-full pt-4 pb-20">
+            <Resources />
+          </div>
+        ) : (
+          <>
+            <div id="home" className="w-full flex justify-center">
+              <HeroSection />
+            </div>
+            <RecentEvents />
+            <AboutVisionMission />
+            <SocialFollowSection />
+            <FooterSection />
+          </>
+        )}
+      </main>
+
+      {/* Floating Bottom Navigation (Google Themed Dock) */}
+      <nav
+        aria-label="Bottom Navigation"
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1.5rem)]"
+      >
+        <div className="relative group p-[1px] rounded-full bg-gradient-to-r from-[#4285F4]/40 via-[#EA4335]/40 via-[#FBBC05]/40 to-[#34A853]/40 shadow-[0_12px_36px_rgba(32,33,36,0.14),0_2px_8px_rgba(32,33,36,0.06)] hover:shadow-[0_14px_42px_rgba(66,133,244,0.22)] transition-all duration-300">
+          <div className="flex items-center gap-1.5 bg-white/95 text-neutral-800 p-2 rounded-full backdrop-blur-xl overflow-x-auto scrollbar-none border border-white/60">
+            {navItems.map((item) => {
+              const Icon = item.icon
+              const isActive = activeTab === item.id
+
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setActiveTab(item.id)
+                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams') {
+                      setTimeout(() => {
+                        const target = document.querySelector(item.href)
+                        if (target) {
+                          target.scrollIntoView({ behavior: 'smooth' })
+                        }
+                      }, 50)
+                    } else {
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                    isActive
+                      ? `${item.activeBg} font-semibold shadow-xs`
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'
+                  }`}
+                >
+                  <Icon
+                    size={17}
+                    strokeWidth={isActive ? 2.2 : 1.9}
+                    className={`transition-colors shrink-0 ${
+                      isActive ? item.activeColor : 'text-neutral-500'
+                    }`}
+                  />
+                  <span>{item.label}</span>
+                </a>
+              )
+            })}
+          </div>
+        </div>
+      </nav>
+    </div>
+  )
+}
