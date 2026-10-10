@@ -172,8 +172,7 @@ export default function LandingPage() {
                   onClick={(e) => {
                     e.preventDefault()
                     setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about') {
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams' || item.id === 'projects' || item.id === 'achievements') {
+                    if (item.id === 'home' || item.id === 'about' || item.id === 'projects' || item.id === 'achievements') {
                       setTimeout(() => {
                         const target = document.querySelector(item.href)
                         if (target) {
