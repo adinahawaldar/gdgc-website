@@ -4,6 +4,7 @@ import {
   Info,
   Users,
   Calendar,
+  Trophy,
   Layers,
 } from 'lucide-react'
 import HeroSection from '../components/HeroSection'
@@ -16,6 +17,9 @@ import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
 import { Resources } from '../Resources.jsx'
 import { Teams } from '../Teams.jsx'
+import AboutPage from './AboutPage'
+import AchievementsPage from './AchievementsPage'
+import ProjectsPage from './ProjectsPage'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
@@ -55,6 +59,14 @@ export default function LandingPage() {
       activeColor: 'text-[#188038]',
     },
     {
+      id: 'achievements',
+      label: 'Achievements',
+      icon: Trophy,
+      href: '#achievements',
+      activeBg: 'bg-[#fef7e0] text-[#b06000]',
+      activeColor: 'text-[#b06000]',
+    },
+    {
       id: 'projects',
       label: 'Projects',
       icon: Layers,
@@ -71,6 +83,11 @@ export default function LandingPage() {
       activeColor: 'text-[#1a73e8]',
     },
   ]
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
@@ -107,20 +124,28 @@ export default function LandingPage() {
 
       {/* Main Content Area */}
       <main className="w-full flex-1 flex flex-col items-center">
-        {activeTab === 'teams' ? (
-          <div className="w-full pt-4 pb-20">
+        {activeTab === 'about' ? (
+          <div className="w-full pt-4">
+            <AboutPage />
+          </div>
+        ) : activeTab === 'teams' ? (
+          <div className="w-full pt-4">
             <Teams />
           </div>
         ) : activeTab === 'events' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4">
             <Events />
           </div>
+        ) : activeTab === 'achievements' ? (
+          <div className="w-full pt-4">
+            <AchievementsPage />
+          </div>
         ) : activeTab === 'projects' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4">
             <ProjectsAchievements />
           </div>
         ) : activeTab === 'resources' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4">
             <Resources />
           </div>
         ) : (
@@ -133,9 +158,11 @@ export default function LandingPage() {
             <TeamsSection onViewAll={openTeams} />
             <ProjectsAchievements />
             <SocialFollowSection />
-            <FooterSection />
           </>
         )}
+
+        {/* Global Footer rendered on every page bottom */}
+        <FooterSection onNavigate={handleTabChange} />
       </main>
 
       {/* Floating Bottom Navigation (Google Themed Dock) */}
@@ -144,7 +171,7 @@ export default function LandingPage() {
         className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)]"
       >
         <div className="relative group p-[2px] rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] shadow-[0_10px_32px_rgba(32,33,36,0.16),0_2px_10px_rgba(66,133,244,0.18)] hover:shadow-[0_16px_44px_rgba(66,133,244,0.26)] transition-all duration-300">
-          <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white text-neutral-800 p-1 sm:p-2 rounded-full backdrop-blur-xl">
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-white text-neutral-800 p-1 sm:p-1.5 rounded-full backdrop-blur-xl overflow-x-auto scrollbar-none max-w-[calc(100vw-1.5rem)]">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = activeTab === item.id
@@ -156,7 +183,7 @@ export default function LandingPage() {
                   onClick={(e) => {
                     e.preventDefault()
                     setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'projects' || item.id === 'achievements') {
+                    if (item.id === 'home') {
                       setTimeout(() => {
                         const target = document.querySelector(item.href)
                         if (target) {
@@ -169,7 +196,7 @@ export default function LandingPage() {
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                     }
                   }}
-                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2.5 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-2 sm:px-3.5 py-1 sm:py-2 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none shrink-0 ${
                     isActive
                       ? `${item.activeBg} font-semibold shadow-xs`
                       : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'

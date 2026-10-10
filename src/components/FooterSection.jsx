@@ -1,6 +1,20 @@
 import React from 'react'
 
-export default function FooterSection() {
+export default function FooterSection({ onNavigate }) {
+  const handleNav = (e, tabId) => {
+    e.preventDefault()
+    if (onNavigate) {
+      onNavigate(tabId)
+    } else {
+      const target = document.querySelector(`#${tabId}`)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }
+  }
+
   return (
     <footer className="w-full bg-white select-none border-t border-neutral-200/80 pt-12 pb-28 sm:pb-32">
       <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16">
@@ -103,53 +117,52 @@ export default function FooterSection() {
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-7 text-xs sm:text-[13px] text-neutral-600">
+          <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-6 text-xs sm:text-[13px] text-neutral-600">
             <a
               href="#home"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={(e) => handleNav(e, 'home')}
               className="hover:text-blue-600 transition-colors"
             >
               Home
             </a>
             <a
               href="#about"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={(e) => handleNav(e, 'about')}
               className="hover:text-blue-600 transition-colors"
             >
               About
             </a>
             <a
               href="#teams"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector('#teams')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={(e) => handleNav(e, 'teams')}
               className="hover:text-blue-600 transition-colors"
             >
               Teams
             </a>
             <a
               href="#events"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector('#events')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={(e) => handleNav(e, 'events')}
               className="hover:text-blue-600 transition-colors"
             >
               Events
             </a>
             <a
+              href="#achievements"
+              onClick={(e) => handleNav(e, 'achievements')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              Achievements
+            </a>
+            <a
+              href="#projects"
+              onClick={(e) => handleNav(e, 'projects')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              Projects
+            </a>
+            <a
               href="#resources"
-              onClick={(e) => {
-                e.preventDefault()
-                document.querySelector('#resources')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              onClick={(e) => handleNav(e, 'resources')}
               className="hover:text-blue-600 transition-colors"
             >
               Resources
