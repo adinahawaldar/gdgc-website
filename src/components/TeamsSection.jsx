@@ -4,7 +4,7 @@ import useTeams from '../hooks/useTeams'
 import Card from './team/TeamCard'
 import TeamModal from './team/TeamModal'
 import OrganizersBand from './team/OrganizersBand'
-import { TeamsHeading, StateMessage, getStats } from './team/TeamsShell'
+import { TeamsHeading, StateMessage } from './team/TeamsShell'
 import { Reveal } from './team/parts'
 
 // Landing-page preview: organisers + the five team leads, then a button to the full Teams page.
@@ -17,7 +17,7 @@ export default function TeamsSection({ onViewAll }) {
       <div className="relative w-full px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
         {!data ? <StateMessage error={error} /> : (
           <>
-            <TeamsHeading meta={data.meta} stats={getStats(data)} sub="Our organisers and the leads of every team." />
+            <TeamsHeading meta={data.meta} />
             <OrganizersBand organizers={data.organizers} onOpen={setSel} />
 
             <Reveal className="mt-8 sm:mt-10">

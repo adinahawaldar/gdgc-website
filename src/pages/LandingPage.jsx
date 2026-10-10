@@ -5,13 +5,12 @@ import {
   Users,
   Calendar,
   Layers,
-  Trophy,
 } from 'lucide-react'
 import HeroSection from '../components/HeroSection'
 import RecentEvents from '../components/RecentEvents'
 import AboutVisionMission from '../components/AboutVisionMission'
 import TeamsSection from '../components/TeamsSection'
-import ProjectsAchievements, { AchievementsSection } from '../components/ProjectsAchievements'
+import ProjectsAchievements from '../components/ProjectsAchievements'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
@@ -62,14 +61,6 @@ export default function LandingPage() {
       href: '#projects',
       activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
       activeColor: 'text-[#1a73e8]',
-    },
-    {
-      id: 'achievements',
-      label: 'Achievements',
-      icon: Trophy,
-      href: '#achievements',
-      activeBg: 'bg-[#fef7e0] text-[#b06000]',
-      activeColor: 'text-[#b06000]',
     },
     {
       id: 'resources',
@@ -123,16 +114,10 @@ export default function LandingPage() {
         ) : activeTab === 'events' ? (
           <div className="w-full pt-4 pb-20">
             <Events />
-            <ProjectsAchievements />
-            <AchievementsSection />
           </div>
         ) : activeTab === 'projects' ? (
           <div className="w-full pt-4 pb-20">
             <ProjectsAchievements />
-          </div>
-        ) : activeTab === 'achievements' ? (
-          <div className="w-full pt-4 pb-20">
-            <AchievementsSection />
           </div>
         ) : activeTab === 'resources' ? (
           <div className="w-full pt-4 pb-20">
@@ -147,7 +132,6 @@ export default function LandingPage() {
             <AboutVisionMission />
             <TeamsSection onViewAll={openTeams} />
             <ProjectsAchievements />
-            <AchievementsSection />
             <SocialFollowSection />
             <FooterSection />
           </>
