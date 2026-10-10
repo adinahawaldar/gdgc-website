@@ -1,4 +1,5 @@
 import React from 'react'
+import { BookOpen, Code2, Users, Rocket, ArrowUpRight, Sparkles } from 'lucide-react'
 
 export default function AboutVisionMission() {
   const missionItems = [
@@ -32,23 +33,55 @@ export default function AboutVisionMission() {
   const pillars = [
     {
       title: 'Learn',
+      tagline: 'Deepen Technical Skills',
       description: 'Hands-on learning experiences through workshops, labs, and guided technical sessions.',
-      color: 'bg-[#e8f0fe] text-[#1a73e8]',
+      color: 'bg-[#e8f0fe] text-[#1a73e8] border-[#d2e3fc]',
+      borderColor: 'hover:border-[#4285f4]',
+      glowColor: 'hover:shadow-[0_20px_40px_-12px_rgba(66,133,244,0.25)]',
+      topBar: 'bg-[#4285f4]',
+      icon: BookOpen,
+      iconBg: 'bg-[#e8f0fe] text-[#1a73e8]',
+      tags: ['Codelabs', 'Cloud & AI', 'Workshops'],
+      actionText: 'Explore learning',
     },
     {
       title: 'Build',
+      tagline: 'Ship Real Solutions',
       description: 'Turn ideas into prototypes and products that solve real challenges for real communities.',
-      color: 'bg-[#e6f4ea] text-[#188038]',
+      color: 'bg-[#e6f4ea] text-[#188038] border-[#ceead6]',
+      borderColor: 'hover:border-[#34a853]',
+      glowColor: 'hover:shadow-[0_20px_40px_-12px_rgba(52,168,83,0.25)]',
+      topBar: 'bg-[#34a853]',
+      icon: Code2,
+      iconBg: 'bg-[#e6f4ea] text-[#188038]',
+      tags: ['Hackathons', 'Prototypes', 'Open Source'],
+      actionText: 'Explore builds',
     },
     {
       title: 'Connect',
+      tagline: 'Grow Your Network',
       description: 'Create a strong network of developers, mentors, founders, and collaborators across campus.',
-      color: 'bg-[#fef7e0] text-[#b06000]',
+      color: 'bg-[#fef7e0] text-[#b06000] border-[#feefc3]',
+      borderColor: 'hover:border-[#fbbc04]',
+      glowColor: 'hover:shadow-[0_20px_40px_-12px_rgba(251,188,4,0.3)]',
+      topBar: 'bg-[#fbbc04]',
+      icon: Users,
+      iconBg: 'bg-[#fef7e0] text-[#b06000]',
+      tags: ['DevFest', 'Mentorship', 'Meetups'],
+      actionText: 'Connect with peers',
     },
     {
       title: 'Lead',
+      tagline: 'Inspire & Empower',
       description: 'Develop future-ready leaders who can shape technology, create impact, and inspire others.',
-      color: 'bg-[#fce8e6] text-[#d93025]',
+      color: 'bg-[#fce8e6] text-[#d93025] border-[#fad2cf]',
+      borderColor: 'hover:border-[#ea4335]',
+      glowColor: 'hover:shadow-[0_20px_40px_-12px_rgba(234,67,53,0.25)]',
+      topBar: 'bg-[#ea4335]',
+      icon: Rocket,
+      iconBg: 'bg-[#fce8e6] text-[#d93025]',
+      tags: ['Leadership', 'Impact', 'Community'],
+      actionText: 'Grow as a leader',
     },
   ]
 
@@ -128,31 +161,94 @@ export default function AboutVisionMission() {
         </div>
       </div>
 
-      <div id="teams" className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-6 flex items-end justify-between gap-4">
+      {/* ============================================================== */}
+      {/* 2. WHAT WE DO - FULL WIDTH INTERACTIVE GOOGLE STYLE            */}
+      {/* ============================================================== */}
+      <div id="what-we-do" className="w-full px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
+        <div className="w-full">
+          <div className="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">What we do</p>
-              <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-neutral-900">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/80 text-xs font-bold text-neutral-700 tracking-wide uppercase mb-3 shadow-2xs">
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#4285f4] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#ea4335]" />
+                  <span className="w-2 h-2 rounded-full bg-[#fbbc04]" />
+                  <span className="w-2 h-2 rounded-full bg-[#34a853]" />
+                </span>
+                What we do
+              </div>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-neutral-900">
                 Building a stronger developer culture
               </h3>
+              <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-2xl font-medium">
+                Four foundational pillars that drive our campus community from curious beginners to confident builders.
+              </p>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-neutral-600 bg-white border border-neutral-200/90 px-4 py-2 rounded-full shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#fbbc04]" />
+              <span>Interactive Google tracks</span>
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {pillars.map((pillar) => (
-              <article
-                key={pillar.title}
-                className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.08)]"
-              >
-                <div className={`inline-flex rounded-full px-3 py-1.5 text-xs font-bold ${pillar.color}`}>
-                  {pillar.title}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
-                  {pillar.description}
-                </p>
-              </article>
-            ))}
+          <div className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full">
+            {pillars.map((pillar) => {
+              const Icon = pillar.icon
+              return (
+                <article
+                  key={pillar.title}
+                  className={`group relative flex flex-col justify-between rounded-3xl border border-neutral-200/90 bg-white p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-2 ${pillar.borderColor} ${pillar.glowColor} overflow-hidden cursor-pointer active:scale-[0.99]`}
+                >
+                  {/* Top Google colored accent stripe */}
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 ${pillar.topBar} transition-all duration-300 group-hover:h-2`} />
+
+                  {/* Subtle hover wash gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-50/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                  <div className="relative z-10">
+                    {/* Header row: Pill Badge + Google Icon */}
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold tracking-wide border shadow-2xs ${pillar.color}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${pillar.topBar}`} />
+                        {pillar.title}
+                      </div>
+
+                      <div className={`p-2.5 rounded-2xl ${pillar.iconBg} transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-xs`}>
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                      </div>
+                    </div>
+
+                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 group-hover:text-black transition-colors">
+                      {pillar.tagline}
+                    </h4>
+
+                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-neutral-600 group-hover:text-neutral-700 transition-colors">
+                      {pillar.description}
+                    </p>
+
+                    {/* Feature tags */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {pillar.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-block px-2.5 py-0.5 rounded-md bg-neutral-100/90 text-[11px] font-medium text-neutral-600 transition-colors group-hover:bg-neutral-200/80 group-hover:text-neutral-800"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom Interactive link / action */}
+                  <div className="relative z-10 mt-6 pt-4 border-t border-neutral-100 flex items-center justify-between text-xs font-semibold text-neutral-700 transition-colors">
+                    <span className="group-hover:text-neutral-950 font-bold">{pillar.actionText}</span>
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-neutral-100 text-neutral-700 transition-all duration-300 group-hover:bg-neutral-950 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-0.5 shadow-2xs">
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </div>
       </div>
