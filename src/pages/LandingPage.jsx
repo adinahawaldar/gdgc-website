@@ -63,7 +63,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
       {/* Top Brand Header (Logo & College Name - No Nav links) */}
-      <header className="w-full px-5 sm:px-8 lg:px-12 pt-6 pb-2 flex items-center justify-start select-none">
+      <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none">
         <div className="flex items-center gap-3 sm:gap-3.5">
           {/* Google Developer Groups Angle Brackets Logo */}
           <svg

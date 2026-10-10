@@ -19,7 +19,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-14 select-none overflow-hidden bg-white">
+    <section className="relative w-full min-h-0 sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-start sm:justify-center px-4 sm:px-6 lg:px-8 pt-2 sm:pt-14 pb-8 sm:pb-14 select-none overflow-hidden bg-white">
       {/* ============================================================== */}
       {/* GOOGLE CONSTELLATION & FLOATING SPHERES (Full Hero, Both Sides) */}
       {/* ============================================================== */}
@@ -234,7 +234,7 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* BIG INTERACTIVE HEADLINE (Product Sans typography)              */}
         {/* ============================================================== */}
-        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-3 sm:space-y-4 md:space-y-5 font-google">
+        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-2 sm:space-y-4 md:space-y-5 font-google">
 
           {/* LINE 1: "Google" + [Minimal Green circle] + [Minimal Blue switch] */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
@@ -273,20 +273,12 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* LINE 2: [Minimal Google Yellow dot] + "— Developer Group" with Google color shades */}
+          {/* LINE 2: "Developer Group" with Google color shades */}
           <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-5 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-            
-            {/* Widget 3: Minimal Google Yellow Glow Node (Hidden on mobile view) */}
-            <div className="hidden sm:inline-flex items-center justify-center shrink-0">
-              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-[#fbbc04] ring-4 ring-[#fef7e0] shadow-xs" />
-            </div>
-
-            {/* Dash and word "Developer Group" with Google Color Shades */}
-            <span className="tracking-tight select-none">
-              <span className="hidden sm:inline text-neutral-300 mr-2">—</span>
-              <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">Developer</span>{' '}
-              <span className="text-[#188038] hover:opacity-90 transition-opacity">Group</span>
-            </span>
+            {/* Dash on desktop */}
+            <span className="hidden sm:inline text-neutral-300 mr-2">—</span>
+            <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">Developer</span>{' '}
+            <span className="text-[#188038] hover:opacity-90 transition-opacity">Group</span>
           </div>
 
           {/* LINE 3: [Minimal Google Red badge] + "on Campus" with Google color shades */}
@@ -315,13 +307,13 @@ export default function HeroSection() {
         {/* ============================================================== */}
         {/* SUBTITLE & CTA BUTTONS (Comfortable vertical clearance)         */}
         {/* ============================================================== */}
-        <div className="mt-6 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
+        <div className="mt-4 sm:mt-8 md:mt-10 max-w-2xl mx-auto text-center px-4">
           <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
 
           {/* CTA Pill Buttons */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#about"
               className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_14px_rgba(0,0,0,0.18)] cursor-pointer"
