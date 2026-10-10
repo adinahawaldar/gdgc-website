@@ -142,7 +142,7 @@ export default function LandingPage() {
           </div>
         ) : activeTab === 'projects' ? (
           <div className="w-full pt-4">
-            <ProjectsAchievements />
+            <ProjectsPage />
           </div>
         ) : activeTab === 'resources' ? (
           <div className="w-full pt-4">
