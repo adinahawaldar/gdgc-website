@@ -37,11 +37,11 @@ export default function AboutVisionMission() {
       {/* ============================================================== */}
       <div className="w-full px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
         {/* Left: Curly brackets with statement */}
-        <div className="flex-1 flex items-center gap-3 sm:gap-6 w-full">
+        <div className="flex-1 flex items-center gap-2 sm:gap-6 w-full">
           {/* Left Yellow Curly Bracket */}
           <div className="shrink-0 text-[#f6bd38] select-none">
             <svg
-              className="w-12 h-32 sm:w-16 sm:h-40 md:w-20 md:h-44"
+              className="w-7 h-20 sm:w-16 sm:h-40 md:w-20 md:h-44"
               viewBox="0 0 50 140"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export default function AboutVisionMission() {
           </div>
 
           {/* Quote Text */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.4rem] font-extrabold text-neutral-900 leading-snug">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.4rem] font-extrabold text-neutral-900 leading-snug">
             Here, we don't just grow with technology—we{' '}
             <span className="inline-block font-black">
               <span className="text-[#4285f4]">e</span>
@@ -74,7 +74,7 @@ export default function AboutVisionMission() {
           {/* Right Yellow Curly Bracket */}
           <div className="shrink-0 text-[#f6bd38] select-none">
             <svg
-              className="w-12 h-32 sm:w-16 sm:h-40 md:w-20 md:h-44"
+              className="w-7 h-20 sm:w-16 sm:h-40 md:w-20 md:h-44"
               viewBox="0 0 50 140"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -106,13 +106,30 @@ export default function AboutVisionMission() {
       </div>
 
       {/* ============================================================== */}
-      {/* 2. VISION TRACK (Full Width Clean Layout)                      */}
+      {/* 2. VISION TRACK (Responsive Layout: Clean card on Mobile, Track on Desktop) */}
       {/* ============================================================== */}
-      <div id="vision" className="w-full border-t border-b border-black bg-white py-0 select-none overflow-hidden">
-        <div className="w-full h-[180px] sm:h-[220px] md:h-[250px] flex items-center justify-between relative px-2 sm:px-4 lg:px-6">
+      <div id="vision" className="w-full border-t border-b border-black bg-white py-6 md:py-0 select-none overflow-hidden">
+        <div className="w-full md:h-[220px] lg:h-[250px] flex flex-col md:flex-row items-center justify-center md:justify-between relative px-4 sm:px-6 lg:px-8 gap-4 md:gap-0">
           
-          {/* Left Circle: Google Developers angled bracket logo (tangent to top & bottom) */}
-          <div className="h-full aspect-square rounded-full border border-black bg-white flex items-center justify-center shrink-0">
+          {/* Mobile Badge: Google Brackets + "Vision" Heading */}
+          <div className="md:hidden inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-black bg-neutral-50 shadow-xs">
+            <div className="flex items-center gap-1 scale-75">
+              <div className="flex flex-col gap-0.5 items-end -rotate-12">
+                <div className="w-5 h-2.5 rounded-full bg-[#ea4335]" />
+                <div className="w-5 h-2.5 rounded-full bg-[#4285f4]" />
+              </div>
+              <div className="flex flex-col gap-0.5 items-start rotate-12">
+                <div className="w-5 h-2.5 rounded-full bg-[#34a853]" />
+                <div className="w-5 h-2.5 rounded-full bg-[#fbbc05]" />
+              </div>
+            </div>
+            <span className="text-sm font-bold text-neutral-900 tracking-tight uppercase">
+              Vision
+            </span>
+          </div>
+
+          {/* Desktop Left Circle: Google Developers angled bracket logo (tangent to top & bottom) */}
+          <div className="hidden md:flex h-full aspect-square rounded-full border border-black bg-white items-center justify-center shrink-0">
             <div className="flex items-center gap-1.5 sm:gap-2">
               {/* Left bracket (Red / Blue) */}
               <div className="flex flex-col gap-1 sm:gap-1.5 items-end -rotate-12">
@@ -127,16 +144,16 @@ export default function AboutVisionMission() {
             </div>
           </div>
 
-          {/* Middle: Vision Text Block expanding to fill the entire remaining space */}
-          <div className="flex-1 px-4 sm:px-8 md:px-12 lg:px-16 flex items-center justify-center text-center">
+          {/* Middle: Vision Text Block */}
+          <div className="flex-1 px-2 sm:px-6 md:px-8 lg:px-14 flex items-center justify-center text-center">
             <p className="text-xs sm:text-sm md:text-base lg:text-[17px] text-neutral-800 leading-relaxed font-normal max-w-3xl">
               This organization envisions itself to be an avenue for the future generation to nurture their ideas and encourage critical thinking by establishing a community of tech enthusiasts who are passionate about uplifting communities through technology and innovation.
             </p>
           </div>
 
-          {/* Right Circle: "Vision" Heading (tangent to top & bottom) */}
-          <div className="h-full aspect-square rounded-full border border-black bg-white flex items-center justify-center shrink-0">
-            <span className="text-lg sm:text-2xl md:text-3xl font-bold text-neutral-900 tracking-tight">
+          {/* Desktop Right Circle: "Vision" Heading (tangent to top & bottom) */}
+          <div className="hidden md:flex h-full aspect-square rounded-full border border-black bg-white items-center justify-center shrink-0">
+            <span className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 tracking-tight">
               Vision
             </span>
           </div>
@@ -166,7 +183,7 @@ export default function AboutVisionMission() {
           {missionItems.map((item) => (
             <div
               key={item.id}
-              className="w-full border-2 border-neutral-900 rounded-full py-2 px-3 sm:px-4 flex items-center gap-3.5 sm:gap-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+              className="w-full border-2 border-neutral-900 rounded-2xl sm:rounded-full py-2.5 px-3.5 sm:px-4 flex items-center gap-3.5 sm:gap-4 bg-white shadow-sm hover:shadow-md transition-shadow"
             >
               {/* Numbered Circle with Brand Color */}
               <div

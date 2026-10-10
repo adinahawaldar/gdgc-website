@@ -237,7 +237,7 @@ export default function HeroSection() {
         <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-3 sm:space-y-4 md:space-y-5 font-google">
 
           {/* LINE 1: "Google" + [Minimal Green circle] + [Minimal Blue switch] */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             <span className="tracking-tight hover:opacity-95 transition-opacity inline-flex select-none">
               <span className="text-[#4285f4]">G</span>
               <span className="text-[#ea4335]">o</span>
@@ -249,64 +249,64 @@ export default function HeroSection() {
 
             {/* Widget 1: Minimal Google Green Circle with Arrow */}
             <div
-              className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
+              className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
               title="Next Step"
             >
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
+              <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
             </div>
 
             {/* Widget 2: Minimal Google Blue Switch */}
             <div
               onClick={() => setToggleActive(!toggleActive)}
-              className="inline-flex items-center h-10 sm:h-12 md:h-14 w-24 sm:w-28 md:w-32 rounded-full p-1 sm:p-1.5 cursor-pointer shadow-xs bg-[#e8f0fe] border border-[#d2e3fc] relative transition-all duration-300 overflow-hidden shrink-0"
+              className="inline-flex items-center h-8 sm:h-12 md:h-14 w-20 sm:w-28 md:w-32 rounded-full p-1 sm:p-1.5 cursor-pointer shadow-xs bg-[#e8f0fe] border border-[#d2e3fc] relative transition-all duration-300 overflow-hidden shrink-0"
               title="Toggle State"
             >
               <div
-                className={`w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#1a73e8] shadow-sm flex items-center justify-center text-white transition-transform duration-300 ease-out ${
+                className={`w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#1a73e8] shadow-sm flex items-center justify-center text-white transition-transform duration-300 ease-out ${
                   toggleActive
-                    ? 'translate-x-1 sm:translate-x-1.5'
-                    : 'translate-x-[3.2rem] sm:translate-x-[3.8rem] md:translate-x-[4.4rem]'
+                    ? 'translate-x-0.5 sm:translate-x-1.5'
+                    : 'translate-x-9 sm:translate-x-[3.8rem] md:translate-x-[4.4rem]'
                 }`}
               >
-                <div className="w-2 h-2 rounded-full bg-white/90" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white/90" />
               </div>
             </div>
           </div>
 
           {/* LINE 2: [Minimal Google Yellow dot] + "— Developer Group" with Google color shades */}
-          <div className="relative flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 md:gap-5 text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-5 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             
-            {/* Widget 3: Minimal Google Yellow Glow Node */}
-            <div className="inline-flex items-center justify-center shrink-0">
+            {/* Widget 3: Minimal Google Yellow Glow Node (Hidden on mobile view) */}
+            <div className="hidden sm:inline-flex items-center justify-center shrink-0">
               <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-[#fbbc04] ring-4 ring-[#fef7e0] shadow-xs" />
             </div>
 
             {/* Dash and word "Developer Group" with Google Color Shades */}
             <span className="tracking-tight select-none">
-              <span className="text-neutral-300 mr-2">—</span>
+              <span className="hidden sm:inline text-neutral-300 mr-2">—</span>
               <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">Developer</span>{' '}
               <span className="text-[#188038] hover:opacity-90 transition-opacity">Group</span>
             </span>
           </div>
 
           {/* LINE 3: [Minimal Google Red badge] + "on Campus" with Google color shades */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 md:gap-5 text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-5 text-3xl sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             
             {/* Widget 5: Minimal Google Red / Blue Pill */}
             <div
               onClick={handleCopyCommand}
-              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-[#fce8e6] border border-[#fad2cf] shadow-xs cursor-pointer hover:bg-red-100/70 active:scale-95 transition-all shrink-0"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-full bg-[#fce8e6] border border-[#fad2cf] shadow-xs cursor-pointer hover:bg-red-100/70 active:scale-95 transition-all shrink-0"
               title="Click to copy GDGC short-key"
             >
-              <div className="w-2.5 h-2.5 rounded-full bg-[#ea4335]" />
-              <span className="text-[10px] sm:text-[11px] font-bold text-[#d93025] tracking-wider">
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#ea4335]" />
+              <span className="text-[9px] sm:text-[11px] font-bold text-[#d93025] tracking-wider">
                 {cmdCopied ? 'COPIED' : 'GDGC'}
               </span>
             </div>
 
             {/* Word "on Campus" with Google color shade */}
             <span className="tracking-tight select-none">
-              <span className="text-neutral-400 font-medium mr-2">on</span>
+              <span className="text-neutral-400 font-medium mr-1.5 sm:mr-2">on</span>
               <span className="text-[#ea4335] hover:opacity-90 transition-opacity">Campus</span>
             </span>
           </div>
