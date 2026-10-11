@@ -51,11 +51,12 @@ export default function ScrollManager() {
     } else {
       // On mobile / touch screens: Native silky-smooth hardware scrolling
       window.__lenis = {
-        scrollTo: (target) => {
+        scrollTo: (target, options) => {
+          const immediate = options?.immediate
           if (typeof target === 'number') {
-            window.scrollTo({ top: target, behavior: 'smooth' })
+            window.scrollTo({ top: target, left: 0, behavior: immediate ? 'instant' : 'smooth' })
           } else if (target instanceof HTMLElement) {
-            target.scrollIntoView({ behavior: 'smooth' })
+            target.scrollIntoView({ behavior: immediate ? 'instant' : 'smooth' })
           }
         },
       }

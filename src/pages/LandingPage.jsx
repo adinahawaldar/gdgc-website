@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Home,
   Info,
@@ -21,7 +21,25 @@ import AchievementsPage from './AchievementsPage'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
-  const openTeams = () => { setActiveTab('teams'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+
+  const scrollToTop = () => {
+    if (window.__lenis && typeof window.__lenis.scrollTo === 'function') {
+      window.__lenis.scrollTo(0, { immediate: true })
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }
+
+  // Ensure each time any page / tab is opened, it always displays the top hero section
+  useEffect(() => {
+    scrollToTop()
+  }, [activeTab])
+
+  const openTeams = () => {
+    setActiveTab('teams')
+    scrollToTop()
+  }
 
   const navItems = [
     {
@@ -76,7 +94,7 @@ export default function LandingPage() {
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }
 
   return (
@@ -167,18 +185,11 @@ export default function LandingPage() {
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault()
-                    setActiveTab(item.id)
-                    if (item.id === 'home') {
-                      setTimeout(() => {
-                        const target = document.querySelector(item.href)
-                        if (target) {
-                          target.scrollIntoView({ behavior: 'smooth' })
-                        } else {
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      }, 50)
+                    if (item.id === 'home' && activeTab === 'home') {
+                      scrollToTop()
                     } else {
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                      setActiveTab(item.id)
+                      scrollToTop()
                     }
                   }}
                   className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-1.5 sm:px-3.5 py-2 sm:py-2 rounded-full text-[8.5px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none shrink-0 min-w-[39px] sm:min-w-0 ${
