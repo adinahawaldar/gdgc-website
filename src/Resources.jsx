@@ -2,9 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { ArrowRight, ExternalLink, Search, X, Check, Award, Sparkles, Briefcase, Calendar, ShieldCheck, Cpu } from 'lucide-react';
 import { categories, careerCertificates, benefits } from './resources.js';
 import './Resources.css';
-import FooterSection from './components/FooterSection';
-
-// Global FooterSection placeholder preserved for component integrity
 
 export const Resources = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -443,9 +440,6 @@ export const Resources = () => {
           </div>
         </div>
       </section>
-
-      {/* Global FooterSection preserved at the bottom */}
-      <FooterSection />
     </div>
   );
 };

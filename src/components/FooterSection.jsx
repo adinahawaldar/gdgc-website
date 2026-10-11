@@ -154,13 +154,6 @@ export default function FooterSection({ onNavigate }) {
               Achievements
             </a>
             <a
-              href="#projects"
-              onClick={(e) => handleNav(e, 'projects')}
-              className="hover:text-blue-600 transition-colors"
-            >
-              Projects
-            </a>
-            <a
               href="#resources"
               onClick={(e) => handleNav(e, 'resources')}
               className="hover:text-blue-600 transition-colors"

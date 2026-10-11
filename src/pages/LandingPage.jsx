@@ -11,7 +11,6 @@ import HeroSection from '../components/HeroSection'
 import RecentEvents from '../components/RecentEvents'
 import AboutVisionMission from '../components/AboutVisionMission'
 import TeamsSection from '../components/TeamsSection'
-import ProjectsAchievements from '../components/ProjectsAchievements'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
@@ -19,7 +18,6 @@ import { Resources } from '../Resources.jsx'
 import { Teams } from '../Teams.jsx'
 import AboutPage from './AboutPage'
 import AchievementsPage from './AchievementsPage'
-import ProjectsPage from './ProjectsPage'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
@@ -65,14 +63,6 @@ export default function LandingPage() {
       href: '#achievements',
       activeBg: 'bg-[#fef7e0] text-[#b06000]',
       activeColor: 'text-[#b06000]',
-    },
-    {
-      id: 'projects',
-      label: 'Projects',
-      icon: Layers,
-      href: '#projects',
-      activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
-      activeColor: 'text-[#1a73e8]',
     },
     {
       id: 'resources',
@@ -140,10 +130,6 @@ export default function LandingPage() {
           <div className="w-full pt-4">
             <AchievementsPage />
           </div>
-        ) : activeTab === 'projects' ? (
-          <div className="w-full pt-4">
-            <ProjectsPage />
-          </div>
         ) : activeTab === 'resources' ? (
           <div className="w-full pt-4">
             <Resources />
@@ -156,7 +142,6 @@ export default function LandingPage() {
             <RecentEvents />
             <AboutVisionMission />
             <TeamsSection onViewAll={openTeams} />
-            <ProjectsAchievements />
             <SocialFollowSection />
           </>
         )}

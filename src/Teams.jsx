@@ -7,7 +7,6 @@ import useTeams from './hooks/useTeams'
 import TeamModal from './components/team/TeamModal'
 import { StateMessage, getStats } from './components/team/TeamsShell'
 import { Photo, Links, PLACEHOLDER, GdgLogo } from './components/team/parts'
-import FooterSection from './components/FooterSection'
 import './Teams.css'
 
 const ICONS = { Code2, Palette, Camera, Megaphone, FileText, Star, Users }
@@ -75,7 +74,6 @@ export const Teams = ({ onNavigate }) => {
   const orgTeam = { name: 'Organizers', color: BLUE }
 
   return (
-    <>
     <div className="teams-page">
       <div className="teams-navbar-spacer" aria-hidden="true" />
 
@@ -209,31 +207,8 @@ export const Teams = ({ onNavigate }) => {
         ))}
       </section>
 
-      {/* Footer */}
-      {meta.footer && (
-      <footer className="teams-footer">
-        <div className="teams-footer-inner">
-          <div className="teams-footer-brand">
-            <GdgLogo className="w-9 h-5 shrink-0" />
-            <div>
-              <div className="teams-footer-tagline">{meta.footer.tagline} · {meta.batch}</div>
-              <div className="teams-footer-college">{meta.footer.college}</div>
-            </div>
-          </div>
-          <nav className="teams-footer-links" aria-label="Chapter links">
-            {meta.footer.links.map((l) => (
-              <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>
-            ))}
-          </nav>
-          <div className="teams-footer-credit">{meta.footer.credit}</div>
-        </div>
-      </footer>
-      )}
-
-      <TeamModal sel={sel} onClose={() => setSel(null)} yearLabels={meta.yearLabels} />
-    </div>
-    <FooterSection onNavigate={onNavigate} />
-    </>
+        <TeamModal sel={sel} onClose={() => setSel(null)} yearLabels={meta.yearLabels} />
+      </div>
   )
 }
 
