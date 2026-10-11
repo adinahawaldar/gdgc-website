@@ -939,6 +939,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 14px;
 }
@@ -1409,7 +1410,7 @@
 .teams-card-role { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 9999px; }
 .teams-card-role.lead { background-color: var(--tm-gray-900); color: #fff; }
 .teams-card-role.member { background-color: var(--tm-gray-100); color: var(--tm-gray-700); }
-.teams-member-footer { margin-top: auto; border-top: 1px solid var(--tm-border); padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.teams-member-footer { margin-top: auto; border-top: 1px solid var(--tm-border); padding-top: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .teams-view-link { font-size: 12.5px; font-weight: 700; color: var(--tm-blue-dark); display: inline-flex; align-items: center; gap: 4px; }
 .teams-pill-icon { display: inline-flex; }
 
@@ -1430,8 +1431,8 @@
 
 /* Portrait photo frames: taller than wide, no coloured top bar */
 .teams-member-photo img, .teams-member-photo > div { object-position: 50% 18%; }
-.teams-card.feature .teams-member-photo { min-height: 520px; }
-.teams-card.feature .teams-member-photo img, .teams-card.feature .teams-member-photo > div { min-height: 520px; }
+.teams-card.feature .teams-member-photo { min-height: 320px; }
+.teams-card.feature .teams-member-photo img, .teams-card.feature .teams-member-photo > div { min-height: 320px; }
 @media (max-width: 767px) { .teams-card.feature .teams-member-photo, .teams-card.feature .teams-member-photo img, .teams-card.feature .teams-member-photo > div { min-height: 420px; } }
 
 /* Slim footer */
@@ -1450,7 +1451,7 @@
 .teams-team-layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; border-bottom: 1px solid var(--tm-border); }
 .teams-team-lead { display: flex; justify-content: center; align-items: center; }
 .teams-team-members { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.teams-team-lead .teams-card.feature { width: 100%; max-width: 320px; flex-direction: column; }
+.teams-team-lead .teams-card.feature { width: 100%; max-width: 350px; flex-direction: column; }
 .teams-card.feature .teams-member-photo { flex: none; display: block; min-height: 0; aspect-ratio: 3 / 4; border-right: none; border-bottom: 1px solid var(--tm-border); }
 .teams-card.feature .teams-member-photo img,
 .teams-card.feature .teams-member-photo > div { min-height: 0; height: 100%; }
@@ -1460,4 +1461,72 @@
 @media (min-width: 900px) {
   .teams-team-layout { grid-template-columns: 1fr 1fr; align-items: center; gap: 36px; }
   .teams-team-members { gap: 18px; }
+}
+
+/* ==========================================================================
+   COMPACT VIEW: Fit one team section per screen height
+   ========================================================================== */
+
+/* Reduce section spacing */
+.teams-team-layout { gap: 16px; padding-bottom: 16px; margin-bottom: 16px; }
+.teams-group-title { margin: 16px 0 10px; padding-bottom: 6px; }
+.teams-group-name { font-size: 18px; }
+.teams-group-sub { font-size: 11px; }
+
+/* Shrink the Lead Card (Left side) */
+.teams-card.feature .teams-member-photo { min-height: 300px !important; }
+@media (max-width: 767px) { .teams-card.feature .teams-member-photo { min-height: 300px !important; } }
+.teams-card.feature .teams-member-name { font-size: 18px; }
+.teams-card.feature .teams-member-dept { font-size: 11px; }
+.teams-card.feature .teams-member-intro { font-size: 12px; -webkit-line-clamp: 3; }
+.teams-card.feature .teams-card-inner { padding: 12px; }
+
+/* Shrink the Member Cards (Right side grid) */
+.teams-team-members { gap: 10px; }
+.teams-member-photo { height: 220px; }
+.teams-member-photo img, .teams-member-photo > div { height: 220px; }
+
+.teams-card-inner { padding: 10px 12px; }
+.teams-card-header-row { margin-bottom: 6px; gap: 4px; }
+.teams-category-chip { font-size: 9px; padding: 2px 6px; }
+.teams-card-role { font-size: 9px; padding: 2px 6px; }
+
+.teams-member-name { font-size: 13px; margin: 2px 0 1px; }
+.teams-member-dept { font-size: 10px; margin-bottom: 3px; }
+.teams-member-intro { font-size: 10px; margin-bottom: 6px; line-height: 1.3; -webkit-line-clamp: 2; }
+
+.teams-member-footer { padding-top: 6px; gap: 4px; }
+.teams-view-link { font-size: 10px; }
+.teams-member-footer svg, .teams-member-footer .teams-pill-icon svg { width: 12px; height: 12px; }
+
+/* ==========================================================================
+   REVERT ORGANIZERS TO ORIGINAL SIZE
+   (Overrides the compact view specifically for the organizers grid)
+   ========================================================================== */
+
+.teams-org-grid .teams-member-photo {
+  height: auto !important; /* Removes the 120px compact height */
+  aspect-ratio: 3/4;       /* Restores the original portrait shape */
+}
+
+.teams-org-grid .teams-member-photo img,
+.teams-org-grid .teams-member-photo > div {
+  height: auto !important;
+}
+
+.teams-org-grid .teams-card-inner {
+  padding: 22px !important; /* Restores original padding */
+}
+
+.teams-org-grid .teams-member-name {
+  font-size: 16px !important; /* Restores original name size */
+}
+
+.teams-org-grid .teams-member-dept {
+  font-size: 12.5px !important;
+}
+
+.teams-org-grid .teams-member-intro {
+  font-size: 13px !important;
+  -webkit-line-clamp: 2 !important;
 }
