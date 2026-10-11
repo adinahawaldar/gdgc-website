@@ -7,7 +7,6 @@ import useTeams from './hooks/useTeams'
 import TeamModal from './components/team/TeamModal'
 import { StateMessage, getStats } from './components/team/TeamsShell'
 import { Photo, Links, PLACEHOLDER, GdgLogo } from './components/team/parts'
-import FooterSection from './components/FooterSection'
 import './Teams.css'
 
 const ICONS = { Code2, Palette, Camera, Megaphone, FileText, Star, Users }
@@ -232,7 +231,7 @@ export const Teams = ({ onNavigate }) => {
 
       <TeamModal sel={sel} onClose={() => setSel(null)} yearLabels={meta.yearLabels} />
     </div>
-    <FooterSection onNavigate={onNavigate} />
+    
     </>
   )
 }
