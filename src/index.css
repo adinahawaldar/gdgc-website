@@ -1,8 +1,17 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @layer base {
   * {
     box-sizing: border-box;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
   }
 
   html,
@@ -10,10 +19,80 @@
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    color: #0f172a;
+    color: #111111;
     min-height: 100vh;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Product Sans', 'Google Sans', 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+.font-google {
+  font-family: 'Product Sans', 'Google Sans', 'Outfit', 'Plus Jakarta Sans', sans-serif;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 32s linear infinite;
+}
+
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+.mask-horizontal {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* ========================================================================== */
+/* Smooth Scroll Reveal Animations (Clean, crisp, no-blur performance)       */
+/* ========================================================================== */
+.scroll-reveal-target {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-target.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* On mobile / touch viewports, disable transitions completely for maximum FPS */
+@media (max-width: 768px) {
+  .scroll-reveal-target {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+}
+
+

@@ -1,0 +1,302 @@
+import React from 'react'
+import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
+
+export default function AboutVisionMission() {
+  const missionItems = [
+    {
+      id: 1,
+      color: 'bg-[#ea4335]', // Google Red
+      text: 'Bridge the gap between theory and practice through a peer-to-peer learning environment.',
+    },
+    {
+      id: 2,
+      color: 'bg-[#fbbc05]', // Google Yellow
+      text: 'Empower our members to leave an impact by building solutions that solve real-life problems in the community and by equipping them with the tools to address local issues.',
+    },
+    {
+      id: 3,
+      color: 'bg-[#34a853]', // Google Green
+      text: 'Empower people through technology and programming education.',
+    },
+    {
+      id: 4,
+      color: 'bg-[#4285f4]', // Google Blue
+      text: 'Create meaningful technological solutions for other communities.',
+    },
+    {
+      id: 5,
+      color: 'bg-[#94a3b8]', // Slate/Gray
+      text: 'Make connections to different organizations that will enable us to grow our network.',
+    },
+  ]
+
+  const pillars = [
+    {
+      title: 'Learn',
+      description: 'Hands-on learning experiences through workshops, labs, and guided technical sessions.',
+      color: 'bg-[#e8f0fe] text-[#1a73e8] border-[#d2e3fc]',
+      borderColor: 'hover:border-[#4285f4]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(66,133,244,0.18)]',
+      dotColor: 'bg-[#4285f4]',
+      icon: BookOpen,
+      iconBg: 'bg-[#e8f0fe] text-[#1a73e8]',
+    },
+    {
+      title: 'Build',
+      description: 'Turn ideas into prototypes and products that solve real challenges for real communities.',
+      color: 'bg-[#e6f4ea] text-[#188038] border-[#ceead6]',
+      borderColor: 'hover:border-[#34a853]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(52,168,83,0.18)]',
+      dotColor: 'bg-[#34a853]',
+      icon: Code2,
+      iconBg: 'bg-[#e6f4ea] text-[#188038]',
+    },
+    {
+      title: 'Connect',
+      description: 'Create a strong network of developers, mentors, founders, and collaborators across campus.',
+      color: 'bg-[#fef7e0] text-[#b06000] border-[#feefc3]',
+      borderColor: 'hover:border-[#fbbc04]/70',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(251,188,4,0.22)]',
+      dotColor: 'bg-[#fbbc04]',
+      icon: Users,
+      iconBg: 'bg-[#fef7e0] text-[#b06000]',
+    },
+    {
+      title: 'Lead',
+      description: 'Develop future-ready leaders who can shape technology, create impact, and inspire others.',
+      color: 'bg-[#fce8e6] text-[#d93025] border-[#fad2cf]',
+      borderColor: 'hover:border-[#ea4335]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(234,67,53,0.18)]',
+      dotColor: 'bg-[#ea4335]',
+      icon: Rocket,
+      iconBg: 'bg-[#fce8e6] text-[#d93025]',
+    },
+  ]
+
+  return (
+    <section id="about" className="w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none">
+      
+      {/* ============================================================== */}
+      {/* 1. ABOUT & QUOTE BANNER WITH STYLIZED YELLOW CURLY BRACKETS     */}
+      {/* ============================================================== */}
+      <div className="w-full px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+        {/* Left: Curly brackets with statement */}
+        <div className="flex-1 flex items-center gap-2 sm:gap-6 w-full">
+          {/* Left Yellow Curly Bracket */}
+          <div className="shrink-0 text-[#f6bd38] select-none">
+            <svg
+              className="w-7 h-20 sm:w-16 sm:h-40 md:w-20 md:h-44"
+              viewBox="0 0 50 140"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 40 10 C 25 10, 20 25, 20 50 C 20 62, 12 70, 4 70 C 12 70, 20 78, 20 90 C 20 115, 25 130, 40 130"
+                stroke="#111111"
+                strokeWidth="5"
+                fill="#fde047"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          {/* Quote Text */}
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.4rem] font-extrabold text-neutral-900 leading-snug">
+            Here, we don't just grow with technology—we{' '}
+            <span className="inline-block font-black">
+              <span className="text-[#4285f4]">e</span>
+              <span className="text-[#ea4335]">v</span>
+              <span className="text-[#fbbc05]">o</span>
+              <span className="text-[#4285f4]">l</span>
+              <span className="text-[#34a853]">v</span>
+              <span className="text-[#ea4335]">e</span>
+            </span>{' '}
+            with it.
+          </h2>
+
+          {/* Right Yellow Curly Bracket */}
+          <div className="shrink-0 text-[#f6bd38] select-none">
+            <svg
+              className="w-7 h-20 sm:w-16 sm:h-40 md:w-20 md:h-44"
+              viewBox="0 0 50 140"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 10 10 C 25 10, 30 25, 30 50 C 30 62, 38 70, 46 70 C 38 70, 30 78, 30 90 C 30 115, 25 130, 10 130"
+                stroke="#111111"
+                strokeWidth="5"
+                fill="#fde047"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Right: Description & Learn More Button */}
+        <div className="w-full lg:w-[360px] xl:w-[420px] shrink-0 flex flex-col items-start lg:pl-6 space-y-4">
+          <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-medium">
+            Develop leadership skills, gain recognition, expand your network and collaborate with other passionate developers at Anjuman-I-Islam's Kalsekar Technical Campus.
+          </p>
+          <a
+            href="#vision"
+            className="inline-flex items-center justify-center px-7 py-2.5 rounded-full bg-[#f6bd38] border-2 border-neutral-950 text-neutral-950 text-xs sm:text-sm font-bold shadow-[0_2px_8px_rgba(246,189,56,0.3)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            Learn more
+          </a>
+        </div>
+      </div>
+      {/* ============================================================== */}
+      {/* 2. WHAT WE DO - FULL WIDTH INTERACTIVE GOOGLE STYLE            */}
+      {/* ============================================================== */}
+      <div id="what-we-do" className="w-full px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
+        <div className="w-full">
+          <div className="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/80 text-xs font-bold text-neutral-700 tracking-wide uppercase mb-2.5 shadow-2xs">
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#4285f4] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#ea4335]" />
+                  <span className="w-2 h-2 rounded-full bg-[#fbbc04]" />
+                  <span className="w-2 h-2 rounded-full bg-[#34a853]" />
+                </span>
+                What we do
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900">
+                Building a stronger developer culture
+              </h3>
+            </div>
+          </div>
+
+          <div className="grid gap-3.5 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
+            {pillars.map((pillar) => {
+              const Icon = pillar.icon
+              return (
+                <article
+                  key={pillar.title}
+                  className={`group relative flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 ${pillar.borderColor} ${pillar.glowColor} cursor-pointer active:scale-[0.99]`}
+                >
+                  {/* Header: Pill Badge + Google Icon */}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold tracking-wide border shadow-2xs ${pillar.color}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${pillar.dotColor}`} />
+                      {pillar.title}
+                    </div>
+
+                    <div className={`p-2 rounded-xl ${pillar.iconBg} transition-transform duration-200 group-hover:scale-110 shadow-xs`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-[13px] leading-relaxed text-neutral-600 group-hover:text-neutral-800 transition-colors">
+                    {pillar.description}
+                  </p>
+                </article>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ============================================================== */}
+      {/* 2. VISION TRACK (Responsive Layout: Clean card on Mobile, Track on Desktop) */}
+      {/* ============================================================== */}
+      <div id="vision" className="w-full border-t border-b border-black bg-white py-6 md:py-0 select-none overflow-hidden">
+        <div className="w-full md:h-[220px] lg:h-[250px] flex flex-col md:flex-row items-center justify-center md:justify-between relative px-4 sm:px-6 lg:px-8 gap-4 md:gap-0">
+          
+          {/* Mobile Badge: Google Brackets + "Vision" Heading */}
+          <div className="md:hidden inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-black bg-neutral-50 shadow-xs">
+            <div className="flex items-center gap-1 scale-75">
+              <div className="flex flex-col gap-0.5 items-end -rotate-12">
+                <div className="w-5 h-2.5 rounded-full bg-[#ea4335]" />
+                <div className="w-5 h-2.5 rounded-full bg-[#4285f4]" />
+              </div>
+              <div className="flex flex-col gap-0.5 items-start rotate-12">
+                <div className="w-5 h-2.5 rounded-full bg-[#34a853]" />
+                <div className="w-5 h-2.5 rounded-full bg-[#fbbc05]" />
+              </div>
+            </div>
+            <span className="text-sm font-bold text-neutral-900 tracking-tight uppercase">
+              Vision
+            </span>
+          </div>
+
+          {/* Desktop Left Circle: Google Developers angled bracket logo (tangent to top & bottom) */}
+          <div className="hidden md:flex h-full aspect-square rounded-full border border-black bg-white items-center justify-center shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Left bracket (Red / Blue) */}
+              <div className="flex flex-col gap-1 sm:gap-1.5 items-end -rotate-12">
+                <div className="w-7 sm:w-10 h-3.5 sm:h-5 rounded-full bg-[#ea4335] shadow-sm" />
+                <div className="w-7 sm:w-10 h-3.5 sm:h-5 rounded-full bg-[#4285f4] shadow-sm" />
+              </div>
+              {/* Right bracket (Green / Yellow) */}
+              <div className="flex flex-col gap-1 sm:gap-1.5 items-start rotate-12">
+                <div className="w-7 sm:w-10 h-3.5 sm:h-5 rounded-full bg-[#34a853] shadow-sm" />
+                <div className="w-7 sm:w-10 h-3.5 sm:h-5 rounded-full bg-[#fbbc05] shadow-sm" />
+              </div>
+            </div>
+          </div>
+
+          {/* Middle: Vision Text Block */}
+          <div className="flex-1 px-2 sm:px-6 md:px-8 lg:px-14 flex items-center justify-center text-center">
+            <p className="text-xs sm:text-sm md:text-base lg:text-[17px] text-neutral-800 leading-relaxed font-normal max-w-3xl">
+              This organization envisions itself to be an avenue for the future generation to nurture their ideas and encourage critical thinking by establishing a community of tech enthusiasts who are passionate about uplifting communities through technology and innovation.
+            </p>
+          </div>
+
+          {/* Desktop Right Circle: "Vision" Heading (tangent to top & bottom) */}
+          <div className="hidden md:flex h-full aspect-square rounded-full border border-black bg-white items-center justify-center shrink-0">
+            <span className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 tracking-tight">
+              Vision
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ============================================================== */}
+      {/* 3. MISSION SECTION (Full Width Spanning Layout)                */}
+      {/* ============================================================== */}
+      <div id="mission" className="w-full px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start justify-between gap-6 md:gap-10 lg:gap-14 pt-2">
+        
+        {/* Left Column: Heading */}
+        <div className="w-full md:w-auto md:min-w-[220px] lg:min-w-[260px] shrink-0 flex flex-col justify-start">
+          <div>
+            <h3 className="text-3xl sm:text-4xl font-black text-neutral-950 tracking-tight">
+              Mission
+            </h3>
+            <p className="mt-2 text-sm text-neutral-500 font-semibold tracking-wide">
+              This organization aims to:
+            </p>
+          </div>
+        </div>
+
+        {/* Right Column: 5 Stacked Mission Pills (Full Width) */}
+        <div className="flex-1 w-full flex flex-col gap-3.5">
+          {missionItems.map((item) => (
+            <div
+              key={item.id}
+              className="w-full border-2 border-neutral-900 rounded-2xl sm:rounded-full py-2.5 px-3.5 sm:px-4 flex items-center gap-3.5 sm:gap-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+            >
+              {/* Numbered Circle with Brand Color */}
+              <div
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full ${item.color} text-white font-extrabold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-sm`}
+              >
+                {item.id}
+              </div>
+
+              {/* Mission Text */}
+              <p className="text-xs sm:text-sm md:text-base text-neutral-800 font-medium pr-4 leading-snug">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </section>
+  )
+}
