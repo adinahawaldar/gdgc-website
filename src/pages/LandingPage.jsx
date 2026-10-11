@@ -1,23 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Home,
   Info,
   Users,
   Calendar,
-  Layers,
   Trophy,
+  Layers,
 } from 'lucide-react'
 import HeroSection from '../components/HeroSection'
 import RecentEvents from '../components/RecentEvents'
 import AboutVisionMission from '../components/AboutVisionMission'
-import ProjectsAchievements, { AchievementsSection } from '../components/ProjectsAchievements'
+import TeamsSection from '../components/TeamsSection'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
 import { Resources } from '../Resources.jsx'
+import { Teams } from '../Teams.jsx'
+import AboutPage from './AboutPage'
+import AchievementsPage from './AchievementsPage'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
+
+  const scrollToTop = () => {
+    if (window.__lenis && typeof window.__lenis.scrollTo === 'function') {
+      window.__lenis.scrollTo(0, { immediate: true })
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }
+
+  // Ensure each time any page / tab is opened, it always displays the top hero section
+  useEffect(() => {
+    scrollToTop()
+  }, [activeTab])
+
+  const openTeams = () => {
+    setActiveTab('teams')
+    scrollToTop()
+  }
 
   const navItems = [
     {
@@ -53,14 +75,6 @@ export default function LandingPage() {
       activeColor: 'text-[#188038]',
     },
     {
-      id: 'projects',
-      label: 'Projects',
-      icon: Layers,
-      href: '#projects',
-      activeBg: 'bg-[#e8f0fe] text-[#1a73e8]',
-      activeColor: 'text-[#1a73e8]',
-    },
-    {
       id: 'achievements',
       label: 'Achievements',
       icon: Trophy,
@@ -77,6 +91,11 @@ export default function LandingPage() {
       activeColor: 'text-[#1a73e8]',
     },
   ]
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId)
+    scrollToTop()
+  }
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
@@ -113,22 +132,24 @@ export default function LandingPage() {
 
       {/* Main Content Area */}
       <main className="w-full flex-1 flex flex-col items-center">
-        {activeTab === 'events' ? (
-          <div className="w-full pt-4 pb-20">
-            <Events />
-            <ProjectsAchievements />
-            <AchievementsSection />
+        {activeTab === 'about' ? (
+          <div className="w-full pt-4">
+            <AboutPage />
           </div>
-        ) : activeTab === 'projects' ? (
-          <div className="w-full pt-4 pb-20">
-            <ProjectsAchievements />
+        ) : activeTab === 'teams' ? (
+          <div className="w-full pt-4">
+            <Teams />
+          </div>
+        ) : activeTab === 'events' ? (
+          <div className="w-full pt-4">
+            <Events />
           </div>
         ) : activeTab === 'achievements' ? (
-          <div className="w-full pt-4 pb-20">
-            <AchievementsSection />
+          <div className="w-full pt-4">
+            <AchievementsPage />
           </div>
         ) : activeTab === 'resources' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4">
             <Resources />
           </div>
         ) : (
@@ -138,21 +159,22 @@ export default function LandingPage() {
             </div>
             <RecentEvents />
             <AboutVisionMission />
-            <ProjectsAchievements />
-            <AchievementsSection />
+            <TeamsSection onViewAll={openTeams} />
             <SocialFollowSection />
-            <FooterSection />
           </>
         )}
+
+        {/* Global Footer rendered on every page bottom */}
+        <FooterSection onNavigate={handleTabChange} />
       </main>
 
       {/* Floating Bottom Navigation (Google Themed Dock) */}
       <nav
         aria-label="Bottom Navigation"
-        className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)]"
+        className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[92vw] sm:max-w-none"
       >
-        <div className="relative group p-[2px] rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] shadow-[0_10px_32px_rgba(32,33,36,0.16),0_2px_10px_rgba(66,133,244,0.18)] hover:shadow-[0_16px_44px_rgba(66,133,244,0.26)] transition-all duration-300">
-          <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white text-neutral-800 p-1 sm:p-2 rounded-full backdrop-blur-xl">
+        <div className="relative group p-[1.5px] sm:p-[2px] rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] shadow-[0_8px_28px_rgba(32,33,36,0.14),0_2px_10px_rgba(66,133,244,0.16)] transition-all duration-300">
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-white text-neutral-800 px-1 py-1.5 sm:px-2 sm:py-1.5 rounded-full overflow-hidden">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = activeTab === item.id
@@ -163,19 +185,14 @@ export default function LandingPage() {
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault()
-                    setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'teams' || item.id === 'projects' || item.id === 'achievements') {
-                      setTimeout(() => {
-                        const target = document.querySelector(item.href)
-                        if (target) {
-                          target.scrollIntoView({ behavior: 'smooth' })
-                        }
-                      }, 50)
+                    if (item.id === 'home' && activeTab === 'home') {
+                      scrollToTop()
                     } else {
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                      setActiveTab(item.id)
+                      scrollToTop()
                     }
                   }}
-                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2.5 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-1.5 sm:px-3.5 py-2 sm:py-2 rounded-full text-[8.5px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none shrink-0 min-w-[39px] sm:min-w-0 ${
                     isActive
                       ? `${item.activeBg} font-semibold shadow-xs`
                       : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'
@@ -183,7 +200,7 @@ export default function LandingPage() {
                 >
                   <Icon
                     strokeWidth={isActive ? 2.3 : 1.9}
-                    className={`w-4 h-4 sm:w-[17px] sm:h-[17px] transition-colors shrink-0 ${
+                    className={`w-[17px] h-[17px] sm:w-[17px] sm:h-[17px] transition-colors shrink-0 ${
                       isActive ? item.activeColor : 'text-neutral-500'
                     }`}
                   />

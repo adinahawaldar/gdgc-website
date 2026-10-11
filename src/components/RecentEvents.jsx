@@ -4,31 +4,24 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 const events = [
   {
     id: 1,
-    title: 'CyberSecurity Workshop by Vaibhav Lakhani',
-    category: 'CYBERSECURITY',
+    title: 'Modern Web Jam: React 19, Vite & Tailwind CSS',
+    category: 'WEB DEV',
     categoryColor: 'bg-[#1a73e8]',
-    image: '/events/event1.jpg',
+    image: '/images/events/web-dev-bootcamp.jpg',
   },
   {
     id: 2,
-    title: 'Google Cloud + AI: Innovation Unleashed',
-    category: 'CLOUD & GENAI',
-    categoryColor: 'bg-[#34a853]',
-    image: '/events/event2.jpg',
+    title: 'Solution Sprint: Ideation to MVP',
+    category: 'HACKATHON SPRINT',
+    categoryColor: 'bg-[#ea4335]',
+    image: '/images/events/pitch-carnival.jpg',
   },
   {
     id: 3,
-    title: 'College Hackathon 2024 Demo Day Showcase',
-    category: 'HACKATHON',
-    categoryColor: 'bg-[#ea4335]',
-    image: '/events/event3.jpg',
-  },
-  {
-    id: 4,
-    title: 'Mobile App Dev Workshop - Android & Flutter',
-    category: 'MOBILE DEV',
+    title: 'Gen AI Study Jams',
+    category: 'GEN AI & CLOUD',
     categoryColor: 'bg-[#fbbc04]',
-    image: '/events/event4.jpg',
+    image: '/images/events/genai-study-jam.jpg',
   },
 ]
 
@@ -72,7 +65,7 @@ export default function RecentEvents() {
   }
 
   return (
-    <section id="events" className="w-full py-8 sm:py-12 select-none">
+    <section id="events" className="w-full pt-4 pb-8 sm:py-12 select-none">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <h2 className="text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight mb-4 sm:mb-6">

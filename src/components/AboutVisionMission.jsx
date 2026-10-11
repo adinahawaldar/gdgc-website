@@ -1,4 +1,5 @@
 import React from 'react'
+import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
 
 export default function AboutVisionMission() {
   const missionItems = [
@@ -33,22 +34,42 @@ export default function AboutVisionMission() {
     {
       title: 'Learn',
       description: 'Hands-on learning experiences through workshops, labs, and guided technical sessions.',
-      color: 'bg-[#e8f0fe] text-[#1a73e8]',
+      color: 'bg-[#e8f0fe] text-[#1a73e8] border-[#d2e3fc]',
+      borderColor: 'hover:border-[#4285f4]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(66,133,244,0.18)]',
+      dotColor: 'bg-[#4285f4]',
+      icon: BookOpen,
+      iconBg: 'bg-[#e8f0fe] text-[#1a73e8]',
     },
     {
       title: 'Build',
       description: 'Turn ideas into prototypes and products that solve real challenges for real communities.',
-      color: 'bg-[#e6f4ea] text-[#188038]',
+      color: 'bg-[#e6f4ea] text-[#188038] border-[#ceead6]',
+      borderColor: 'hover:border-[#34a853]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(52,168,83,0.18)]',
+      dotColor: 'bg-[#34a853]',
+      icon: Code2,
+      iconBg: 'bg-[#e6f4ea] text-[#188038]',
     },
     {
       title: 'Connect',
       description: 'Create a strong network of developers, mentors, founders, and collaborators across campus.',
-      color: 'bg-[#fef7e0] text-[#b06000]',
+      color: 'bg-[#fef7e0] text-[#b06000] border-[#feefc3]',
+      borderColor: 'hover:border-[#fbbc04]/70',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(251,188,4,0.22)]',
+      dotColor: 'bg-[#fbbc04]',
+      icon: Users,
+      iconBg: 'bg-[#fef7e0] text-[#b06000]',
     },
     {
       title: 'Lead',
       description: 'Develop future-ready leaders who can shape technology, create impact, and inspire others.',
-      color: 'bg-[#fce8e6] text-[#d93025]',
+      color: 'bg-[#fce8e6] text-[#d93025] border-[#fad2cf]',
+      borderColor: 'hover:border-[#ea4335]/60',
+      glowColor: 'hover:shadow-[0_12px_28px_-8px_rgba(234,67,53,0.18)]',
+      dotColor: 'bg-[#ea4335]',
+      icon: Rocket,
+      iconBg: 'bg-[#fce8e6] text-[#d93025]',
     },
   ]
 
@@ -127,32 +148,54 @@ export default function AboutVisionMission() {
           </a>
         </div>
       </div>
-
-      <div id="teams" className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-6 flex items-end justify-between gap-4">
+      {/* ============================================================== */}
+      {/* 2. WHAT WE DO - FULL WIDTH INTERACTIVE GOOGLE STYLE            */}
+      {/* ============================================================== */}
+      <div id="what-we-do" className="w-full px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16">
+        <div className="w-full">
+          <div className="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">What we do</p>
-              <h3 className="mt-2 text-2xl sm:text-3xl font-black tracking-tight text-neutral-900">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/80 text-xs font-bold text-neutral-700 tracking-wide uppercase mb-2.5 shadow-2xs">
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#4285f4] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#ea4335]" />
+                  <span className="w-2 h-2 rounded-full bg-[#fbbc04]" />
+                  <span className="w-2 h-2 rounded-full bg-[#34a853]" />
+                </span>
+                What we do
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-900">
                 Building a stronger developer culture
               </h3>
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {pillars.map((pillar) => (
-              <article
-                key={pillar.title}
-                className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.08)]"
-              >
-                <div className={`inline-flex rounded-full px-3 py-1.5 text-xs font-bold ${pillar.color}`}>
-                  {pillar.title}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
-                  {pillar.description}
-                </p>
-              </article>
-            ))}
+          <div className="grid gap-3.5 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
+            {pillars.map((pillar) => {
+              const Icon = pillar.icon
+              return (
+                <article
+                  key={pillar.title}
+                  className={`group relative flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 ${pillar.borderColor} ${pillar.glowColor} cursor-pointer active:scale-[0.99]`}
+                >
+                  {/* Header: Pill Badge + Google Icon */}
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold tracking-wide border shadow-2xs ${pillar.color}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${pillar.dotColor}`} />
+                      {pillar.title}
+                    </div>
+
+                    <div className={`p-2 rounded-xl ${pillar.iconBg} transition-transform duration-200 group-hover:scale-110 shadow-xs`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-[13px] leading-relaxed text-neutral-600 group-hover:text-neutral-800 transition-colors">
+                    {pillar.description}
+                  </p>
+                </article>
+              )
+            })}
           </div>
         </div>
       </div>
