@@ -72,22 +72,27 @@
 }
 
 /* ========================================================================== */
-/* Smooth Scroll Reveal Animations (triggers when scrolling up and down)     */
+/* Smooth Scroll Reveal Animations (Clean, crisp, no-blur performance)       */
 /* ========================================================================== */
 .scroll-reveal-target {
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.scroll-reveal-target.is-out-of-view {
-  opacity: 0.15;
-  transform: translateY(22px) scale(0.99);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .scroll-reveal-target.is-in-view {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
+}
+
+/* On mobile / touch viewports, disable transitions completely for maximum FPS */
+@media (max-width: 768px) {
+  .scroll-reveal-target {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
 }
 
 

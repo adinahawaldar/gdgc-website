@@ -3,79 +3,105 @@ import Lenis from 'lenis'
 
 export default function ScrollManager() {
   useEffect(() => {
-    // 1. Initialize Lenis Smooth Momentum Scrolling
-    const lenis = new Lenis({
-      duration: 1.25,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
-      infinite: false,
-    })
+    // 1. Detect touch/mobile screens to allow native 60fps/120fps hardware scrolling
+    const isMobileOrTouch =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(max-width: 768px)').matches ||
+        window.matchMedia('(pointer: coarse)').matches ||
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0)
 
-    // Expose lenis globally so components/links can use window.__lenis.scrollTo()
-    window.__lenis = lenis
+    let lenis = null
+    let rafId = null
 
-    let rafId
-    function raf(time) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
-
-    // 2. Track scroll direction & progress bar
+    // Track progress bar
     const progressBar = document.getElementById('global-scroll-progress')
-    
-    lenis.on('scroll', (e) => {
-      const { scroll, limit, direction } = e
-      const progress = limit > 0 ? Math.min(1, Math.max(0, scroll / limit)) : 0
-      
+    const updateProgress = (scrollTop, scrollLimit) => {
+      const progress = scrollLimit > 0 ? Math.min(1, Math.max(0, scrollTop / scrollLimit)) : 0
       if (progressBar) {
         progressBar.style.transform = `scaleX(${progress})`
       }
+    }
 
-      // Update body dataset for scroll direction (1 = down, -1 = up)
-      document.body.dataset.scrollDirection = direction >= 0 ? 'down' : 'up'
-    })
+    if (!isMobileOrTouch) {
+      // Initialize Lenis ONLY on desktop with mouse wheel
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 0, // Never hijack touch gestures
+        infinite: false,
+      })
 
-    // 3. IntersectionObserver for smooth entrance and exit animations on scroll up/down
+      window.__lenis = lenis
+
+      function raf(time) {
+        lenis.raf(time)
+        rafId = requestAnimationFrame(raf)
+      }
+      rafId = requestAnimationFrame(raf)
+
+      lenis.on('scroll', (e) => {
+        updateProgress(e.scroll, e.limit)
+        document.body.dataset.scrollDirection = e.direction >= 0 ? 'down' : 'up'
+      })
+    } else {
+      // On mobile / touch screens: Native silky-smooth hardware scrolling
+      window.__lenis = {
+        scrollTo: (target) => {
+          if (typeof target === 'number') {
+            window.scrollTo({ top: target, behavior: 'smooth' })
+          } else if (target instanceof HTMLElement) {
+            target.scrollIntoView({ behavior: 'smooth' })
+          }
+        },
+      }
+
+      let lastScrollY = window.scrollY
+      const handleNativeScroll = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight
+        updateProgress(scrollTop, docHeight)
+        document.body.dataset.scrollDirection = scrollTop >= lastScrollY ? 'down' : 'up'
+        lastScrollY = scrollTop
+      }
+
+      window.addEventListener('scroll', handleNativeScroll, { passive: true })
+    }
+
+    // 2. IntersectionObserver: Reveal elements smoothly without EVER resetting or blurring on scroll down
     const selector = [
-      'section:not(#home)',
       '.scroll-reveal',
       '.scroll-reveal-card',
       '.teams-card',
       '.team-card',
       '.event-card',
       '.resources-card',
-      '.about-pillar-card'
+      '.about-pillar-card',
     ].join(', ')
 
-    const observerCallback = (entries) => {
+    const observerCallback = (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-in-view')
-          entry.target.classList.remove('is-out-of-view')
-        } else {
-          // Trigger smooth exit so re-scrolling up or down re-animates smoothly
-          entry.target.classList.remove('is-in-view')
-          entry.target.classList.add('is-out-of-view')
+          // Once revealed, keep it permanently visible and stop observing
+          obs.unobserve(entry.target)
         }
       })
     }
 
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.05,
+      rootMargin: '0px 0px -20px 0px',
     })
 
     const attachObservers = () => {
       const elements = document.querySelectorAll(selector)
       elements.forEach((el) => {
-        // Prevent hiding initial hero or top elements
-        if (el.id === 'home') return
         if (!el.classList.contains('scroll-reveal-target')) {
           el.classList.add('scroll-reveal-target')
         }
@@ -83,11 +109,13 @@ export default function ScrollManager() {
       })
     }
 
-    // Attach initially and on dynamic DOM updates
     attachObservers()
 
+    // Debounced mutation observer to avoid thrashing during typing or fast state changes
+    let mutationTimer = null
     const mutationObserver = new MutationObserver(() => {
-      attachObservers()
+      if (mutationTimer) clearTimeout(mutationTimer)
+      mutationTimer = setTimeout(attachObservers, 150)
     })
 
     mutationObserver.observe(document.body, {
@@ -95,7 +123,7 @@ export default function ScrollManager() {
       subtree: true,
     })
 
-    // Intercept internal hash links for smooth Lenis scrolling
+    // Smooth scroll for anchor links
     const handleAnchorClick = (e) => {
       const target = e.target.closest('a[href^="#"]')
       if (!target) return
@@ -104,7 +132,11 @@ export default function ScrollManager() {
         const targetEl = document.querySelector(href)
         if (targetEl) {
           e.preventDefault()
-          lenis.scrollTo(targetEl, { offset: -20, duration: 1.2 })
+          if (lenis) {
+            lenis.scrollTo(targetEl, { offset: -20, duration: 1.1 })
+          } else {
+            targetEl.scrollIntoView({ behavior: 'smooth' })
+          }
         }
       }
     }
@@ -112,9 +144,12 @@ export default function ScrollManager() {
     document.addEventListener('click', handleAnchorClick)
 
     return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-      window.__lenis = null
+      if (rafId) cancelAnimationFrame(rafId)
+      if (lenis) {
+        lenis.destroy()
+        window.__lenis = null
+      }
+      if (mutationTimer) clearTimeout(mutationTimer)
       observer.disconnect()
       mutationObserver.disconnect()
       document.removeEventListener('click', handleAnchorClick)
