@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Calendar,
   Clock,
@@ -13,8 +13,6 @@ import {
   Code2,
   History,
   X,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import {
   eventCategories,
@@ -26,16 +24,6 @@ import './Events.css';
 export const Events = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isKeyboardFocused, setIsKeyboardFocused] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-    return false;
-  });
-  const [touchStartX, setTouchStartX] = useState(null);
 
   // Icon mapper helper
   const getCategoryIcon = (iconName) => {
@@ -69,37 +57,12 @@ export const Events = () => {
         query === '' ||
         item.title.toLowerCase().includes(query) ||
         item.description.toLowerCase().includes(query) ||
-        item.tags.some((tag) => tag.toLowerCase().includes(query));
+        item.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        (item.takeaways && item.takeaways.some((t) => t.toLowerCase().includes(query)));
 
       return matchesCategory && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
-
-  // Safe active index clamped to current filtered results
-  const safeActiveIndex = filteredUpcoming.length > 0 ? activeIndex % filteredUpcoming.length : 0;
-
-  // Manual navigation handlers
-  const handlePrev = (e) => {
-    e?.currentTarget?.blur();
-    if (filteredUpcoming.length <= 1) return;
-    setActiveIndex((prev) => (prev - 1 + filteredUpcoming.length) % filteredUpcoming.length);
-  };
-
-  const handleNext = (e) => {
-    e?.currentTarget?.blur();
-    if (filteredUpcoming.length <= 1) return;
-    setActiveIndex((prev) => (prev + 1) % filteredUpcoming.length);
-  };
-
-  const handleFocus = (e) => {
-    try {
-      if (e.target.matches(':focus-visible')) {
-        setIsKeyboardFocused(true);
-      }
-    } catch {
-      // fallback
-    }
-  };
 
   // Filtered Past Events
   const filteredPast = useMemo(() => {
@@ -175,71 +138,13 @@ export const Events = () => {
     return null;
   };
 
-  // Listen for prefers-reduced-motion changes
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return;
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = (e) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  // Continuous auto-cycling through 3D depth positions
-  // Continues automatically after manual navigation, pauses on hover/keyboard focus, respects reduced motion
-  useEffect(() => {
-    if (filteredUpcoming.length <= 1) return;
-    if (isHovered || isKeyboardFocused || prefersReducedMotion) return;
-
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % filteredUpcoming.length);
-    }, 3600);
-
-    return () => clearInterval(interval);
-  }, [filteredUpcoming.length, activeIndex, isHovered, isKeyboardFocused, prefersReducedMotion]);
-
-  // Keyboard navigation for the carousel
-  const handleKeyDown = (e) => {
-    if (filteredUpcoming.length <= 1) return;
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      handlePrev();
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      handleNext();
-    } else if (e.key === 'Tab') {
-      setIsKeyboardFocused(true);
-    }
-  };
-
-  // Blur handler to resume automatic movement when focus exits carousel
-  const handleBlur = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsKeyboardFocused(false);
-    }
-  };
-
-  // Touch swipe support for mobile
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    if (touchStartX === null || filteredUpcoming.length <= 1) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        handleNext();
-      } else {
-        handlePrev();
-      }
-    }
-    setTouchStartX(null);
-  };
-
   const hasNoResults =
     (activeCategory === 'past' && filteredPast.length === 0) ||
-    (activeCategory !== 'past' && filteredUpcoming.length === 0 && filteredPast.length === 0);
+    (activeCategory === 'upcoming' && filteredUpcoming.length === 0) ||
+    (activeCategory !== 'past' &&
+      activeCategory !== 'upcoming' &&
+      filteredUpcoming.length === 0 &&
+      filteredPast.length === 0);
 
   return (
     <div className="events-page">
@@ -255,9 +160,7 @@ export const Events = () => {
           <span className="events-badge-chapter">Campus Chapter</span>
         </div>
 
-        <h1 className="events-title">
-          Events & Programs
-        </h1>
+        <h1 className="events-title">Events & Programs</h1>
 
         <p className="events-subtitle">
           Hands-on technical workshops, peer study sprints, and community gatherings in Navi Mumbai.
@@ -278,10 +181,7 @@ export const Events = () => {
               return (
                 <button
                   key={cat.id}
-                  onClick={() => {
-                    setActiveCategory(cat.id);
-                    setActiveIndex(0);
-                  }}
+                  onClick={() => setActiveCategory(cat.id)}
                   className={`events-filter-pill ${isActive ? 'active' : ''}`}
                 >
                   {getCategoryIcon(cat.icon)}
@@ -301,18 +201,12 @@ export const Events = () => {
               type="text"
               placeholder="Search by topic or tech..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setActiveIndex(0);
-              }}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="events-search-input"
             />
             {searchQuery && (
               <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setActiveIndex(0);
-                }}
+                onClick={() => setSearchQuery('')}
                 className="events-search-clear-btn"
                 aria-label="Clear search"
               >
@@ -331,13 +225,12 @@ export const Events = () => {
           <div className="events-empty-box">
             <h3 className="events-empty-title">No events matching your filter</h3>
             <p className="events-empty-desc">
-              Try adjusting your search keywords or select "All Events" to view all chapter sessions.
+              Try adjusting your search keywords or select &quot;All Events&quot; to view all chapter sessions.
             </p>
             <button
               onClick={() => {
                 setActiveCategory('all');
                 setSearchQuery('');
-                setActiveIndex(0);
               }}
               className="events-reset-btn"
             >
@@ -348,215 +241,137 @@ export const Events = () => {
       )}
 
       {/* ====================================================================
-          4. 3D Perspective Depth Carousel (Upcoming Events)
+          4. Static Event Grid - Upcoming & Active Sessions
           ==================================================================== */}
       {activeCategory !== 'past' && filteredUpcoming.length > 0 && (
-        <section className="events-section-container" aria-label="Upcoming Events 3D Carousel">
+        <section className="events-section-container" aria-label="Upcoming Events">
           <div className="events-section-label-row">
             <div className="events-section-label-left">
               <span className="events-section-label-dot blue" />
               <h2 className="events-section-heading">Upcoming & Active Sessions</h2>
             </div>
-            {filteredUpcoming.length > 1 && (
-              <span className="events-depth-count-indicator">
-                {safeActiveIndex + 1} of {filteredUpcoming.length}
-              </span>
-            )}
+            <span className="events-count-badge">
+              {filteredUpcoming.length} {filteredUpcoming.length === 1 ? 'Event' : 'Events'}
+            </span>
           </div>
 
-          {/* 3D Perspective Stage Container */}
-          <div
-            className="events-depth-stage-wrapper"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onMouseDown={() => setIsKeyboardFocused(false)}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            tabIndex={0}
-            role="region"
-            aria-label="3D Depth Events Carousel. Use Left and Right arrow keys to navigate."
-          >
-            {/* Subtle black radial glow behind the carousel fading into white */}
-            <div className="events-depth-glow" aria-hidden="true" />
-
-            <div className="events-depth-stage">
-              {filteredUpcoming.map((item, index) => {
-                const total = filteredUpcoming.length;
-
-                // Calculate wrapped relative offset from safeActiveIndex
-                let offset = index - safeActiveIndex;
-                if (offset > total / 2) offset -= total;
-                if (offset < -total / 2) offset += total;
-
-                const isCenter = offset === 0;
-
-                // Assign depth placement class
-                let depthClass = 'depth-hidden';
-                if (offset === 0) depthClass = 'depth-center';
-                else if (offset === 1) depthClass = 'depth-right-1';
-                else if (offset === -1) depthClass = 'depth-left-1';
-                else if (offset === 2) depthClass = 'depth-right-2';
-                else if (offset === -2) depthClass = 'depth-left-2';
-
-                return (
-                  <div
-                    key={item.id}
-                    className={`events-depth-card-slot ${depthClass}`}
-                    onClick={() => {
-                      if (!isCenter) setActiveIndex(index);
-                    }}
-                    style={{
-                      cursor: !isCenter ? 'pointer' : 'default',
-                    }}
-                    aria-hidden={!isCenter}
-                  >
-                    <article className="event-card event-card--depth">
-                      {/* Poster / Image Container */}
-                      <div className="event-card-img-wrap">
-                        <img
-                          src={item.image}
-                          alt={item.imageAlt}
-                          className="event-card-img"
-                          loading="lazy"
-                        />
-                        {/* Badges over image */}
-                        <div className="event-card-badges-row">
-                          <span className="event-card-status-badge">
-                            {item.statusLabel}
-                          </span>
-                          {item.isFeatured && (
-                            <span className="event-card-featured-badge">
-                              <Sparkles className="w-3 h-3 text-[#FBBC05]" />
-                              <span>Featured</span>
-                            </span>
-                          )}
-                        </div>
-                        <span className="event-card-img-caption">
-                          {item.imageDisclaimer}
-                        </span>
-                      </div>
-
-                      {/* Google Accent Top Bar */}
-                      <div className={`event-card-accent-bar ${item.accentColor}`} />
-
-                      {/* Card Content */}
-                      <div className="event-card-body">
-                        <div className="event-card-top-info">
-                          <span className="event-card-category-tag">{item.categoryName}</span>
-                          <span className="event-card-audience-tag">{item.audience}</span>
-                        </div>
-
-                        <h3 className="event-card-title">{item.title}</h3>
-
-                        <p className="event-card-description">{item.description}</p>
-
-                        {/* Schedule & Venue Meta */}
-                        <div className="event-card-meta-box">
-                          <div className="event-card-meta-item">
-                            <Calendar className="w-3.5 h-3.5 text-[#4285F4] shrink-0" />
-                            <span>{item.schedule}</span>
-                          </div>
-                          {item.time && (
-                            <div className="event-card-meta-item">
-                              <Clock className="w-3.5 h-3.5 text-[#FBBC05] shrink-0" />
-                              <span>{item.time}</span>
-                            </div>
-                          )}
-                          <div className="event-card-meta-item">
-                            <MapPin className="w-3.5 h-3.5 text-[#34A853] shrink-0" />
-                            <span>{item.location}</span>
-                          </div>
-                        </div>
-
-                        {/* Tags */}
-                        <div className="event-card-tags">
-                          {item.tags.map((tag) => (
-                            <span key={tag} className="event-card-tag">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Footer Action */}
-                        <div className="event-card-footer">
-                          <a
-                            href={item.registrationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="event-card-btn"
-                            tabIndex={isCenter ? 0 : -1}
-                            onClick={(e) => {
-                              if (!isCenter) {
-                                e.preventDefault();
-                                setActiveIndex(index);
-                              }
-                            }}
-                          >
-                            <span>Chapter Hub</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </a>
-                          <span className="event-card-note">
-                            {item.registrationNote}
-                          </span>
-                        </div>
-                      </div>
-                    </article>
+          <div className="events-cards-grid">
+            {filteredUpcoming.map((item) => (
+              <article key={item.id} className="event-card">
+                {/* Poster / Image Container */}
+                <div className="event-card-img-wrap">
+                  <img
+                    src={item.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="event-card-img-blur"
+                  />
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt}
+                    className="event-card-img"
+                    loading="lazy"
+                  />
+                  <div className="event-card-badges-row">
+                    <span className="event-card-status-badge">
+                      {item.statusLabel}
+                    </span>
+                    {item.isFeatured && (
+                      <span className="event-card-featured-badge">
+                        <Sparkles className="w-3 h-3 text-[#FBBC05]" />
+                        <span>Featured</span>
+                      </span>
+                    )}
                   </div>
-                );
-              })}
-            </div>
+                  {item.imageDisclaimer && (
+                    <span className="event-card-img-caption">
+                      {item.imageDisclaimer}
+                    </span>
+                  )}
+                </div>
 
-            {/* Left and Right Subtle Step Buttons */}
-            {filteredUpcoming.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="events-depth-nav-arrow left"
-                  aria-label="Previous event card"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
+                {/* Google Accent Bar */}
+                <div className={`event-card-accent-bar ${item.accentColor}`} />
 
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="events-depth-nav-arrow right"
-                  aria-label="Next event card"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </>
-            )}
+                {/* Card Content Body */}
+                <div className="event-card-body">
+                  <div className="event-card-top-info">
+                    <span className="event-card-category-tag">{item.categoryName}</span>
+                    <span className="event-card-audience-tag">{item.schedule}</span>
+                  </div>
+
+                  <h3 className="event-card-title">{item.title}</h3>
+
+                  <p className="event-card-description">{item.description}</p>
+
+                  {/* Session Highlights */}
+                  {item.takeaways && item.takeaways.length > 0 && (
+                    <div className="event-card-takeaways">
+                      <div className="event-card-takeaways-title">Session Highlights:</div>
+                      <ul className="event-card-takeaways-list">
+                        {item.takeaways.map((takeaway, idx) => (
+                          <li key={idx} className="event-card-takeaway-item">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#34A853] shrink-0 mt-0.5" />
+                            <span>{takeaway}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Schedule & Venue Meta */}
+                  <div className="event-card-meta-box">
+                    <div className="event-card-meta-item">
+                      <Calendar className="w-3.5 h-3.5 text-[#4285F4] shrink-0" />
+                      <span>{item.schedule}</span>
+                    </div>
+                    {item.time && (
+                      <div className="event-card-meta-item">
+                        <Clock className="w-3.5 h-3.5 text-[#FBBC05] shrink-0" />
+                        <span>{item.time}</span>
+                      </div>
+                    )}
+                    <div className="event-card-meta-item">
+                      <MapPin className="w-3.5 h-3.5 text-[#34A853] shrink-0" />
+                      <span>{item.location}</span>
+                    </div>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="event-card-tags">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="event-card-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="event-card-footer">
+                    <a
+                      href={item.registrationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="event-card-btn"
+                    >
+                      <span>Chapter Hub</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                    {item.registrationNote && (
+                      <span className="event-card-note">
+                        {item.registrationNote}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
-
-          {/* Dots Indicator for 3D Carousel */}
-          {filteredUpcoming.length > 1 && (
-            <div className="events-depth-dots-row" role="tablist" aria-label="Choose event card">
-              {filteredUpcoming.map((item, idx) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={(e) => {
-                    e.currentTarget.blur();
-                    setActiveIndex(idx);
-                  }}
-                  className={`events-depth-dot ${idx === safeActiveIndex ? 'active' : ''}`}
-                  aria-label={`Jump to ${item.title}`}
-                  role="tab"
-                  aria-selected={idx === safeActiveIndex}
-                />
-              ))}
-            </div>
-          )}
         </section>
       )}
 
       {/* ====================================================================
-          5. Past Events Gallery (Straightforward Compact Static Grid)
+          5. Static Event Grid - Past Sessions & Recaps Archive
           ==================================================================== */}
       {activeCategory !== 'upcoming' && filteredPast.length > 0 && (
         <section className="events-section-container past" aria-label="Past Events Archive">
@@ -565,13 +380,22 @@ export const Events = () => {
               <span className="events-section-label-dot red" />
               <h2 className="events-section-heading">Past Sessions & Recaps</h2>
             </div>
+            <span className="events-count-badge">
+              {filteredPast.length} {filteredPast.length === 1 ? 'Event' : 'Events'}
+            </span>
           </div>
 
           <div className="events-cards-grid">
             {filteredPast.map((item) => (
               <article key={item.id} className="event-card past">
-                {/* Poster / Session Photo */}
+                {/* Poster / Session Image Container */}
                 <div className="event-card-img-wrap">
+                  <img
+                    src={item.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="event-card-img-blur"
+                  />
                   <img
                     src={item.image}
                     alt={item.imageAlt}
@@ -583,13 +407,17 @@ export const Events = () => {
                       Past Session
                     </span>
                   </div>
-                  <span className="event-card-img-caption">
-                    {item.imageDisclaimer}
-                  </span>
+                  {item.imageDisclaimer && (
+                    <span className="event-card-img-caption">
+                      {item.imageDisclaimer}
+                    </span>
+                  )}
                 </div>
 
+                {/* Google Accent Bar */}
                 <div className={`event-card-accent-bar ${item.accentColor}`} />
 
+                {/* Card Content Body */}
                 <div className="event-card-body">
                   <div className="event-card-top-info">
                     <span className="event-card-category-tag">{item.categoryType}</span>
@@ -600,18 +428,20 @@ export const Events = () => {
 
                   <p className="event-card-description">{item.description}</p>
 
-                  {/* Key Takeaways */}
-                  <div className="event-card-takeaways">
-                    <div className="event-card-takeaways-title">Session Highlights:</div>
-                    <ul className="event-card-takeaways-list">
-                      {item.takeaways.map((takeaway, idx) => (
-                        <li key={idx} className="event-card-takeaway-item">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#34A853] shrink-0 mt-0.5" />
-                          <span>{takeaway}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* Session Highlights */}
+                  {item.takeaways && item.takeaways.length > 0 && (
+                    <div className="event-card-takeaways">
+                      <div className="event-card-takeaways-title">Session Highlights:</div>
+                      <ul className="event-card-takeaways-list">
+                        {item.takeaways.map((takeaway, idx) => (
+                          <li key={idx} className="event-card-takeaway-item">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#34A853] shrink-0 mt-0.5" />
+                            <span>{takeaway}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   {/* Tags */}
                   <div className="event-card-tags">
