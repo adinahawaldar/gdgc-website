@@ -1032,3 +1032,20 @@ body, #root {
     transform: none !important;
   }
 }
+
+/* Fix for scroll blur/fade lag on mobile and desktop */
+.resources-page,
+.resources-certs-section,
+.resources-cert-card,
+.resources-cert-pills-list,
+.resources-hero {
+  opacity: 1 !important;
+  filter: none !important;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.resources-cert-card {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out !important;
+}
