@@ -29,7 +29,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative w-full min-h-[calc(100svh-4.5rem)] sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-between px-4 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-0 select-none overflow-hidden bg-white">
+    <section className="relative w-full sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-start sm:justify-between px-4 sm:px-6 lg:px-8 pt-20 sm:pt-14 pb-0 select-none overflow-hidden bg-white">
       {/* ============================================================== */}
       {/* GOOGLE CONSTELLATION & FLOATING SPHERES (Full Hero, Both Sides) */}
       {/* ============================================================== */}
@@ -295,7 +295,7 @@ export default function HeroSection() {
       {/* ============================================================== */}
       {/* CONTINUOUS MOVING STATS TICKER                                 */}
       {/* ============================================================== */}
-      <div className="mt-12 sm:mt-16 relative z-10 -mx-4 sm:-mx-6 lg:-mx-8 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)]">
+      <div className="mt-10 sm:mt-16 relative z-10 -mx-4 sm:-mx-6 lg:-mx-8 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)]">
         <div className="w-full border-y border-neutral-100 bg-neutral-50/60 backdrop-blur-xs py-3 sm:py-3.5 overflow-hidden">
           <div className="mask-horizontal w-full overflow-hidden">
             <div className="animate-marquee flex items-center whitespace-nowrap will-change-transform">

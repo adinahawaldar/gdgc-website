@@ -442,8 +442,6 @@ export const Resources = () => {
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 };

@@ -1,12 +1,17 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @layer base {
   * {
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
   }
 
   html,
@@ -65,4 +70,24 @@
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
+
+/* ========================================================================== */
+/* Smooth Scroll Reveal Animations (triggers when scrolling up and down)     */
+/* ========================================================================== */
+.scroll-reveal-target {
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-target.is-out-of-view {
+  opacity: 0.15;
+  transform: translateY(22px) scale(0.99);
+}
+
+.scroll-reveal-target.is-in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 
