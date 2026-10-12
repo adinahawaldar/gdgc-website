@@ -104,27 +104,17 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
-      {/* Top Brand Header (Logo & College Name - No Nav links) */}
-      <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none">
-        <div className="flex items-center gap-3 sm:gap-3.5">
-          {/* Google Developer Groups Angle Brackets Logo */}
-          <img
-            src="/images/gdg-logo.png"
-            alt="Google Developer Groups"
-            className="w-9 sm:w-11 h-9 sm:h-11 object-contain shrink-0"
-          />
-
-          {/* Text: Google Developer Groups & On Campus • College Name */}
-          <div className="flex flex-col justify-center leading-tight">
-            <span className="text-base sm:text-lg font-semibold tracking-tight text-[#3c4043]">
-              Google Developer Groups
-            </span>
-            <span className="text-xs sm:text-[13px] font-medium text-neutral-600 tracking-tight flex items-center gap-1.5 flex-wrap">
-              <span className="text-[#1a73e8] font-semibold">On Campus</span>
-              <span className="text-neutral-400">•</span>
-              <span>Anjuman-I-Islam's Kalsekar Technical Campus</span>
-            </span>
-          </div>
+      {/* Top Brand Header (GDG & College Name - No Nav links) */}
+      <header className="w-full px-4 sm:px-8 lg:px-12 pt-3 sm:pt-5 pb-1 sm:pb-2 flex items-center justify-start select-none">
+        <div className="flex flex-col justify-center leading-tight">
+          <span className="text-[13.5px] sm:text-[16px] font-semibold tracking-tight text-[#3c4043]">
+            Google Developer Groups
+          </span>
+          <span className="text-[10px] sm:text-[12px] font-medium text-neutral-600 tracking-tight flex items-center gap-1 sm:gap-1.5 flex-nowrap whitespace-nowrap">
+            <span className="text-[#1a73e8] font-semibold shrink-0">On Campus</span>
+            <span className="text-neutral-400 shrink-0">•</span>
+            <span>Anjuman-I-Islam's Kalsekar Technical Campus</span>
+          </span>
         </div>
       </header>
 

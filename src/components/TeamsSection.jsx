@@ -4,6 +4,7 @@ import useTeams from '../hooks/useTeams'
 import Card from './team/TeamCard'
 import TeamModal from './team/TeamModal'
 import OrganizersBand from './team/OrganizersBand'
+import FacultyCard from './team/FacultyCard'
 import { TeamsHeading, StateMessage } from './team/TeamsShell'
 import { Reveal } from './team/parts'
 
@@ -17,6 +18,14 @@ export default function TeamsSection({ onViewAll }) {
         {!data ? <StateMessage error={error} /> : (
           <>
             <TeamsHeading meta={data.meta} />
+
+            {/* Faculty Coordinator - Displayed First */}
+            <Reveal className="mb-8 sm:mb-10 flex flex-col items-center">
+              <div className="w-full max-w-[260px] sm:max-w-[290px] mx-auto">
+                <FacultyCard faculty={data.facultyCoordinator} onOpen={setSel} />
+              </div>
+            </Reveal>
+
             <OrganizersBand organizers={data.organizers} onOpen={setSel} />
             
             <Reveal className="mt-8 sm:mt-10">
