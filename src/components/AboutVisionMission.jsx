@@ -1,7 +1,7 @@
 import React from 'react'
 import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
 
-export default function AboutVisionMission() {
+export default function AboutVisionMission({ onLearnMore }) {
   const missionItems = [
     {
       id: 1,
@@ -140,12 +140,23 @@ export default function AboutVisionMission() {
           <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-medium">
             Develop leadership skills, gain recognition, expand your network and collaborate with other passionate developers at Anjuman-I-Islam's Kalsekar Technical Campus.
           </p>
-          <a
-            href="#vision"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault()
+              if (onLearnMore) {
+                onLearnMore()
+              } else {
+                const target = document.querySelector('#about')
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' })
+                }
+              }
+            }}
             className="inline-flex items-center justify-center px-7 py-2.5 rounded-full bg-[#f6bd38] border-2 border-neutral-950 text-neutral-950 text-xs sm:text-sm font-bold shadow-[0_2px_8px_rgba(246,189,56,0.3)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             Learn more
-          </a>
+          </button>
         </div>
       </div>
       {/* ============================================================== */}

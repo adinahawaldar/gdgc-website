@@ -41,6 +41,11 @@ export default function LandingPage() {
     scrollToTop()
   }
 
+  const openAbout = () => {
+    setActiveTab('about')
+    scrollToTop()
+  }
+
   const navItems = [
     {
       id: 'home',
@@ -103,18 +108,11 @@ export default function LandingPage() {
       <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none">
         <div className="flex items-center gap-3 sm:gap-3.5">
           {/* Google Developer Groups Angle Brackets Logo */}
-          <svg
-            className="w-10 sm:w-12 h-6 sm:h-7 shrink-0"
-            viewBox="0 0 100 50"
-            fill="none"
-          >
-            {/* Left Bracket < (Red top, Blue bottom) */}
-            <line x1="40" y1="9" x2="18" y2="25" stroke="#EA4335" strokeWidth="8.5" strokeLinecap="round" />
-            <line x1="18" y1="25" x2="40" y2="41" stroke="#4285F4" strokeWidth="8.5" strokeLinecap="round" />
-            {/* Right Bracket > (Green top, Yellow bottom) */}
-            <line x1="60" y1="9" x2="82" y2="25" stroke="#34A853" strokeWidth="8.5" strokeLinecap="round" />
-            <line x1="82" y1="25" x2="60" y2="41" stroke="#FBBC04" strokeWidth="8.5" strokeLinecap="round" />
-          </svg>
+          <img
+            src="/images/gdg-logo.png"
+            alt="Google Developer Groups"
+            className="w-9 sm:w-11 h-9 sm:h-11 object-contain shrink-0"
+          />
 
           {/* Text: Google Developer Groups & On Campus • College Name */}
           <div className="flex flex-col justify-center leading-tight">
@@ -158,7 +156,7 @@ export default function LandingPage() {
               <HeroSection />
             </div>
             <RecentEvents />
-            <AboutVisionMission />
+            <AboutVisionMission onLearnMore={openAbout} />
             <TeamsSection onViewAll={openTeams} />
             <SocialFollowSection />
           </>
