@@ -1,7 +1,7 @@
 /* ==========================================================================
-   GDGC AIKTC - Events Page Styles (Content-First & 3D Depth Carousel)
-   3D perspective depth flow: far back -> approaching -> front -> receding.
-   Features subtle black radial glow fading into the white page.
+   GDGC AIKTC - Events Page Styles (Static Card Grid Layout)
+   Clean, content-first layout with responsive 3-column event grid.
+   Preserves official brand styling, Google colors, and responsive aesthetics.
    ========================================================================== */
 
 :root {
@@ -26,7 +26,7 @@
   --ev-gray-100: #F3F4F6;
   --ev-gray-50: #F9FAFB;
   --ev-border: #E5E7EB;
-  --ev-card-border: #1F2937;
+  --ev-card-border: #E5E7EB;
 }
 
 /* Page Layout Container */
@@ -122,7 +122,7 @@
    ========================================================================== */
 
 .events-toolbar-section {
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .events-toolbar-container {
@@ -247,17 +247,17 @@
 }
 
 /* ==========================================================================
-   3. Section Labels
+   3. Section Containers & Labels
    ========================================================================== */
 
 .events-section-container {
-  margin-bottom: 40px;
+  margin-bottom: 48px;
   position: relative;
 }
 
 .events-section-container.past {
-  margin-top: 10px;
-  padding-top: 24px;
+  margin-top: 16px;
+  padding-top: 28px;
   border-top: 1px dashed var(--ev-border);
 }
 
@@ -267,7 +267,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .events-section-label-left {
@@ -287,16 +287,16 @@
 .events-section-label-dot.red { background-color: var(--ev-red); }
 
 .events-section-heading {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--ev-dark);
   margin: 0;
 }
 
-.events-depth-count-indicator {
-  font-size: 12px;
-  font-weight: 600;
+.events-count-badge {
+  font-size: 11.5px;
+  font-weight: 700;
   color: var(--ev-gray-500);
   background-color: var(--ev-gray-100);
   padding: 3px 10px;
@@ -304,376 +304,100 @@
 }
 
 /* ==========================================================================
-   4. 3D Perspective Depth Carousel (Stage & Positioning)
+   4. Static Event Grid
+   Desktop: 3 equal-width cards per row
+   Tablet: 2 cards per row
+   Mobile: 1 card per row
    ========================================================================== */
 
-.events-depth-stage-wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 590px;
-  background-color: #FFFFFF;
-  border-radius: 24px;
-  overflow: hidden;
-  outline: none;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.events-cards-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
-/* Subtle black radial glow behind the carousel, fading naturally into white */
-.events-depth-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 820px;
-  max-width: 92vw;
-  height: 480px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(15, 23, 42, 0.08) 0%,
-    rgba(15, 23, 42, 0.04) 38%,
-    rgba(15, 23, 42, 0.01) 68%,
-    transparent 85%
-  );
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 3D Perspective Stage */
-.events-depth-stage {
-  position: relative;
-  width: 100%;
-  height: 550px;
-  perspective: 1200px;
-  perspective-origin: center center;
-  transform-style: preserve-3d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-/* Individual Card Slot */
-.events-depth-card-slot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 350px;
-  max-width: 86vw;
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.85s ease,
-              filter 0.85s ease,
-              box-shadow 0.85s ease;
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
-}
-
-/* --------------------------------------------------------------------------
-   Depth Positions: far back -> approaching -> front -> receding
-   -------------------------------------------------------------------------- */
-
-/* Front / Center Position (Largest, sharpest, most prominent) */
-.events-depth-card-slot.depth-center {
-  transform: translate(-50%, -50%) translateX(0px) translateZ(40px) scale(1.04);
-  opacity: 1;
-  z-index: 20;
-  filter: blur(0);
-  pointer-events: auto;
-}
-
-.events-depth-card-slot.depth-center .event-card {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.06);
-  border-color: var(--ev-gray-900);
-}
-
-/* Right (+1): Moving Away */
-.events-depth-card-slot.depth-right-1 {
-  transform: translate(-50%, -50%) translateX(280px) translateZ(-110px) scale(0.86);
-  opacity: 0.72;
-  z-index: 10;
-  filter: blur(0.35px);
-  pointer-events: auto;
-}
-
-.events-depth-card-slot.depth-right-1 .event-card {
-  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.12);
-}
-
-/* Left (-1): Approaching Center */
-.events-depth-card-slot.depth-left-1 {
-  transform: translate(-50%, -50%) translateX(-280px) translateZ(-110px) scale(0.86);
-  opacity: 0.72;
-  z-index: 10;
-  filter: blur(0.35px);
-  pointer-events: auto;
-}
-
-.events-depth-card-slot.depth-left-1 .event-card {
-  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.12);
-}
-
-/* Right (+2): Far Back Receding */
-.events-depth-card-slot.depth-right-2 {
-  transform: translate(-50%, -50%) translateX(460px) translateZ(-240px) scale(0.72);
-  opacity: 0.35;
-  z-index: 5;
-  filter: blur(1.2px);
-  pointer-events: auto;
-}
-
-.events-depth-card-slot.depth-right-2 .event-card {
-  box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08);
-}
-
-/* Left (-2): Far Back Beginning Approach */
-.events-depth-card-slot.depth-left-2 {
-  transform: translate(-50%, -50%) translateX(-460px) translateZ(-240px) scale(0.72);
-  opacity: 0.35;
-  z-index: 5;
-  filter: blur(1.2px);
-  pointer-events: auto;
-}
-
-.events-depth-card-slot.depth-left-2 .event-card {
-  box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08);
-}
-
-/* Hidden in Depth Stack */
-.events-depth-card-slot.depth-hidden {
-  transform: translate(-50%, -50%) translateX(0px) translateZ(-420px) scale(0.5);
-  opacity: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Hover Lift on Front Card */
-.events-depth-card-slot.depth-center:hover .event-card {
-  transform: translateY(-4px);
-  box-shadow: 0 28px 55px -12px rgba(0, 0, 0, 0.26);
-}
-
-/* Flanking Card Clickable Hover Cue */
-.events-depth-card-slot:not(.depth-center):hover {
-  opacity: 0.9;
-  filter: blur(0);
-}
-
-/* Responsive Breakpoints for 3D Perspective */
-@media (max-width: 1024px) {
-  .events-depth-stage-wrapper {
-    min-height: 570px;
-  }
-  .events-depth-stage {
-    height: 530px;
-  }
-  .events-depth-card-slot {
-    width: 330px;
-    max-width: 86vw;
-  }
-  .events-depth-card-slot.depth-right-1 {
-    transform: translate(-50%, -50%) translateX(220px) translateZ(-100px) scale(0.86);
-  }
-  .events-depth-card-slot.depth-left-1 {
-    transform: translate(-50%, -50%) translateX(-220px) translateZ(-100px) scale(0.86);
-  }
-  .events-depth-card-slot.depth-right-2 {
-    transform: translate(-50%, -50%) translateX(380px) translateZ(-220px) scale(0.72);
-  }
-  .events-depth-card-slot.depth-left-2 {
-    transform: translate(-50%, -50%) translateX(-380px) translateZ(-220px) scale(0.72);
+@media (min-width: 640px) {
+  .events-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
-  .events-depth-stage-wrapper {
-    min-height: 540px;
+@media (min-width: 1024px) {
+  .events-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .events-depth-stage {
-    height: 500px;
-  }
-  .events-depth-card-slot {
-    width: 295px;
-    max-width: 84vw;
-  }
-  .events-depth-card-slot.depth-center {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  .events-depth-card-slot.depth-right-1 {
-    transform: translate(-50%, -50%) translateX(160px) scale(0.82);
-    opacity: 0.5;
-  }
-  .events-depth-card-slot.depth-left-1 {
-    transform: translate(-50%, -50%) translateX(-160px) scale(0.82);
-    opacity: 0.5;
-  }
-  .events-depth-card-slot.depth-right-2,
-  .events-depth-card-slot.depth-left-2 {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .events-depth-nav-arrow {
-    width: 36px;
-    height: 36px;
-  }
-  .events-depth-nav-arrow.left {
-    left: 8px;
-  }
-  .events-depth-nav-arrow.right {
-    right: 8px;
-  }
-}
-
-/* Subtle Stage Step Arrows */
-.events-depth-nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.92);
-  border: 1.5px solid var(--ev-border);
-  color: var(--ev-gray-700);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 25;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(4px);
-}
-
-.events-depth-nav-arrow:hover {
-  background-color: #FFFFFF;
-  color: var(--ev-dark);
-  border-color: var(--ev-gray-900);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.events-depth-nav-arrow.left {
-  left: 12px;
-}
-
-.events-depth-nav-arrow.right {
-  right: 12px;
-}
-
-/* Dots Row */
-.events-depth-dots-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.events-depth-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background-color: var(--ev-gray-300);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.25s ease;
-}
-
-.events-depth-dot.active {
-  width: 24px;
-  background-color: var(--ev-blue);
 }
 
 /* ==========================================================================
-   5. Event Card Styles (Shared across 3D Carousel and Past Grid)
+   5. Event Card Styles
+   White cards with subtle borders, rounded corners, and consistent spacing
    ========================================================================== */
 
 .event-card {
   background-color: #FFFFFF;
-  border: 1.5px solid var(--ev-border);
+  border: 1.5px solid var(--ev-card-border);
   border-radius: 18px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  position: relative;
-}
-
-/* Card in 3D Depth Carousel */
-.event-card--depth {
-  height: 490px;
-  width: 100%;
-}
-
-/* Card in Past Archive Grid */
-.event-card.past {
   height: 100%;
-  min-height: 520px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+  border-color: #CBD5E1;
 }
 
 /* Poster / Image Container */
 .event-card-img-wrap {
   position: relative;
   width: 100%;
-  height: 185px;
-  aspect-ratio: 16 / 9;
+  height: 215px;
   overflow: hidden;
-  background-color: var(--ev-gray-100);
+  background-color: #0F172A; /* Rich dark ambient foundation for poster art */
   flex-shrink: 0;
   border-top-left-radius: 16.5px;
   border-top-right-radius: 16.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Ambient Backdrop Glow Layer */
+.event-card-img-blur {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  filter: blur(20px) brightness(0.7);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Foreground Poster Art (Uncropped, crisp, perfectly framed) */
 .event-card-img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
   transition: transform 0.35s ease;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .event-card:hover .event-card-img {
-  transform: scale(1.04);
-}
-
-/* Specific image subject vertical alignment */
-.event-card-img[src*="chapter-kickoff"] {
-  object-position: center 32%;
-}
-.event-card-img[src*="pitch-carnival"] {
-  object-position: center 28%;
-}
-.event-card-img[src*="genai-study-jam.jpg"] {
-  object-position: center 25%;
-}
-.event-card-img[src*="backend-bootcamp"] {
-  object-position: center 35%;
-}
-.event-card-img[src*="web-dev-bootcamp"] {
-  object-position: center 40%;
-}
-.event-card-img[src*="genai-foundations-lab"] {
-  object-position: center 25%;
-}
-.event-card-img[src*="photo-1607252650355"] {
-  object-position: center 25%;
-}
-.event-card-img[src*="photo-1540575467063"] {
-  object-position: center 30%;
-}
-.event-card-img[src*="photo-1531482615713"] {
-  object-position: center 25%;
-}
-.event-card-img[src*="photo-1531403009284"] {
-  object-position: center 22%;
-}
-.event-card-img[src*="photo-1522071820081"] {
-  object-position: center 25%;
+  transform: scale(1.03);
 }
 
 /* Badges over Image */
@@ -687,7 +411,7 @@
   justify-content: space-between;
   gap: 8px;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 .event-card-status-badge {
@@ -697,7 +421,7 @@
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.95);
   color: var(--ev-blue-dark);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(4px);
 }
 
@@ -721,20 +445,20 @@
 
 .event-card-img-caption {
   position: absolute;
-  bottom: 6px;
-  right: 6px;
+  bottom: 8px;
+  right: 8px;
   font-size: 9.5px;
   font-weight: 500;
   color: #FFFFFF;
-  background-color: rgba(17, 24, 39, 0.65);
-  padding: 2px 6px;
+  background-color: rgba(17, 24, 39, 0.7);
+  padding: 2px 7px;
   border-radius: 4px;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
-/* Google-Colored Top Accent Bar */
+/* Google Top Accent Bar */
 .event-card-accent-bar {
   height: 4px;
   width: 100%;
@@ -746,13 +470,12 @@
 .event-card-accent-bar.yellow { background-color: var(--ev-yellow); }
 .event-card-accent-bar.red { background-color: var(--ev-red); }
 
-/* Card Body */
+/* Card Content Body */
 .event-card-body {
   padding: 16px 18px 18px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: hidden;
 }
 
 .event-card-top-info {
@@ -778,15 +501,15 @@
 .event-card-audience-tag {
   font-size: 11px;
   color: var(--ev-gray-500);
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 175px;
 }
 
 .event-card-title {
-  font-size: 16px;
+  font-size: 16.5px;
   font-weight: 800;
   line-height: 1.35;
   letter-spacing: -0.02em;
@@ -810,91 +533,17 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 4.5em;
-}
-
-/* Carousel Card specifics for tight fit inside 490px */
-.event-card--depth .event-card-title {
-  font-size: 15.5px;
-  margin-bottom: 6px;
-  min-height: 2.6em;
-  -webkit-line-clamp: 2;
-}
-
-.event-card--depth .event-card-description {
-  font-size: 12px;
-  line-height: 1.45;
-  margin-bottom: 10px;
-  min-height: 2.9em;
-  -webkit-line-clamp: 2;
-}
-
-/* Schedule & Location Meta Block */
-.event-card-meta-box {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 9px 11px;
-  background-color: var(--ev-gray-50);
-  border-radius: 10px;
-  margin-bottom: 12px;
-  border: 1px solid var(--ev-gray-100);
   flex-shrink: 0;
 }
 
-.event-card--depth .event-card-meta-box {
-  padding: 8px 10px;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-
-.event-card-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 11.5px;
-  font-weight: 500;
-  color: var(--ev-gray-700);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Tag Pills */
-.event-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 12px;
-  min-height: 24px;
-  max-height: 52px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.event-card--depth .event-card-tags {
-  height: 24px;
-  max-height: 24px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.event-card-tag {
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 5px;
-  background-color: var(--ev-gray-100);
-  color: var(--ev-gray-700);
-  white-space: nowrap;
-}
-
-/* Takeaways (for Past Events) */
+/* Session Highlights (Consistent Box) */
 .event-card-takeaways {
   margin-bottom: 12px;
   padding: 10px 12px;
   background-color: var(--ev-gray-50);
   border-radius: 10px;
   min-height: 104px;
+  border: 1px solid var(--ev-gray-100);
   flex-shrink: 0;
 }
 
@@ -921,6 +570,53 @@
   align-items: flex-start;
   gap: 6px;
   line-height: 1.35;
+}
+
+/* Schedule & Location Meta Block */
+.event-card-meta-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 10px;
+  background-color: var(--ev-gray-50);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1px solid var(--ev-gray-100);
+  flex-shrink: 0;
+}
+
+.event-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ev-gray-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tags */
+.event-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+  min-height: 24px;
+  max-height: 52px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.event-card-tag {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background-color: var(--ev-gray-100);
+  color: var(--ev-gray-700);
+  white-space: nowrap;
 }
 
 /* Footer Action */
@@ -969,30 +665,7 @@
 }
 
 /* ==========================================================================
-   6. Static Grid for Past Events
-   ========================================================================== */
-
-.events-cards-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: stretch;
-}
-
-@media (min-width: 640px) {
-  .events-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .events-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* ==========================================================================
-   7. Empty State
+   6. Empty State
    ========================================================================== */
 
 .events-empty-section {
@@ -1037,14 +710,4 @@
 .events-reset-btn:hover {
   background-color: var(--ev-blue);
   color: #FFFFFF;
-}
-
-/* ==========================================================================
-   8. Reduced Motion Accessibility
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .events-depth-card-slot {
-    transition: none !important;
-  }
 }
