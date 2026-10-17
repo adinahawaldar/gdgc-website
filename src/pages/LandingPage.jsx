@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Home,
   Info,
@@ -16,10 +16,29 @@ import FooterSection from '../components/FooterSection'
 import { Events } from '../Events.jsx'
 import { Resources } from '../Resources.jsx'
 import { Teams } from '../Teams.jsx'
+import { useScrollProgress } from '../hooks/useScrollReveal'
+import SplashScreen from '../components/SplashScreen'
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('home')
-  const openTeams = () => { setActiveTab('teams'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const contentRef = useRef(null)
+  const progressRef = useScrollProgress()
+  const openTeams = () => { switchTab('teams') }
+
+  // Smooth tab switching with fade transition
+  const switchTab = (newTab) => {
+    if (newTab === activeTab) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setActiveTab(newTab)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      // Allow DOM to paint then fade in
+      requestAnimationFrame(() => {
+        setIsTransitioning(false)
+      })
+    }, 200)
+  }
 
   const navItems = [
     {
@@ -74,8 +93,15 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
+
+      {/* GDG Iconic 7-Dot Morphing Brackets Loader Animation */}
+      <SplashScreen minDuration={3200} />
+
+      {/* Scroll Progress Bar */}
+      <div ref={progressRef} className="scroll-progress" />
+
       {/* Top Brand Header (Logo & College Name - No Nav links) */}
-      <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none">
+      <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none hero-entrance-1">
         <div className="flex items-center gap-3 sm:gap-3.5">
           {/* Google Developer Groups Angle Brackets Logo */}
           <svg
@@ -106,21 +132,24 @@ export default function LandingPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="w-full flex-1 flex flex-col items-center">
+      <main
+        ref={contentRef}
+        className={`w-full flex-1 flex flex-col items-center transition-opacity duration-200 ease-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
+      >
         {activeTab === 'teams' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4 pb-32 page-enter" key="teams">
             <Teams />
           </div>
         ) : activeTab === 'events' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4 pb-32 page-enter" key="events">
             <Events />
           </div>
         ) : activeTab === 'projects' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4 pb-32 page-enter" key="projects">
             <ProjectsAchievements />
           </div>
         ) : activeTab === 'resources' ? (
-          <div className="w-full pt-4 pb-20">
+          <div className="w-full pt-4 pb-32 page-enter" key="resources">
             <Resources />
           </div>
         ) : (
@@ -142,6 +171,7 @@ export default function LandingPage() {
       <nav
         aria-label="Bottom Navigation"
         className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)]"
+        style={{ animation: 'hero-fade-up 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.9s both' }}
       >
         <div className="relative group p-[2px] rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC05] to-[#34A853] shadow-[0_10px_32px_rgba(32,33,36,0.16),0_2px_10px_rgba(66,133,244,0.18)] hover:shadow-[0_16px_44px_rgba(66,133,244,0.26)] transition-all duration-300">
           <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white text-neutral-800 p-1 sm:p-2 rounded-full backdrop-blur-xl">
@@ -155,21 +185,9 @@ export default function LandingPage() {
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault()
-                    setActiveTab(item.id)
-                    if (item.id === 'home' || item.id === 'about' || item.id === 'projects' || item.id === 'achievements') {
-                      setTimeout(() => {
-                        const target = document.querySelector(item.href)
-                        if (target) {
-                          target.scrollIntoView({ behavior: 'smooth' })
-                        } else {
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      }, 50)
-                    } else {
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
-                    }
+                    switchTab(item.id)
                   }}
-                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2.5 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2.5 rounded-full text-[10px] sm:text-[13px] font-medium tracking-tight transition-all duration-250 whitespace-nowrap cursor-pointer select-none ${
                     isActive
                       ? `${item.activeBg} font-semibold shadow-xs`
                       : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'
@@ -177,8 +195,8 @@ export default function LandingPage() {
                 >
                   <Icon
                     strokeWidth={isActive ? 2.3 : 1.9}
-                    className={`w-4 h-4 sm:w-[17px] sm:h-[17px] transition-colors shrink-0 ${
-                      isActive ? item.activeColor : 'text-neutral-500'
+                    className={`w-4 h-4 sm:w-[17px] sm:h-[17px] transition-all duration-250 shrink-0 ${
+                      isActive ? `${item.activeColor} scale-110` : 'text-neutral-500'
                     }`}
                   />
                   <span className="leading-tight">{item.label}</span>

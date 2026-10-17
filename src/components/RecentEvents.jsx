@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import useScrollReveal from '../hooks/useScrollReveal'
 
 const events = [
   {
@@ -36,14 +37,15 @@ export default function RecentEvents() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
+  const sectionRef = useScrollReveal()
 
-  // Auto transition every 1.8 - 2 seconds
+  // Auto transition every 3.5 seconds (slightly slower for readability)
   useEffect(() => {
     if (isPaused) return
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % events.length)
-    }, 2000)
+    }, 3500)
 
     return () => clearInterval(timer)
   }, [isPaused, currentIndex])
@@ -72,16 +74,16 @@ export default function RecentEvents() {
   }
 
   return (
-    <section id="events" className="w-full py-8 sm:py-12 select-none">
+    <section id="events" className="w-full py-8 sm:py-12 select-none" ref={sectionRef}>
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight mb-4 sm:mb-6">
+        <h2 className="reveal section-heading-accent text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight mb-4 sm:mb-6">
           Recent Events
         </h2>
 
         {/* Carousel Container */}
         <div
-          className="relative w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-neutral-200/80 bg-neutral-900 group"
+          className="reveal reveal-scale relative w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-neutral-200/80 bg-neutral-900 group"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
@@ -94,15 +96,15 @@ export default function RecentEvents() {
             return (
               <div
                 key={event.id}
-                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                  isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                className={`absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                  isActive ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 pointer-events-none scale-105'
                 }`}
               >
                 {/* Image */}
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
                   loading="lazy"
                 />
 
@@ -111,7 +113,7 @@ export default function RecentEvents() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/30" />
 
                 {/* Overlaid Event Title and Badge */}
-                <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 sm:left-8 md:left-10 right-16 sm:right-20 flex flex-col items-start gap-2 sm:gap-2.5 z-20">
+                <div className={`absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 sm:left-8 md:left-10 right-16 sm:right-20 flex flex-col items-start gap-2 sm:gap-2.5 z-20 transition-all duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                   <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white tracking-tight drop-shadow-md line-clamp-2">
                     {event.title}
                   </h3>
@@ -129,7 +131,7 @@ export default function RecentEvents() {
           <button
             onClick={handlePrev}
             aria-label="Previous slide"
-            className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 border border-white/10 hover:scale-105 active:scale-95"
+            className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 border border-white/10 hover:scale-110 active:scale-95 opacity-0 group-hover:opacity-100"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
           </button>
@@ -138,10 +140,18 @@ export default function RecentEvents() {
           <button
             onClick={handleNext}
             aria-label="Next slide"
-            className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 border border-white/10 hover:scale-105 active:scale-95"
+            className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md flex items-center justify-center transition-all duration-200 border border-white/10 hover:scale-110 active:scale-95 opacity-0 group-hover:opacity-100"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
           </button>
+
+          {/* Progress Bar */}
+          <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px] bg-white/10">
+            <div
+              className="h-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#34A853] transition-all duration-500 ease-out"
+              style={{ width: `${((currentIndex + 1) / events.length) * 100}%` }}
+            />
+          </div>
 
           {/* Pagination Dots */}
           <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2">

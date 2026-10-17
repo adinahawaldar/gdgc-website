@@ -20,6 +20,7 @@ import {
   eventCategories,
   upcomingEvents,
   pastEvents,
+  officialChapterUrl,
 } from './events.js';
 import './Events.css';
 
@@ -483,16 +484,13 @@ export const Events = () => {
                         {/* Footer Action */}
                         <div className="event-card-footer">
                           <a
-                            href={item.registrationUrl}
+                            href={item.registrationUrl || officialChapterUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="event-card-btn"
-                            tabIndex={isCenter ? 0 : -1}
+                            aria-label={`Open Chapter Hub for ${item.title}`}
                             onClick={(e) => {
-                              if (!isCenter) {
-                                e.preventDefault();
-                                setActiveIndex(index);
-                              }
+                              e.stopPropagation();
                             }}
                           >
                             <span>Chapter Hub</span>
