@@ -30,16 +30,16 @@ export default function TeamsSection({ onViewAll }) {
                 {data.teams.map((t) => {
                   const lead = t.members[0];
                   return (
-                    // FIX 2: Wrapper to hold the outside tag
-                    <div key={t.id} className="relative mt-3"> 
+                    // Wrapper to hold the outside tag with full height
+                    <div key={t.id} className="relative mt-3 h-full flex flex-col"> 
                       
                       {/* The Tag Floating Outside the Top-Right */}
                       <span className="absolute -top-3 right-2 z-10 bg-neutral-900 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full uppercase tracking-wider shadow-sm whitespace-nowrap">
                         {t.name} Lead
                       </span>
                       
-                      {/* The Card (badge prop removed so it doesn't show inside) */}
-                      <Card m={lead} color={t.color} size="sm" onOpen={setSel} />
+                      {/* The Card */}
+                      <Card m={lead} color={t.color} size="sm" onOpen={setSel} className="h-full" />
                     </div>
                   );
                 })}
