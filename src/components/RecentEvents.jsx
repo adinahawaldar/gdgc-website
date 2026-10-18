@@ -12,17 +12,17 @@ const events = [
   },
   {
     id: 2,
-    title: 'Solution Sprint: Ideation to MVP',
-    category: 'HACKATHON SPRINT',
+    title: 'Pitch Carnival',
+    category: 'Igniting Startup',
     categoryColor: 'bg-[#ea4335]',
     image: '/images/events/pitch-carnival.jpg',
   },
   {
     id: 3,
-    title: 'Gen AI Study Jams',
-    category: 'GEN AI & CLOUD',
+    title: 'Solution Challenge',
+    category: 'Hackathon',
     categoryColor: 'bg-[#fbbc04]',
-    image: '/images/events/genai-study-jam.jpg',
+    image: '/images/events/solution-challenge-banner.jpg',
   },
 ]
 
@@ -93,7 +93,7 @@ export default function RecentEvents() {
                   isActive ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 pointer-events-none scale-105'
                 }`}
               >
-                {/* Image */}
+                {/* Full Box Image edge-to-edge */}
                 <img
                   src={event.image}
                   alt={event.title}
@@ -101,9 +101,9 @@ export default function RecentEvents() {
                   loading="lazy"
                 />
 
-                {/* Gradient Overlays for readable text and cinematic look */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/30" />
+                {/* Cinematic Gradient Overlays for readable text and depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20 pointer-events-none" />
 
                 {/* Overlaid Event Title and Badge */}
                 <div className={`absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 sm:left-8 md:left-10 right-16 sm:right-20 flex flex-col items-start gap-2 sm:gap-2.5 z-20 transition-all duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
