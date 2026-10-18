@@ -1,7 +1,10 @@
 import React from 'react'
 import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
+import useScrollReveal from '../hooks/useScrollReveal'
 
 export default function AboutVisionMission({ onLearnMore }) {
+  const sectionRef = useScrollReveal()
+
   const missionItems = [
     {
       id: 1,

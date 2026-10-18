@@ -2,6 +2,8 @@ import React from 'react'
 import useScrollReveal from '../hooks/useScrollReveal'
 
 export default function FooterSection({ onNavigate }) {
+  const sectionRef = useScrollReveal()
+
   const handleNav = (e, tabId) => {
     e.preventDefault()
     if (onNavigate) {
