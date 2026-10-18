@@ -219,19 +219,11 @@ export default function AboutPage() {
       </div>
 
       <div className="w-full max-w-5xl mx-auto relative z-10">
-        
-        {/* ============================================================== */}
-        {/* VERTICAL CONTINUOUS GOOGLE GRADIENT SPINE LINE                 */}
-        {/* ============================================================== */}
-        <div
-          aria-hidden="true"
-          className="hidden md:block absolute left-1/2 -translate-x-1/2 top-28 bottom-16 w-[3px] bg-gradient-to-b from-[#4285f4] via-[#ea4335] via-[#fbbc05] to-[#34a853] rounded-full pointer-events-none opacity-85 shadow-xs"
-        />
 
         {/* ============================================================== */}
         {/* CENTERED PAGE HEADER WITH GOOGLE COLORED TYPOGRAPHY            */}
         {/* ============================================================== */}
-        <div className="reveal flex flex-col items-center text-center mb-14 sm:mb-20">
+        <div className="reveal flex flex-col items-center text-center mb-12 sm:mb-16">
           
           {/* Google Chapter Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-neutral-300 shadow-xs text-xs font-google font-semibold text-neutral-700 mb-4 select-none">
@@ -268,6 +260,12 @@ export default function AboutPage() {
         {/* ALTERNATING TIMELINE MILESTONES (Google Themed Cards)          */}
         {/* ============================================================== */}
         <div className="flex flex-col space-y-4 sm:space-y-6 relative">
+          {/* VERTICAL CONTINUOUS GOOGLE GRADIENT SPINE LINE (Starts cleanly below the header) */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-8 w-[3px] bg-gradient-to-b from-[#4285f4] via-[#ea4335] via-[#fbbc05] to-[#34a853] rounded-full pointer-events-none opacity-85 shadow-xs"
+          />
+
           {timelineData.map((milestone, index) => (
             <MilestoneRow key={milestone.id} milestone={milestone} index={index} />
           ))}
