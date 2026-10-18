@@ -5,7 +5,6 @@ import {
 } from 'lucide-react'
 import useTeams from './hooks/useTeams'
 import TeamModal from './components/team/TeamModal'
-import FacultyCard from './components/team/FacultyCard'
 import { StateMessage, getStats } from './components/team/TeamsShell'
 import { Photo, Links, PLACEHOLDER, GdgLogo } from './components/team/parts'
 import './Teams.css'
@@ -131,12 +130,6 @@ export const Teams = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Faculty Coordinator (First in roster) */}
-      <section className="my-8 sm:my-10 flex flex-col items-center px-4">
-        <div className="w-full max-w-[270px] sm:max-w-[300px] mx-auto">
-          <FacultyCard faculty={data.facultyCoordinator} onOpen={setSel} />
-        </div>
-      </section>
 
       {/* 4. Organizers spotlight */}
       <section className="teams-featured-section">

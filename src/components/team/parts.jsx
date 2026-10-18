@@ -31,10 +31,17 @@ export function Reveal({ children, delay = 0, className = '' }) {
   const ref = useRef(null)
   const [shown, setShown] = useState(false)
   useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setShown(true)
+      return
+    }
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) { setShown(true); io.disconnect() }
-    }, { threshold: 0.1 })
-    io.observe(ref.current)
+    }, { threshold: 0.05 })
+    io.observe(el)
     return () => io.disconnect()
   }, [])
   return (

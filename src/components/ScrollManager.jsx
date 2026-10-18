@@ -73,8 +73,12 @@ export default function ScrollManager() {
       window.addEventListener('scroll', handleNativeScroll, { passive: true })
     }
 
-    // 2. IntersectionObserver: Reveal elements smoothly without EVER resetting or blurring on scroll down
+    // 2. IntersectionObserver: Reveal elements smoothly with Google Material Motion (Mobile & Desktop)
     const selector = [
+      '.reveal',
+      '.reveal-left',
+      '.reveal-right',
+      '.reveal-scale',
       '.scroll-reveal',
       '.scroll-reveal-card',
       '.teams-card',
@@ -82,13 +86,15 @@ export default function ScrollManager() {
       '.event-card',
       '.resources-card',
       '.about-pillar-card',
+      '.milestone-row',
+      '.achievement-card',
     ].join(', ')
 
     const observerCallback = (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          entry.target.classList.add('revealed')
           entry.target.classList.add('is-in-view')
-          // Once revealed, keep it permanently visible and stop observing
           obs.unobserve(entry.target)
         }
       })
@@ -97,16 +103,23 @@ export default function ScrollManager() {
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
       threshold: 0.05,
-      rootMargin: '0px 0px -20px 0px',
+      rootMargin: '0px 0px -15px 0px',
     })
 
     const attachObservers = () => {
       const elements = document.querySelectorAll(selector)
       elements.forEach((el) => {
-        if (!el.classList.contains('scroll-reveal-target')) {
-          el.classList.add('scroll-reveal-target')
+        if (el.classList.contains('revealed') || el.classList.contains('is-in-view')) {
+          return
         }
-        observer.observe(el)
+        const rect = el.getBoundingClientRect()
+        // If already within viewport on initial load, reveal immediately
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('revealed')
+          el.classList.add('is-in-view')
+        } else {
+          observer.observe(el)
+        }
       })
     }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import useScrollReveal from '../hooks/useScrollReveal'
 
-export default function FooterSection({ onNavigate }) {
+export default function FooterSection({ onNavigate, _isScreenLoaded = true }) {
+  const sectionRef = useScrollReveal({ once: false })
   const handleNav = (e, tabId) => {
     e.preventDefault()
     if (onNavigate) {
@@ -17,42 +18,42 @@ export default function FooterSection({ onNavigate }) {
   }
 
   return (
-    <footer className="w-full bg-white select-none border-t border-neutral-200/80 pt-12 pb-28 sm:pb-32" ref={sectionRef}>
+    <footer className="reveal w-full bg-white select-none border-t border-neutral-200/80 pt-12 pb-28 sm:pb-32" ref={sectionRef}>
       <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16">
         
         {/* ============================================================== */}
         {/* 1. PLAYFUL GOOGLE GEOMETRIC SHAPES (Resting on Divider Line)   */}
         {/* ============================================================== */}
-        <div className="reveal w-full flex items-end justify-between px-1 sm:px-2 overflow-x-auto scrollbar-none pb-0">
+        <div className="reveal stagger-1 w-full flex items-end justify-between px-1 sm:px-2 overflow-x-auto scrollbar-none pb-0">
           
           {/* Left Shapes Cluster: Green Column & Orange/Pink Column */}
           <div className="flex items-end gap-3 sm:gap-5 shrink-0">
             {/* Shape 1: Green Hexagon over Green Rounded Squircle */}
-            <div className="flex flex-col items-center gap-1 group cursor-pointer transition-transform duration-500 hover:-translate-y-2 hover:rotate-3">
+            <div className="footer-shape-1 flex flex-col items-center gap-1 group cursor-pointer transition-transform duration-500 hover:-translate-y-3 hover:scale-110 active:scale-95">
               {/* Hexagon */}
-              <svg className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 text-[#00e676]" viewBox="0 0 100 100" fill="currentColor">
+              <svg className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 text-[#00e676] transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 100 100" fill="currentColor">
                 <polygon points="50 3, 93 27, 93 73, 50 97, 7 73, 7 27" rx="8" />
               </svg>
               {/* Rounded Squircle */}
-              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#00e676] rounded-2xl sm:rounded-3xl shadow-xs" />
+              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#00e676] rounded-2xl sm:rounded-3xl shadow-xs transition-transform duration-300 group-hover:scale-105" />
             </div>
 
             {/* Shape 2: Orange Hexagon over Pink Rounded Squircle */}
-            <div className="flex flex-col items-center gap-1 group cursor-pointer transition-transform duration-500 hover:-translate-y-2 hover:-rotate-3">
+            <div className="footer-shape-2 flex flex-col items-center gap-1 group cursor-pointer transition-transform duration-500 hover:-translate-y-3 hover:-rotate-6 hover:scale-110 active:scale-95">
               {/* Hexagon */}
-              <svg className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 text-[#ff6e40]" viewBox="0 0 100 100" fill="currentColor">
+              <svg className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 text-[#ff6e40] transition-transform duration-300 group-hover:-rotate-12" viewBox="0 0 100 100" fill="currentColor">
                 <polygon points="50 3, 93 27, 93 73, 50 97, 7 73, 7 27" />
               </svg>
               {/* Pink Rounded Squircle */}
-              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#f48fb1] rounded-2xl sm:rounded-3xl shadow-xs" />
+              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#f48fb1] rounded-2xl sm:rounded-3xl shadow-xs transition-transform duration-300 group-hover:scale-105" />
             </div>
           </div>
 
           {/* Right Shapes Cluster: Yellow Clover & Two Blue Circles */}
           <div className="flex items-end gap-2.5 sm:gap-4 shrink-0 ml-6">
             {/* Shape 3: Yellow 4-Petal Clover */}
-            <div className="group cursor-pointer transition-transform duration-500 hover:-translate-y-2 hover:rotate-12">
-              <svg className="w-16 h-16 sm:w-24 md:w-28 sm:h-24 md:h-28 text-[#ffca28]" viewBox="0 0 100 100" fill="currentColor">
+            <div className="footer-shape-3 group cursor-pointer transition-transform duration-500 hover:-translate-y-3 hover:scale-110 active:scale-95">
+              <svg className="w-16 h-16 sm:w-24 md:w-28 sm:h-24 md:h-28 text-[#ffca28] transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 100 100" fill="currentColor">
                 <circle cx="32" cy="50" r="22" />
                 <circle cx="68" cy="50" r="22" />
                 <circle cx="50" cy="32" r="22" />
@@ -62,9 +63,9 @@ export default function FooterSection({ onNavigate }) {
             </div>
 
             {/* Shape 4 & 5: Two Tangent Google Blue Circles */}
-            <div className="flex items-end group cursor-pointer transition-transform duration-500 hover:-translate-y-2">
-              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#4285f4] rounded-full shadow-xs transition-transform duration-500 group-hover:scale-95" />
-              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#4285f4] rounded-full shadow-xs -ml-0.5 sm:-ml-1 transition-transform duration-500 group-hover:scale-105" />
+            <div className="footer-shape-4 flex items-end group cursor-pointer transition-transform duration-500 hover:-translate-y-3 active:scale-95">
+              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#4285f4] rounded-full shadow-xs transition-transform duration-500 group-hover:scale-105 group-hover:-translate-x-1" />
+              <div className="w-14 h-14 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-[#4285f4] rounded-full shadow-xs -ml-0.5 sm:-ml-1 transition-transform duration-500 group-hover:scale-110 group-hover:translate-x-1" />
             </div>
           </div>
 
@@ -76,10 +77,10 @@ export default function FooterSection({ onNavigate }) {
         {/* ============================================================== */}
         {/* 2. ICONIC BIG STATEMENT HEADLINE (Google Themed Colors)        */}
         {/* ============================================================== */}
-        <div className="reveal w-full my-3 sm:my-5 flex items-center justify-start overflow-visible">
+        <div className="reveal stagger-2 w-full my-3 sm:my-5 flex items-center justify-start overflow-visible">
           <svg
             viewBox="0 0 628 82"
-            className="w-full h-auto select-none overflow-visible"
+            className="footer-headline-svg w-full h-auto select-none overflow-visible"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -111,7 +112,7 @@ export default function FooterSection({ onNavigate }) {
         {/* ============================================================== */}
         {/* 3. BASE FOOTER: COLLEGE NAME & NAVBAR LINKS                   */}
         {/* ============================================================== */}
-        <div className="reveal w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-[13px] text-neutral-600 font-medium px-1">
+        <div className="reveal stagger-3 w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-[13px] text-neutral-600 font-medium px-1">
           <div className="flex items-center">
             <span className="text-xs sm:text-[13px] font-medium text-neutral-600">
               Anjuman-I-Islam's Kalsekar Technical Campus

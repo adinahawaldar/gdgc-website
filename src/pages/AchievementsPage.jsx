@@ -57,10 +57,10 @@ const achievementsData = [
 
 export default function AchievementsPage() {
   return (
-    <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-6 pb-36 font-sans select-none text-neutral-900">
+    <div className="page-fade-enter w-full px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-6 pb-36 font-sans select-none text-neutral-900">
       {/* Top Left Title (Matching Reference Screenshot) */}
-      <div className="mb-10 sm:mb-14">
-        <h3 className="text-base sm:text-lg font-bold tracking-tight text-neutral-900 leading-tight">
+      <div className="reveal mb-10 sm:mb-14">
+        <h3 className="section-heading-accent text-base sm:text-lg font-bold tracking-tight text-neutral-900 leading-tight">
           Chapter Honors
         </h3>
         <p className="text-base sm:text-lg font-bold tracking-tight text-neutral-900 leading-tight">
@@ -74,7 +74,7 @@ export default function AchievementsPage() {
           const numberLabel = String(index + 1).padStart(2, '0')
 
           return (
-            <article key={item.id} className="w-full py-10 sm:py-14 transition-all">
+            <article key={item.id} className={`achievement-card reveal stagger-${(index % 4) + 1} w-full py-10 sm:py-14 transition-all`}>
               {/* Header Row: Number + Heading */}
               <div className="w-full flex items-center gap-6 sm:gap-10">
                 <span className="text-3xl sm:text-4xl md:text-5xl font-light text-neutral-900 shrink-0">

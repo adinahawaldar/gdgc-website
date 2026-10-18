@@ -98,11 +98,11 @@ function MilestoneRow({ milestone, index }) {
   )
 
   return (
-    <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center py-7 sm:py-12">
+    <div className={`milestone-row reveal ${isEven ? 'reveal-left' : 'reveal-right'} relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center py-7 sm:py-12`}>
       {/* Center node dot on the timeline spine */}
       <div
         aria-hidden="true"
-        className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-[#1a73e8] shadow-xs z-10 items-center justify-center"
+        className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-[#1a73e8] shadow-xs z-10 items-center justify-center transition-transform duration-300 hover:scale-125"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-[#1a73e8]" />
       </div>
@@ -133,7 +133,7 @@ function MilestoneRow({ milestone, index }) {
 
 export default function AboutPage() {
   return (
-    <div className="w-full min-h-screen bg-white text-neutral-900 py-12 sm:py-20 px-4 sm:px-6 md:px-10 selection:bg-[#8bd3c7] selection:text-[#142d20]">
+    <div className="page-fade-enter w-full min-h-screen bg-white text-neutral-900 py-12 sm:py-20 px-4 sm:px-6 md:px-10 selection:bg-[#8bd3c7] selection:text-[#142d20]">
       <div className="w-full max-w-5xl mx-auto relative">
         {/* ============================================================== */}
         {/* VERTICAL CONTINUOUS SPINE LINE                                 */}
@@ -146,7 +146,7 @@ export default function AboutPage() {
         {/* ============================================================== */}
         {/* CENTERED PAGE HEADER                                           */}
         {/* ============================================================== */}
-        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
+        <div className="reveal flex flex-col items-center text-center mb-12 sm:mb-16">
           <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#1a73e8] mb-2 font-mono">
             COMMUNITY TIMELINE
           </span>

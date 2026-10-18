@@ -195,7 +195,7 @@ export default function SocialFollowSection() {
   return (
     <section
       id="social"
-      className="w-full bg-white py-10 sm:py-14 select-none overflow-hidden border-t border-neutral-100"
+      className="reveal w-full bg-white py-10 sm:py-14 select-none overflow-hidden border-t border-neutral-100"
       ref={sectionRef}
     >
       {/* Compact Header Container flanked by Doodle Phone Mockups */}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 
 /**
  * useScrollReveal — Shared hook for scroll-triggered reveal animations.
@@ -15,14 +15,15 @@ import { useEffect, useRef, useCallback } from 'react'
  *   </div>
  * 
  * Options:
- *   threshold - visibility threshold (default: 0.12)
- *   rootMargin - observer root margin (default: '0px 0px -40px 0px')
+ *   threshold - visibility threshold (default: 0.05)
+ *   rootMargin - observer root margin (default: '0px 0px -15px 0px')
  *   selector - CSS selector for elements to reveal (default: '.reveal, .reveal-left, .reveal-right, .reveal-scale')
  */
 export default function useScrollReveal({
-  threshold = 0.12,
-  rootMargin = '0px 0px -40px 0px',
-  selector = '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+  threshold = 0.05,
+  rootMargin = '0px 0px -15px 0px',
+  selector = '.reveal, .reveal-left, .reveal-right, .reveal-scale',
+  once = true,
 } = {}) {
   const containerRef = useRef(null)
 
@@ -42,18 +43,45 @@ export default function useScrollReveal({
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed')
-            observer.unobserve(entry.target)
+            if (once) {
+              observer.unobserve(entry.target)
+            }
+          } else if (!once) {
+            entry.target.classList.remove('revealed')
           }
         })
       },
       { threshold, rootMargin }
     )
 
-    const elements = container.querySelectorAll(selector)
-    elements.forEach(el => observer.observe(el))
+    const elements = Array.from(container.querySelectorAll(selector))
+    if (container.matches(selector)) {
+      elements.unshift(container)
+    }
+    const checkInitialReveal = () => {
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect()
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('revealed')
+        }
+      })
+    }
+
+    if (document.documentElement.dataset.screenLoaded === 'true') {
+      checkInitialReveal()
+    } else {
+      const handleLoaded = () => {
+        setTimeout(checkInitialReveal, 60)
+      }
+      window.addEventListener('gdgc-screen-loaded', handleLoaded, { once: true })
+    }
+
+    elements.forEach(el => {
+      observer.observe(el)
+    })
 
     return () => observer.disconnect()
-  }, [threshold, rootMargin, selector])
+  }, [threshold, rootMargin, selector, once])
 
   return containerRef
 }

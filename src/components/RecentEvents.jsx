@@ -67,7 +67,7 @@ export default function RecentEvents() {
   }
 
   return (
-    <section id="events" className="w-full pt-4 pb-8 sm:py-12 select-none">
+    <section id="events" className="reveal w-full pt-4 pb-8 sm:py-12 select-none" ref={sectionRef}>
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <h2 className="reveal section-heading-accent text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight mb-4 sm:mb-6">

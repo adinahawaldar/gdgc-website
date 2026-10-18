@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   ArrowRight,
   ExternalLink,
@@ -14,8 +14,61 @@ const HERO_STATS = [
   { value: '90%', label: 'Member Retention Rate' },
 ]
 
-export default function HeroSection() {
+export default function HeroSection({ isScreenLoaded = true }) {
   const [cmdCopied, setCmdCopied] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isEntered, setIsEntered] = useState(false)
+
+  useEffect(() => {
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY || 0)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1
+      const y = (e.clientY / window.innerHeight) * 2 - 1
+      setMousePos({ x, y })
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+
+    // Entrance trigger: fires smoothly right as screen loads
+    const triggerEntrance = () => {
+      requestAnimationFrame(() => {
+        setIsEntered(true)
+      })
+    }
+
+    if (document.documentElement.dataset.screenLoaded === 'true' || isScreenLoaded) {
+      const timer = setTimeout(triggerEntrance, 50)
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('mousemove', handleMouseMove)
+        clearTimeout(timer)
+      }
+    }
+
+    const handleScreenLoaded = () => {
+      setTimeout(triggerEntrance, 60)
+    }
+
+    window.addEventListener('gdgc-screen-loaded', handleScreenLoaded)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('gdgc-screen-loaded', handleScreenLoaded)
+    }
+  }, [isScreenLoaded])
 
   const handleCopyCommand = () => {
     setCmdCopied(true)
@@ -23,7 +76,14 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative w-full sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-start sm:justify-between px-4 sm:px-6 lg:px-8 pt-20 sm:pt-14 pb-0 select-none overflow-hidden bg-white">
+    <section className={`relative w-full sm:min-h-[calc(100vh-5rem)] flex flex-col items-center justify-start sm:justify-between px-4 sm:px-6 lg:px-8 pt-20 sm:pt-14 pb-0 select-none overflow-hidden bg-white transition-opacity duration-700 ${isEntered ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Mobile Floating Ambient Google Spheres (Alive & dynamic on small screens) */}
+      <div className="md:hidden absolute inset-0 pointer-events-none select-none z-0 overflow-hidden" aria-hidden="true">
+        <div className="mobile-orb-blue absolute top-12 left-5 w-7 h-7 rounded-full bg-[#4285f4] opacity-80 shadow-[0_4px_16px_rgba(66,133,244,0.35)]" />
+        <div className="mobile-orb-red absolute top-16 right-6 w-5 h-5 rounded-full bg-[#ea4335] opacity-85 shadow-[0_4px_12px_rgba(234,67,53,0.35)]" />
+        <div className="mobile-orb-yellow absolute bottom-24 left-6 w-6 h-6 rounded-full bg-[#fbbc05] opacity-90 shadow-[0_4px_14px_rgba(251,188,4,0.35)]" />
+        <div className="mobile-orb-green absolute bottom-28 right-8 w-6 h-6 rounded-full bg-[#34a853] opacity-85 shadow-[0_4px_14px_rgba(52,168,83,0.35)]" />
+      </div>
       {/* ============================================================== */}
       {/* GOOGLE CONSTELLATION & FLOATING SPHERES (Full Hero, Both Sides) */}
       {/* ============================================================== */}
@@ -45,7 +105,12 @@ export default function HeroSection() {
         {/* ------------------------------------------------------------ */}
         {/* LEFT FLANK CONSTELLATION & SPHERES (Shifted Far Left)       */}
         {/* ------------------------------------------------------------ */}
-        <g className="transition-all duration-500">
+        <g
+          className="transition-transform duration-300 ease-out"
+          style={{
+            transform: `translate3d(${mousePos.x * 14}px, ${scrollY * 0.14 + mousePos.y * 10}px, 0)`,
+          }}
+        >
           {/* Constellation Network Lines (Left) */}
           <path
             d="M 40 160 L 110 90 L 160 190 L 80 330 L 30 480 L 120 460 L 170 560"
@@ -115,7 +180,12 @@ export default function HeroSection() {
         {/* ------------------------------------------------------------ */}
         {/* RIGHT FLANK CONSTELLATION & SPHERES (Shifted Far Right)      */}
         {/* ------------------------------------------------------------ */}
-        <g className="transition-all duration-500">
+        <g
+          className="transition-transform duration-300 ease-out"
+          style={{
+            transform: `translate3d(${mousePos.x * -14}px, ${scrollY * -0.12 + mousePos.y * -10}px, 0)`,
+          }}
+        >
           {/* Constellation Network Lines (Right) */}
           <path
             d="M 1435 110 L 1370 70 L 1320 150 L 1395 240 L 1435 350 L 1380 350 L 1320 500 L 1385 550"
@@ -186,7 +256,7 @@ export default function HeroSection() {
       <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center z-10">
 
         {/* Ambient Google Colors Glow / Aura behind Title (Subtle, light shade on mobile) */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-72 sm:h-96 pointer-events-none -z-10 select-none opacity-45 sm:opacity-100 transition-opacity">
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-72 sm:h-96 pointer-events-none -z-10 select-none transition-opacity duration-1000 ${isEntered ? 'opacity-45 sm:opacity-100' : 'opacity-0'}`}>
           {/* Top-left Google Blue Glow */}
           <div className="absolute -top-10 -left-10 w-52 sm:w-80 h-52 sm:h-80 rounded-full bg-[#4285f4]/10 sm:bg-[#4285f4]/20 filter blur-[65px] sm:blur-[80px] animate-pulse" style={{ animationDuration: '6s' }} />
           {/* Top-right Google Red Glow */}
@@ -205,7 +275,7 @@ export default function HeroSection() {
         <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-2.5 sm:space-y-3.5 md:space-y-4 font-google">
 
           {/* LINE 1: "Google" + [Minimal Interactive Green Circle] */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+          <div className={`${isEntered ? 'hero-entrance-1' : 'opacity-0'} flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none`}>
             <span className="tracking-tight inline-flex select-none">
               <span className="text-[#4285f4] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">G</span>
               <span className="text-[#ea4335] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">o</span>
@@ -231,7 +301,7 @@ export default function HeroSection() {
           </div>
 
           {/* LINE 2: "Developer Group" with authentic Google color shades */}
-          <div className="relative flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+          <div className={`${isEntered ? 'hero-entrance-2' : 'opacity-0'} relative flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none`}>
             <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">
               Developer
             </span>
@@ -241,7 +311,7 @@ export default function HeroSection() {
           </div>
 
           {/* LINE 3: [Static GDGC Pill badge] + "on Campus" with authentic Google colors */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+          <div className={`${isEntered ? 'hero-entrance-3' : 'opacity-0'} flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none`}>
             
             {/* Widget: Static Google Red Pill badge */}
             <div
@@ -269,12 +339,12 @@ export default function HeroSection() {
         {/* SUBTITLE & CTA BUTTONS                                         */}
         {/* ============================================================== */}
         <div className="mt-4 sm:mt-6 md:mt-7 max-w-3xl mx-auto text-center px-4">
-          <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
+          <p className={`${isEntered ? 'hero-entrance-subtitle' : 'opacity-0'} text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto`}>
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
 
           {/* CTA Pill Buttons */}
-          <div className="hero-entrance-cta mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className={`${isEntered ? 'hero-entrance-cta' : 'opacity-0'} mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3`}>
             <a
               href="#about"
               className="btn-primary inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide cursor-pointer shadow-[0_4px_14px_rgba(0,0,0,0.18)]"
@@ -296,7 +366,7 @@ export default function HeroSection() {
       {/* ============================================================== */}
       {/* CONTINUOUS MOVING STATS TICKER                                 */}
       {/* ============================================================== */}
-      <div className="mt-10 sm:mt-16 relative z-10 -mx-4 sm:-mx-6 lg:-mx-8 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)]">
+      <div className={`${isEntered ? 'hero-entrance-ticker' : 'opacity-0'} mt-10 sm:mt-16 relative z-10 -mx-4 sm:-mx-6 lg:-mx-8 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)]`}>
         <div className="w-full border-y border-neutral-100 bg-neutral-50/60 backdrop-blur-xs py-3 sm:py-3.5 overflow-hidden">
           <div className="mask-horizontal w-full overflow-hidden">
             <div className="animate-marquee flex items-center whitespace-nowrap will-change-transform">

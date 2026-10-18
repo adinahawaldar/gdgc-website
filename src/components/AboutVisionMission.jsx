@@ -1,7 +1,10 @@
 import React from 'react'
 import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
+import useScrollReveal from '../hooks/useScrollReveal'
 
 export default function AboutVisionMission({ onLearnMore }) {
+  const sectionRef = useScrollReveal()
+
   const missionItems = [
     {
       id: 1,
@@ -74,7 +77,7 @@ export default function AboutVisionMission({ onLearnMore }) {
   ]
 
   return (
-    <section id="about" className="w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none" ref={sectionRef}>
+    <section id="about" className="reveal w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none" ref={sectionRef}>
       
       {/* ============================================================== */}
       {/* 1. ABOUT & QUOTE BANNER WITH STYLIZED YELLOW CURLY BRACKETS     */}
@@ -182,12 +185,12 @@ export default function AboutVisionMission({ onLearnMore }) {
           </div>
 
           <div className="grid gap-3.5 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4 w-full">
-            {pillars.map((pillar) => {
+            {pillars.map((pillar, idx) => {
               const Icon = pillar.icon
               return (
                 <article
                   key={pillar.title}
-                  className={`group relative flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 ${pillar.borderColor} ${pillar.glowColor} cursor-pointer active:scale-[0.99]`}
+                  className={`reveal stagger-${idx + 1} group relative flex flex-col rounded-2xl sm:rounded-3xl border border-neutral-200/90 bg-white p-4 sm:p-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1.5 ${pillar.borderColor} ${pillar.glowColor} cursor-pointer active:scale-[0.98]`}
                 >
                   {/* Header: Pill Badge + Google Icon */}
                   <div className="flex items-center justify-between gap-3 mb-3">

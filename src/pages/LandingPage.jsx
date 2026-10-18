@@ -13,13 +13,14 @@ import AboutVisionMission from '../components/AboutVisionMission'
 import TeamsSection from '../components/TeamsSection'
 import SocialFollowSection from '../components/SocialFollowSection'
 import FooterSection from '../components/FooterSection'
+import MagazineSection from '../components/MagazineSection'
 import { Events } from '../Events.jsx'
 import { Resources } from '../Resources.jsx'
 import { Teams } from '../Teams.jsx'
 import AboutPage from './AboutPage'
 import AchievementsPage from './AchievementsPage'
 
-export default function LandingPage() {
+export default function LandingPage({ isScreenLoaded = true }) {
   const [activeTab, setActiveTab] = useState('home')
 
   const scrollToTop = () => {
@@ -121,39 +122,40 @@ export default function LandingPage() {
       {/* Main Content Area */}
       <main className="w-full flex-1 flex flex-col items-center">
         {activeTab === 'about' ? (
-          <div className="w-full pt-4">
+          <div key="about" className="page-fade-enter w-full pt-4">
             <AboutPage />
           </div>
         ) : activeTab === 'teams' ? (
-          <div className="w-full pt-4">
+          <div key="teams" className="page-fade-enter w-full pt-4">
             <Teams />
           </div>
         ) : activeTab === 'events' ? (
-          <div className="w-full pt-4">
+          <div key="events" className="page-fade-enter w-full pt-4">
             <Events />
           </div>
         ) : activeTab === 'achievements' ? (
-          <div className="w-full pt-4">
+          <div key="achievements" className="page-fade-enter w-full pt-4">
             <AchievementsPage />
           </div>
         ) : activeTab === 'resources' ? (
-          <div className="w-full pt-4">
+          <div key="resources" className="page-fade-enter w-full pt-4">
             <Resources />
           </div>
         ) : (
-          <>
+          <div key="home" className="page-fade-enter w-full flex flex-col items-center">
             <div id="home" className="w-full flex justify-center">
-              <HeroSection />
+              <HeroSection isScreenLoaded={isScreenLoaded} />
             </div>
             <RecentEvents />
             <AboutVisionMission onLearnMore={openAbout} />
+            <MagazineSection />
             <TeamsSection onViewAll={openTeams} />
             <SocialFollowSection />
-          </>
+          </div>
         )}
 
         {/* Global Footer rendered on every page bottom */}
-        <FooterSection onNavigate={handleTabChange} />
+        <FooterSection onNavigate={handleTabChange} isScreenLoaded={isScreenLoaded} />
       </main>
 
       {/* Floating Bottom Navigation (Google Themed Dock) */}
@@ -180,10 +182,10 @@ export default function LandingPage() {
                       scrollToTop()
                     }
                   }}
-                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-1.5 sm:px-3.5 py-2 sm:py-2 rounded-full text-[8.5px] sm:text-[13px] font-medium tracking-tight transition-all duration-200 whitespace-nowrap cursor-pointer select-none shrink-0 min-w-[39px] sm:min-w-0 ${
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 px-1.5 sm:px-3.5 py-2 sm:py-2 rounded-full text-[8.5px] sm:text-[13px] font-medium tracking-tight transition-all duration-300 ease-out whitespace-nowrap cursor-pointer select-none shrink-0 min-w-[39px] sm:min-w-0 ${
                     isActive
-                      ? `${item.activeBg} font-semibold shadow-xs`
-                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-95'
+                      ? `${item.activeBg} font-semibold shadow-xs scale-[1.04]`
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/80 active:scale-90'
                   }`}
                 >
                   <Icon
