@@ -1,7 +1,7 @@
 import React from 'react'
 import { BookOpen, Code2, Users, Rocket } from 'lucide-react'
 
-export default function AboutVisionMission() {
+export default function AboutVisionMission({ onLearnMore }) {
   const missionItems = [
     {
       id: 1,
@@ -74,12 +74,12 @@ export default function AboutVisionMission() {
   ]
 
   return (
-    <section id="about" className="w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none">
+    <section id="about" className="w-full py-12 sm:py-20 space-y-16 sm:space-y-24 select-none" ref={sectionRef}>
       
       {/* ============================================================== */}
       {/* 1. ABOUT & QUOTE BANNER WITH STYLIZED YELLOW CURLY BRACKETS     */}
       {/* ============================================================== */}
-      <div className="w-full px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+      <div className="reveal w-full px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
         {/* Left: Curly brackets with statement */}
         <div className="flex-1 flex items-center gap-2 sm:gap-6 w-full">
           {/* Left Yellow Curly Bracket */}
@@ -140,12 +140,23 @@ export default function AboutVisionMission() {
           <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-medium">
             Develop leadership skills, gain recognition, expand your network and collaborate with other passionate developers at Anjuman-I-Islam's Kalsekar Technical Campus.
           </p>
-          <a
-            href="#vision"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault()
+              if (onLearnMore) {
+                onLearnMore()
+              } else {
+                const target = document.querySelector('#about')
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' })
+                }
+              }
+            }}
             className="inline-flex items-center justify-center px-7 py-2.5 rounded-full bg-[#f6bd38] border-2 border-neutral-950 text-neutral-950 text-xs sm:text-sm font-bold shadow-[0_2px_8px_rgba(246,189,56,0.3)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             Learn more
-          </a>
+          </button>
         </div>
       </div>
       {/* ============================================================== */}
@@ -203,7 +214,7 @@ export default function AboutVisionMission() {
       {/* ============================================================== */}
       {/* 2. VISION TRACK (Responsive Layout: Clean card on Mobile, Track on Desktop) */}
       {/* ============================================================== */}
-      <div id="vision" className="w-full border-t border-b border-black bg-white py-6 md:py-0 select-none overflow-hidden">
+      <div id="vision" className="reveal-scale w-full border-t border-b border-black bg-white py-6 md:py-0 select-none overflow-hidden">
         <div className="w-full md:h-[220px] lg:h-[250px] flex flex-col md:flex-row items-center justify-center md:justify-between relative px-4 sm:px-6 lg:px-8 gap-4 md:gap-0">
           
           {/* Mobile Badge: Google Brackets + "Vision" Heading */}
@@ -262,9 +273,9 @@ export default function AboutVisionMission() {
       <div id="mission" className="w-full px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start justify-between gap-6 md:gap-10 lg:gap-14 pt-2">
         
         {/* Left Column: Heading */}
-        <div className="w-full md:w-auto md:min-w-[220px] lg:min-w-[260px] shrink-0 flex flex-col justify-start">
+        <div className="reveal-left w-full md:w-auto md:min-w-[220px] lg:min-w-[260px] shrink-0 flex flex-col justify-start">
           <div>
-            <h3 className="text-3xl sm:text-4xl font-black text-neutral-950 tracking-tight">
+            <h3 className="section-heading-accent text-3xl sm:text-4xl font-black text-neutral-950 tracking-tight">
               Mission
             </h3>
             <p className="mt-2 text-sm text-neutral-500 font-semibold tracking-wide">
@@ -275,14 +286,14 @@ export default function AboutVisionMission() {
 
         {/* Right Column: 5 Stacked Mission Pills (Full Width) */}
         <div className="flex-1 w-full flex flex-col gap-3.5">
-          {missionItems.map((item) => (
+          {missionItems.map((item, idx) => (
             <div
               key={item.id}
-              className="w-full border-2 border-neutral-900 rounded-2xl sm:rounded-full py-2.5 px-3.5 sm:px-4 flex items-center gap-3.5 sm:gap-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+              className={`reveal stagger-${idx + 1} w-full border-2 border-neutral-900 rounded-2xl sm:rounded-full py-2.5 px-3.5 sm:px-4 flex items-center gap-3.5 sm:gap-4 bg-white shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5`}
             >
               {/* Numbered Circle with Brand Color */}
               <div
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full ${item.color} text-white font-extrabold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-sm`}
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full ${item.color} text-white font-extrabold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 hover:scale-110`}
               >
                 {item.id}
               </div>

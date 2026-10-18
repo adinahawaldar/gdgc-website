@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import {
   ArrowRight,
-  Command,
   ExternalLink,
-  Users,
-  Code2,
-  Check
 } from 'lucide-react'
 
 const HERO_STATS = [
@@ -19,8 +15,6 @@ const HERO_STATS = [
 ]
 
 export default function HeroSection() {
-  const [toggleActive, setToggleActive] = useState(false)
-  const [sliderPos, setSliderPos] = useState(50)
   const [cmdCopied, setCmdCopied] = useState(false)
 
   const handleCopyCommand = () => {
@@ -35,7 +29,7 @@ export default function HeroSection() {
       {/* ============================================================== */}
       {/* SVG Constellation Network & Solid Colored Balls (Hidden on mobile view) */}
       <svg
-        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none z-0"
+        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none z-0 hero-constellation"
         viewBox="0 0 1440 640"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +97,7 @@ export default function HeroSection() {
             r="30"
             fill="#fbbc04"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-slow"
           />
           {/* Green Ball */}
           <circle
@@ -112,10 +106,10 @@ export default function HeroSection() {
             r="22"
             fill="#34a853"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-medium"
           />
           {/* Small Green Dot */}
-          <circle cx="190" cy="500" r="12" fill="#34a853" filter="url(#ball-shadow)" />
+          <circle cx="190" cy="500" r="12" fill="#34a853" filter="url(#ball-shadow)" className="float-fast" />
         </g>
 
         {/* ------------------------------------------------------------ */}
@@ -166,7 +160,7 @@ export default function HeroSection() {
             r="32"
             fill="#fbbc04"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-medium"
           />
           <circle
             cx="1230"
@@ -174,7 +168,7 @@ export default function HeroSection() {
             r="14"
             fill="#ea4335"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-fast"
           />
           <circle
             cx="1380"
@@ -182,107 +176,114 @@ export default function HeroSection() {
             r="28"
             fill="#4285f4"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-slow"
           />
-          <circle cx="1320" cy="500" r="11" fill="#fbbc04" filter="url(#ball-shadow)" />
+          <circle cx="1320" cy="500" r="11" fill="#fbbc04" filter="url(#ball-shadow)" className="float-medium" />
         </g>
       </svg>
 
       {/* Main Canvas Container */}
       <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center z-10">
 
-        {/* ============================================================== */}
-        {/* BIG INTERACTIVE HEADLINE (Product Sans typography)              */}
-        {/* ============================================================== */}
-        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-3 sm:space-y-4 md:space-y-5 font-google">
+        {/* Ambient Google Colors Glow / Aura behind Title (Subtle, light shade on mobile) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-72 sm:h-96 pointer-events-none -z-10 select-none opacity-45 sm:opacity-100 transition-opacity">
+          {/* Top-left Google Blue Glow */}
+          <div className="absolute -top-10 -left-10 w-52 sm:w-80 h-52 sm:h-80 rounded-full bg-[#4285f4]/10 sm:bg-[#4285f4]/20 filter blur-[65px] sm:blur-[80px] animate-pulse" style={{ animationDuration: '6s' }} />
+          {/* Top-right Google Red Glow */}
+          <div className="absolute -top-8 -right-8 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-[#ea4335]/9 sm:bg-[#ea4335]/18 filter blur-[65px] sm:blur-[85px] animate-pulse" style={{ animationDuration: '7s', animationDelay: '1s' }} />
+          {/* Bottom-right Google Yellow Glow */}
+          <div className="absolute -bottom-8 -right-6 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-[#fbbc05]/10 sm:bg-[#fbbc05]/22 filter blur-[60px] sm:blur-[75px] animate-pulse" style={{ animationDuration: '8s', animationDelay: '2s' }} />
+          {/* Bottom-left Google Green Glow */}
+          <div className="absolute -bottom-10 -left-8 w-48 sm:w-72 h-48 sm:h-72 rounded-full bg-[#34a853]/10 sm:bg-[#34a853]/20 filter blur-[65px] sm:blur-[80px] animate-pulse" style={{ animationDuration: '6.5s', animationDelay: '3s' }} />
+          {/* Center Subtle Multi-color Mesh */}
+          <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-blue-400/8 via-amber-300/8 to-emerald-400/8 filter blur-[45px] opacity-40 sm:opacity-80" />
+        </div>
 
-          {/* LINE 1: "Google" + [Minimal Green circle] + [Minimal Blue switch] */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
-            <span className="tracking-tight hover:opacity-95 transition-opacity inline-flex select-none">
-              <span className="text-[#4285f4]">G</span>
-              <span className="text-[#ea4335]">o</span>
-              <span className="text-[#fbbc05]">o</span>
-              <span className="text-[#4285f4]">g</span>
-              <span className="text-[#34a853]">l</span>
-              <span className="text-[#ea4335]">e</span>
+        {/* ============================================================== */}
+        {/* BIG INTERACTIVE HEADLINE (Outfit / Product Sans typography)      */}
+        {/* ============================================================== */}
+        <div className="w-full flex flex-col items-center text-center font-bold tracking-tight text-[#111111] leading-none space-y-2.5 sm:space-y-3.5 md:space-y-4 font-google">
+
+          {/* LINE 1: "Google" + [Minimal Interactive Green Circle] */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+            <span className="tracking-tight inline-flex select-none">
+              <span className="text-[#4285f4] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">G</span>
+              <span className="text-[#ea4335] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">o</span>
+              <span className="text-[#fbbc05] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">o</span>
+              <span className="text-[#4285f4] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">g</span>
+              <span className="text-[#34a853] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">l</span>
+              <span className="text-[#ea4335] inline-block hover:-translate-y-0.5 hover:scale-105 transition-transform duration-200 cursor-default">e</span>
             </span>
 
-            {/* Widget 1: Minimal Google Green Circle with Arrow */}
-            <div
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-xs hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
-              title="Next Step"
+            {/* Widget: Minimal Google Green Circle with Arrow */}
+            <a
+              href="#recent-events"
+              onClick={(e) => {
+                e.preventDefault()
+                const el = document.getElementById('recent-events')
+                if (el) el.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-[#e6f4ea] border border-[#ceead6] shadow-[0_4px_16px_rgba(52,168,83,0.22)] hover:shadow-[0_8px_24px_rgba(52,168,83,0.32)] hover:scale-105 active:scale-95 transition-all cursor-pointer group shrink-0"
+              title="Explore Chapter Events"
             >
-              <ArrowRight className="w-4.5 h-4.5 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
-            </div>
-
-            {/* Widget 2: Minimal Google Blue Switch */}
-            <div
-              onClick={() => setToggleActive(!toggleActive)}
-              className="inline-flex items-center h-9 sm:h-12 md:h-14 w-22 sm:w-28 md:w-32 rounded-full p-1 sm:p-1.5 cursor-pointer shadow-xs bg-[#e8f0fe] border border-[#d2e3fc] relative transition-all duration-300 overflow-hidden shrink-0"
-              title="Toggle State"
-            >
-              <div
-                className={`w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#1a73e8] shadow-sm flex items-center justify-center text-white transition-transform duration-300 ease-out ${
-                  toggleActive
-                    ? 'translate-x-0.5 sm:translate-x-1.5'
-                    : 'translate-x-10 sm:translate-x-[3.8rem] md:translate-x-[4.4rem]'
-                }`}
-              >
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white/90" />
-              </div>
-            </div>
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#188038] group-hover:translate-x-0.5 transition-transform stroke-[2.6]" />
+            </a>
           </div>
 
-          {/* LINE 2: "Developer Group" with Google color shades */}
-          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-5 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
-            {/* Dash on desktop */}
-            <span className="hidden sm:inline text-neutral-300 mr-2">—</span>
-            <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">Developer</span>{' '}
-            <span className="text-[#188038] hover:opacity-90 transition-opacity">Group</span>
+          {/* LINE 2: "Developer Group" with authentic Google color shades */}
+          <div className="relative flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+            <span className="text-[#1a73e8] hover:opacity-90 transition-opacity">
+              Developer
+            </span>
+            <span className="text-[#188038] hover:opacity-90 transition-opacity">
+              Group
+            </span>
           </div>
 
-          {/* LINE 3: [Minimal Google Red badge] + "on Campus" with Google color shades */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-5 text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
+          {/* LINE 3: [Static GDGC Pill badge] + "on Campus" with authentic Google colors */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3.5 md:gap-4 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-none">
             
-            {/* Widget 5: Minimal Google Red / Blue Pill */}
+            {/* Widget: Static Google Red Pill badge */}
             <div
               onClick={handleCopyCommand}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-full bg-[#fce8e6] border border-[#fad2cf] shadow-xs cursor-pointer hover:bg-red-100/70 active:scale-95 transition-all shrink-0"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3.5 sm:py-2 rounded-full bg-[#fce8e6] border border-[#fad2cf] shadow-[0_4px_14px_rgba(234,67,53,0.18)] hover:shadow-[0_6px_20px_rgba(234,67,53,0.25)] hover:scale-105 active:scale-95 cursor-pointer transition-all shrink-0 align-middle"
               title="Click to copy GDGC short-key"
             >
-              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#ea4335]" />
+              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#ea4335] shrink-0" />
               <span className="text-[10px] sm:text-[11px] font-bold text-[#d93025] tracking-wider">
-                {cmdCopied ? 'COPIED' : 'GDGC'}
+                {cmdCopied ? 'COPIED!' : 'GDGC'}
               </span>
             </div>
 
-            {/* Word "on Campus" with Google color shade */}
-            <span className="tracking-tight select-none">
-              <span className="text-neutral-400 font-medium mr-1.5 sm:mr-2">on</span>
-              <span className="text-[#ea4335] hover:opacity-90 transition-opacity">Campus</span>
+            {/* Word "on Campus" */}
+            <span className="tracking-tight select-none inline-flex items-baseline">
+              <span className="text-neutral-400 font-medium mr-1.5 sm:mr-2 text-[0.88em]">on</span>
+              <span className="text-[#ea4335] hover:opacity-90 transition-opacity">
+                Campus
+              </span>
             </span>
           </div>
         </div>
 
         {/* ============================================================== */}
-        {/* SUBTITLE & CTA BUTTONS (Comfortable vertical clearance)         */}
+        {/* SUBTITLE & CTA BUTTONS                                         */}
         {/* ============================================================== */}
-        <div className="mt-5 sm:mt-8 md:mt-10 max-w-3xl mx-auto text-center px-4">
+        <div className="mt-4 sm:mt-6 md:mt-7 max-w-3xl mx-auto text-center px-4">
           <p className="text-xs sm:text-sm md:text-base text-neutral-600 font-medium leading-relaxed max-w-xl mx-auto">
             Connecting curious minds and developers in the learning process so students can build better products, faster.
           </p>
 
           {/* CTA Pill Buttons */}
-          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="hero-entrance-cta mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#about"
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_14px_rgba(0,0,0,0.18)] cursor-pointer"
+              className="btn-primary inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide cursor-pointer shadow-[0_4px_14px_rgba(0,0,0,0.18)]"
             >
               Join Chapter
             </a>
             <a
               href="#events"
-              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs sm:text-sm font-semibold tracking-wide active:scale-95 transition-all cursor-pointer"
+              className="btn-secondary inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer"
             >
               <span>Explore Events</span>
               <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
@@ -324,4 +325,3 @@ export default function HeroSection() {
     </section>
   )
 }
-

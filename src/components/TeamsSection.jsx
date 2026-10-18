@@ -1,22 +1,33 @@
 import React, { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import useTeams from '../hooks/useTeams'
+import useScrollReveal from '../hooks/useScrollReveal'
 import Card from './team/TeamCard'
 import TeamModal from './team/TeamModal'
 import OrganizersBand from './team/OrganizersBand'
+import FacultyCard from './team/FacultyCard'
 import { TeamsHeading, StateMessage } from './team/TeamsShell'
 import { Reveal } from './team/parts'
 
 export default function TeamsSection({ onViewAll }) {
   const { data, error } = useTeams()
   const [sel, setSel] = useState(null)
+  const sectionRef = useScrollReveal()
 
   return (
-    <section id="teams" className="relative w-full py-12 sm:py-20 overflow-hidden select-none scroll-mt-4">
+    <section id="teams" className="relative w-full py-12 sm:py-20 overflow-hidden select-none scroll-mt-4" ref={sectionRef}>
       <div className="relative w-full px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto">
         {!data ? <StateMessage error={error} /> : (
           <>
             <TeamsHeading meta={data.meta} />
+
+            {/* Faculty Coordinator - Displayed First */}
+            <Reveal className="mb-8 sm:mb-10 flex flex-col items-center">
+              <div className="w-full max-w-[260px] sm:max-w-[290px] mx-auto">
+                <FacultyCard faculty={data.facultyCoordinator} onOpen={setSel} />
+              </div>
+            </Reveal>
+
             <OrganizersBand organizers={data.organizers} onOpen={setSel} />
             
             <Reveal className="mt-8 sm:mt-10">
@@ -43,10 +54,10 @@ export default function TeamsSection({ onViewAll }) {
               </div>
             </Reveal>
 
-            <div className="mt-10 flex justify-center">
+            <div className="reveal mt-10 flex justify-center">
               <button
                 onClick={onViewAll}
-                className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#f6bd38] border-2 border-neutral-950 text-neutral-950 text-sm font-bold shadow-[0_2px_8px_rgba(246,189,56,0.3)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="btn-primary inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#f6bd38] border-2 border-neutral-950 text-neutral-950 text-sm font-bold cursor-pointer"
               >
                 Meet our whole team <ArrowRight className="w-4 h-4" />
               </button>

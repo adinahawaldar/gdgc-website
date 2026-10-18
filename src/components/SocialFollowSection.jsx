@@ -1,5 +1,6 @@
 import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import useScrollReveal from '../hooks/useScrollReveal'
 
 // Custom Platform Brand SVGs
 function WhatsAppIcon({ className = "w-4 h-4 sm:w-5 sm:h-5" }) {
@@ -107,13 +108,13 @@ function SocialCard({ item }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group w-[240px] sm:w-[270px] shrink-0 bg-white border border-neutral-200/90 rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between ${item.hoverBorder} hover:-translate-y-0.5 select-none`}
+      className={`group w-[240px] sm:w-[270px] shrink-0 bg-white border border-neutral-200/90 rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${item.hoverBorder} hover:-translate-y-1 select-none`}
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
           {/* Platform Icon Badge */}
           <div
-            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${item.iconBg}`}
+            className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 shadow-xs transition-transform duration-300 group-hover:scale-110 ${item.iconBg}`}
           >
             <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
@@ -189,13 +190,16 @@ function DoodlePhone({ rotation = "-rotate-12" }) {
 }
 
 export default function SocialFollowSection() {
+  const sectionRef = useScrollReveal()
+
   return (
     <section
       id="social"
       className="w-full bg-white py-10 sm:py-14 select-none overflow-hidden border-t border-neutral-100"
+      ref={sectionRef}
     >
       {/* Compact Header Container flanked by Doodle Phone Mockups */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 md:gap-8 mb-8 sm:mb-10">
+      <div className="reveal max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 md:gap-8 mb-8 sm:mb-10">
         {/* Left Phone Mockup */}
         <div className="hidden sm:flex items-center justify-center shrink-0">
           <DoodlePhone rotation="-rotate-12" />
@@ -203,7 +207,7 @@ export default function SocialFollowSection() {
 
         {/* Center Text (Clean professional font colors) */}
         <div className="flex-1 text-center max-w-xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-google leading-tight text-neutral-900">
+          <h2 className="section-heading-accent text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-google leading-tight text-neutral-900">
             You can follow us on{' '}
             <span className="text-[#1a73e8]">social media</span>
           </h2>
@@ -219,7 +223,7 @@ export default function SocialFollowSection() {
       </div>
 
       {/* Dual-Row Marquee Tracks with ONLY WhatsApp, LinkedIn & Instagram */}
-      <div className="w-full flex flex-col gap-3 overflow-hidden py-1">
+      <div className="reveal w-full flex flex-col gap-3 overflow-hidden py-1">
         {/* Row 1 (Scrolling Left) */}
         <div className="flex overflow-hidden mask-horizontal">
           <div className="animate-marquee flex gap-3 sm:gap-4 shrink-0">

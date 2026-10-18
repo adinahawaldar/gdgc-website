@@ -41,6 +41,11 @@ export default function LandingPage() {
     scrollToTop()
   }
 
+  const openAbout = () => {
+    setActiveTab('about')
+    scrollToTop()
+  }
+
   const navItems = [
     {
       id: 'home',
@@ -99,34 +104,17 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 relative flex flex-col justify-start selection:bg-blue-500 selection:text-white">
-      {/* Top Brand Header (Logo & College Name - No Nav links) */}
-      <header className="w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-1 sm:pb-2 flex items-center justify-start select-none">
-        <div className="flex items-center gap-3 sm:gap-3.5">
-          {/* Google Developer Groups Angle Brackets Logo */}
-          <svg
-            className="w-10 sm:w-12 h-6 sm:h-7 shrink-0"
-            viewBox="0 0 100 50"
-            fill="none"
-          >
-            {/* Left Bracket < (Red top, Blue bottom) */}
-            <line x1="40" y1="9" x2="18" y2="25" stroke="#EA4335" strokeWidth="8.5" strokeLinecap="round" />
-            <line x1="18" y1="25" x2="40" y2="41" stroke="#4285F4" strokeWidth="8.5" strokeLinecap="round" />
-            {/* Right Bracket > (Green top, Yellow bottom) */}
-            <line x1="60" y1="9" x2="82" y2="25" stroke="#34A853" strokeWidth="8.5" strokeLinecap="round" />
-            <line x1="82" y1="25" x2="60" y2="41" stroke="#FBBC04" strokeWidth="8.5" strokeLinecap="round" />
-          </svg>
-
-          {/* Text: Google Developer Groups & On Campus • College Name */}
-          <div className="flex flex-col justify-center leading-tight">
-            <span className="text-base sm:text-lg font-semibold tracking-tight text-[#3c4043]">
-              Google Developer Groups
-            </span>
-            <span className="text-xs sm:text-[13px] font-medium text-neutral-600 tracking-tight flex items-center gap-1.5 flex-wrap">
-              <span className="text-[#1a73e8] font-semibold">On Campus</span>
-              <span className="text-neutral-400">•</span>
-              <span>Anjuman-I-Islam's Kalsekar Technical Campus</span>
-            </span>
-          </div>
+      {/* Top Brand Header (GDG & College Name - No Nav links) */}
+      <header className="w-full px-4 sm:px-8 lg:px-12 pt-3 sm:pt-5 pb-1 sm:pb-2 flex items-center justify-start select-none">
+        <div className="flex flex-col justify-center leading-tight">
+          <span className="text-[13.5px] sm:text-[16px] font-semibold tracking-tight text-[#3c4043]">
+            Google Developer Groups
+          </span>
+          <span className="text-[10px] sm:text-[12px] font-medium text-neutral-600 tracking-tight flex items-center gap-1 sm:gap-1.5 flex-nowrap whitespace-nowrap">
+            <span className="text-[#1a73e8] font-semibold shrink-0">On Campus</span>
+            <span className="text-neutral-400 shrink-0">•</span>
+            <span>Anjuman-I-Islam's Kalsekar Technical Campus</span>
+          </span>
         </div>
       </header>
 
@@ -158,7 +146,7 @@ export default function LandingPage() {
               <HeroSection />
             </div>
             <RecentEvents />
-            <AboutVisionMission />
+            <AboutVisionMission onLearnMore={openAbout} />
             <TeamsSection onViewAll={openTeams} />
             <SocialFollowSection />
           </>
