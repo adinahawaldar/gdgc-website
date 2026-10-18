@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import {
   ArrowRight,
-  Command,
   ExternalLink,
-  Users,
-  Code2,
-  Check
 } from 'lucide-react'
 
 const HERO_STATS = [
@@ -33,7 +29,7 @@ export default function HeroSection() {
       {/* ============================================================== */}
       {/* SVG Constellation Network & Solid Colored Balls (Hidden on mobile view) */}
       <svg
-        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none z-0"
+        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none z-0 hero-constellation"
         viewBox="0 0 1440 640"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +97,7 @@ export default function HeroSection() {
             r="30"
             fill="#fbbc04"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-slow"
           />
           {/* Green Ball */}
           <circle
@@ -110,10 +106,10 @@ export default function HeroSection() {
             r="22"
             fill="#34a853"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-medium"
           />
           {/* Small Green Dot */}
-          <circle cx="190" cy="500" r="12" fill="#34a853" filter="url(#ball-shadow)" />
+          <circle cx="190" cy="500" r="12" fill="#34a853" filter="url(#ball-shadow)" className="float-fast" />
         </g>
 
         {/* ------------------------------------------------------------ */}
@@ -164,7 +160,7 @@ export default function HeroSection() {
             r="32"
             fill="#fbbc04"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-medium"
           />
           <circle
             cx="1230"
@@ -172,7 +168,7 @@ export default function HeroSection() {
             r="14"
             fill="#ea4335"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-fast"
           />
           <circle
             cx="1380"
@@ -180,9 +176,9 @@ export default function HeroSection() {
             r="28"
             fill="#4285f4"
             filter="url(#ball-shadow)"
-            className="cursor-pointer hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer float-slow"
           />
-          <circle cx="1320" cy="500" r="11" fill="#fbbc04" filter="url(#ball-shadow)" />
+          <circle cx="1320" cy="500" r="11" fill="#fbbc04" filter="url(#ball-shadow)" className="float-medium" />
         </g>
       </svg>
 
@@ -278,16 +274,16 @@ export default function HeroSection() {
           </p>
 
           {/* CTA Pill Buttons */}
-          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="hero-entrance-cta mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
               href="#about"
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide hover:bg-neutral-800 active:scale-95 transition-all shadow-[0_4px_14px_rgba(0,0,0,0.18)] cursor-pointer"
+              className="btn-primary inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold tracking-wide cursor-pointer shadow-[0_4px_14px_rgba(0,0,0,0.18)]"
             >
               Join Chapter
             </a>
             <a
               href="#events"
-              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs sm:text-sm font-semibold tracking-wide active:scale-95 transition-all cursor-pointer"
+              className="btn-secondary inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer"
             >
               <span>Explore Events</span>
               <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
@@ -329,4 +325,3 @@ export default function HeroSection() {
     </section>
   )
 }
-

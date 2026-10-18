@@ -18,6 +18,7 @@ import {
   eventCategories,
   upcomingEvents,
   pastEvents,
+  officialChapterUrl,
 } from './events.js';
 import './Events.css';
 

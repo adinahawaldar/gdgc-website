@@ -1,26 +1,31 @@
 import React from 'react'
 import { ArrowUpRight, Trophy, Rocket } from 'lucide-react'
+import useScrollReveal, { useCountUp } from '../hooks/useScrollReveal'
 
 const projects = [
   {
     title: 'AI for Campus Solutions',
     description: 'Student-led prototypes that use AI to solve real campus pain points in learning, accessibility, and operations.',
     accent: 'bg-[#e8f0fe] text-[#1a73e8]',
+    hoverBorder: 'hover:border-[#4285f4]',
   },
   {
     title: 'Build & Ship Sprint',
     description: 'Fast-moving product challenges where members go from concept to MVP in a single weekend with developer mentorship.',
     accent: 'bg-[#e6f4ea] text-[#188038]',
+    hoverBorder: 'hover:border-[#34a853]',
   },
   {
     title: 'Cloud Skills Bootcamp',
     description: 'Hands-on guided learning paths on Google Cloud, Firebase, and scalable product architecture for beginners and intermediates.',
     accent: 'bg-[#fef7e0] text-[#b06000]',
+    hoverBorder: 'hover:border-[#fbbc04]',
   },
   {
     title: 'Community Impact Lab',
     description: 'Open collaboration sessions for interns, developers, and designers to build social-impact solutions with local relevance.',
     accent: 'bg-[#fce8e6] text-[#d93025]',
+    hoverBorder: 'hover:border-[#ea4335]',
   },
 ]
 
@@ -31,10 +36,17 @@ const achievements = [
   { value: '90%', label: 'Member retention rate' },
 ]
 
+function CountUpValue({ value }) {
+  const ref = useCountUp(value, 1400)
+  return <span ref={ref}>{value}</span>
+}
+
 export function AchievementsSection() {
+  const sectionRef = useScrollReveal()
+
   return (
-    <section id="achievements" className="w-full px-4 pb-12 sm:px-6 lg:px-8 lg:pb-20">
-      <div className="mx-auto max-w-6xl rounded-[32px] border border-neutral-200 bg-neutral-50 p-5 sm:p-6 lg:p-8">
+    <section id="achievements" className="w-full px-4 pb-12 sm:px-6 lg:px-8 lg:pb-20" ref={sectionRef}>
+      <div className="reveal-scale mx-auto max-w-6xl rounded-[32px] border border-neutral-200 bg-neutral-50 p-5 sm:p-6 lg:p-8">
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#fef7e0] text-[#b06000]">
             <Trophy className="h-5 w-5" />
@@ -46,9 +58,11 @@ export function AchievementsSection() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {achievements.map((item) => (
-            <div key={item.label} className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
-              <div className="text-3xl font-black tracking-tight text-neutral-900">{item.value}</div>
+          {achievements.map((item, idx) => (
+            <div key={item.label} className={`reveal stagger-${idx + 1} rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1`}>
+              <div className="text-3xl font-black tracking-tight text-neutral-900">
+                <CountUpValue value={item.value} />
+              </div>
               <div className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">{item.label}</div>
             </div>
           ))}
@@ -59,13 +73,15 @@ export function AchievementsSection() {
 }
 
 export default function ProjectsAchievements() {
+  const sectionRef = useScrollReveal()
+
   return (
-    <section id="projects" className="w-full px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <section id="projects" className="w-full px-4 py-12 sm:px-6 lg:px-8 lg:py-20" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="reveal mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">Projects & impact</p>
-            <h3 className="mt-2 text-3xl font-black tracking-tight text-neutral-900 sm:text-4xl">
+            <h3 className="section-heading-accent mt-2 text-3xl font-black tracking-tight text-neutral-900 sm:text-4xl">
               Turning learning into measurable outcomes
             </h3>
           </div>
@@ -76,10 +92,10 @@ export default function ProjectsAchievements() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {projects.map((project) => (
+          {projects.map((project, idx) => (
             <article
               key={project.title}
-              className="group rounded-[28px] border border-neutral-200 bg-white p-5 shadow-[0_14px_34px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_rgba(15,23,42,0.08)]"
+              className={`reveal stagger-${idx + 1} card-hover group rounded-[28px] border border-neutral-200 bg-white p-5 shadow-[0_14px_34px_rgba(15,23,42,0.05)] ${project.hoverBorder}`}
             >
               <div className={`inline-flex rounded-full px-3 py-1.5 text-xs font-bold ${project.accent}`}>
                 Initiative
@@ -88,11 +104,16 @@ export default function ProjectsAchievements() {
               <p className="mt-3 text-sm leading-relaxed text-neutral-600">{project.description}</p>
               <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-neutral-900">
                 View story
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </article>
           ))}
         </div>
+      </div>
+
+      {/* Achievements subsection */}
+      <div className="mt-12 sm:mt-16">
+        <AchievementsSection />
       </div>
     </section>
   )
