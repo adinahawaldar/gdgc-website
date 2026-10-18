@@ -35,14 +35,6 @@
   position: relative;
   width: 225px;
   height: 150px;
-  transform: scale(1.15);
-  transform-origin: center center;
-}
-
-@media (max-width: 480px) {
-  .loader {
-    transform: scale(0.95);
-  }
 }
 
 .loaderdot {
@@ -53,11 +45,9 @@
   animation-duration: 2.8s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
-  will-change: transform, width, opacity, background-color;
 }
 
 .dot1 {
-  left: 0;
   top: 55px;
   background-color: var(--color-blue);
   transform-origin: 20px center;
@@ -80,7 +70,6 @@
 }
 
 .dot4 {
-  top: 0;
   left: 62.5px;
   background-color: var(--color-green);
   animation-name: dsc-dot4;
@@ -101,7 +90,6 @@
 }
 
 .dot7 {
-  left: 0;
   top: 55px;
   background-color: var(--color-red);
   transform-origin: 20px center;
@@ -338,12 +326,5 @@
     transform: scale(1);
     width: 100px;
     transform: rotate(-30deg);
-  }
-}
-
-/* Reduced motion: skip animation entirely */
-@media (prefers-reduced-motion: reduce) {
-  #loader-overlay {
-    display: none !important;
   }
 }

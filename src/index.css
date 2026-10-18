@@ -1,12 +1,17 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 @layer base {
   * {
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
   }
 
   html,
@@ -22,6 +27,7 @@
   }
 }
 
+.font-hero,
 .font-google {
   font-family: 'Product Sans', 'Google Sans', 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
@@ -423,55 +429,28 @@
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-/* ── Focus Indicators (Accessibility) ──────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid #4285F4;
-  outline-offset: 2px;
-  border-radius: 4px;
+/* ========================================================================== */
+/* Smooth Scroll Reveal Animations (Clean, crisp, no-blur performance)       */
+/* ========================================================================== */
+.scroll-reveal-target {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid #4285F4;
-  outline-offset: 3px;
+.scroll-reveal-target.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* ── Smooth page wrapper ───────────────────────────────────────────────── */
-.page-enter {
-  animation: page-fade-in 0.4s ease both;
-}
-
-@keyframes page-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Reduced Motion ────────────────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .reveal,
-  .reveal-left,
-  .reveal-right,
-  .reveal-scale {
-    opacity: 1 !important;
+/* On mobile / touch viewports, disable transitions completely for maximum FPS */
+@media (max-width: 768px) {
+  .scroll-reveal-target {
+    transition: none !important;
     transform: none !important;
-  }
-
-  .scroll-progress {
-    display: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
   }
 }
+
+

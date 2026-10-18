@@ -38,6 +38,11 @@
       ]
     }
   },
+  "facultyCoordinator": {
+    "name": "Abdul Majid Ansari",
+    "designation": "Faculty Coordinator",
+    "photo": "/teams/image.png"
+  },
   "organizers": [
     {
       "name": "Aman Antuley",
@@ -132,6 +137,7 @@
           "name": "Almira Fangari",
           "dept": "TE · CO",
           "photo": "/teams/almira-fangari.jpg",
+          "github": "https://github.com/almirafangari",
           "linkedin": "https://www.linkedin.com/in/almira-fangari-020920376",
           "email": "24co05@aiktc.ac.in",
           "intro": "I’m Almira Fangari. I’m a third-year Computer Engineering student. I’m interested in combining technology with creativity, especially in areas like UI/UX and visual design."
@@ -158,6 +164,7 @@
           "name": "Afifa Naik",
           "dept": "SE · CSE(AIML)",
           "photo": "/teams/afifa-naik.jpg",
+          "github": "https://github.com/afifainaik-ux",
           "linkedin": "https://www.linkedin.com/in/afifa-naik",
           "email": "afifainaik@gmail.com",
           "intro": "I’m Afifa, a Computer Science student specializing in Artificial Intelligence and Machine Learning. I enjoy exploring AI, coding, and design, and I love getting creative with the things I work on. From taking part in hackathons to being involved in college clubs and design teams, I’ve had the chance to learn new things, work with different people, and step out of my comfort zone. I’m always curious to try something new and keep improving along the way."
